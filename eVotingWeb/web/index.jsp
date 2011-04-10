@@ -1,19 +1,22 @@
-<%-- 
-    Document   : index
-    Created on : Apr 10, 2011, 2:34:44 PM
-    Author     : tom
---%>
+<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="header.jsp" />
+<f:view>
+    <h:outputText rendered="#{default.commissioner}"><h1>E-volby welcome page</h1></h:outputText>
+    <h:outputText rendered="#{default.voter}"><h1>E-volby úvodní stránka</h1></h:outputText>
+    <br />
+    <h:outputText rendered="#{default.administrator}">Welcome </h:outputText>
+    <h:outputText rendered="#{default.commissioner}">Welcome </h:outputText>
+    <h:outputText rendered="#{default.voter}">Vítejte </h:outputText>
+    <h:outputText value="#{default.usersName}" />
+    <h:form>
+    <h:commandLink value="Klikněte zde pro pokračování na výběr voličských akcí" action="voters" rendered="#{default.voter}" />
+    <h:commandLink value="Click here to continue, commissioner" action="commissioners" rendered="#{default.commissioner}" />
+    <h:commandLink value="Click here to continue, administrator" action="administrators" rendered="#{default.administrator}" />
+    </h:form>
+</f:view>
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<jsp:include page="footer.jsp"/>
+
+

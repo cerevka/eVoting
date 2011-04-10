@@ -1,0 +1,275 @@
+/*
+Screen css file for evolby project
+@author Ondra Mandik <ondramandik@gmail.com>
+*/
+
+.message {
+    position: absolute;
+    font-size: 15px;
+    font-weight: bold;
+    list-style-type: none;
+    color: red;
+    margin: 0;
+    padding: 0;
+    top: 100px;
+}
+
+body {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+div.menu {
+    display: block;
+    margin: 0 0 0 0;
+    padding: 5px 0 10px 0;
+}
+
+div.menu h1 {
+    position: relative;
+    top: -20px;
+    text-align: right;
+    /*font-size: 20px;
+    margin: 0 0 0 0;*/
+    padding: 0 0 0 0;
+    /*border: none;
+    border-bottom: solid 2px #ccc;*/
+    z-index: 1;
+}
+
+
+div.menu ul.buttons {
+    position: relative;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0px;
+    z-index: 2;
+}
+
+div.createElection ul li {
+    list-style-type: decimal;
+}
+
+
+h1 {
+    font-size: 20px;
+    text-align: right;
+    border-bottom: solid 2px #ccc;
+    margin: 0 0 0 0;
+    padding: 10px 0 0 0;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 0;
+    padding: 0 0 10px 5px;
+}
+
+ul.buttons li a:visited, ul.buttons li a {
+    color:white;
+}
+
+ul.buttons li a, a.button, input.button {
+    display: block;
+    background-image: url("img/button.png");
+    background-position: left top;
+    background-repeat: no-repeat;
+    width: 160px;
+    padding: 8px 0 8px 10px;
+    text-align:left;
+    font-size:11px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight:bold;
+    margin: 0;
+    border:none;
+    cursor: url;
+}
+
+ul.buttons li span{
+    display: block;
+    background-image: url("img/button.png");
+    background-position: left top;
+    background-repeat: no-repeat;
+    width: 160px;
+    position: relative;
+    color : darkgrey;
+    padding: 8px 0 8px 10px;
+    text-align:left;
+    font-size:11px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight:bold;
+    margin: 0;
+    border:none;
+    cursor: url;
+    float: left;
+}
+
+
+
+ul.buttons li a:hover, a.button:hover, input.button_hover {
+    background-image: url("img/button_hover.png");
+    color: white;
+}
+
+ul.buttons,
+ul.buttons li {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+ul.buttons {
+    height: 31px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left:0px;
+    padding-left: 0px;
+}
+
+ul.buttons li a {
+    float: left;
+}
+
+p {
+    margin: 0;
+    padding: 0 0 0 10px;
+}
+
+table.form {
+    background-color: #fff;
+    padding: 0 0 0 10px;
+}
+
+table.form td,
+table.form th {
+    font-size: 15px;
+    padding: 0 10px 3px 0;
+    background-color: transparent;
+
+}
+table.form th {
+    vertical-align: top;
+    text-align:right;
+}
+table.form td.button {
+    text-align:right;
+    background-color: #fff;
+    padding: 10px 0 0 0;
+}
+
+div.main {
+    width:900px;
+    margin: 0 auto;
+}
+
+div.main div.content {
+    min-height: 400px;
+}
+
+div.main div.head {
+    background-image: url("img/head.png");
+    background-repeat: no-repeat;
+    padding: 17px 0 30px 0;
+}
+
+div.main div.head ul,
+div.main div.head ul li {
+    display:block;
+    list-style:none;
+}
+
+div.main div.head ul {
+    padding: 0 0 0 24px;
+}
+div.main div.head ul li {
+    float: left;
+    font-size: 12px;
+    /*text-transform: uppercase;*/
+    border-right: 1px solid #333;
+    padding-right: 5px;
+    margin-right: 5px;
+
+}
+div.main div.head ul li a {
+    text-decoration:none;
+    font-weight: bold;
+    color: #333;
+}
+
+div.main div.head ul li a:hover {
+    text-decoration:underline;
+    color: #000;
+}
+
+div.main div.foot {
+    background-image: url("img/foot.png");
+    background-repeat: no-repeat;
+    padding: 30px 14px 30px 0;
+    text-align:right;
+}
+
+div.main div.login {
+    padding-top: 100px;
+}
+
+div.main div.login div {
+    margin: 0 auto 0 auto;
+    background-color: #eee;
+    padding: 10px 10px 10px 10px;
+    width:300px;
+}
+
+div.main div.login h1 {
+    padding: 0 0 10px 0;
+    text-align:left;
+    margin: 0;
+}
+
+table.elections {
+    padding: 0 0 0 20px;
+    font-size: 16px;
+}
+table.elections th {
+    text-align: left;
+    border-bottom: 1px solid black;
+}
+table.elections td {
+    text-align: left;
+    padding: 5px 10px 0 0;
+}
+
+table.electionsInfo {
+    text-align: left;
+    font-size: 16px;
+    padding: 0 0 0 20px;
+}
+
+table.electionsInfo th {
+    font-weight: bold;
+    padding: 0 5px 0 0;
+    border-bottom: 1px solid black;
+}
+
+
+table.electionsInfo td {
+    padding: 3px 20px 0 0;
+}
+
+div.elinfo {
+    font-size: 16px;
+    padding: 0px 0 20px 15px;
+}
+div.elinfo th {
+    padding: 0 10px 0 0;
+    text-align: right;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+span.alertRow{
+    color: red;
+    font-weight: bold;
+
+}
