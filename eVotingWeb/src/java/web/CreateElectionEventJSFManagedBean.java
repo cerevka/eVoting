@@ -4,10 +4,10 @@
  */
 package web;
 
-import ejb.CreatingElectionSessionRemote;
-import ejb.NominatingSessionRemote;
-import ejb.TellerSessionRemote;
-import ejb.VotingSessionRemote;
+import bean.stateless.CreatingElectionSessionRemote;
+import bean.stateless.NominatingSessionRemote;
+import bean.stateless.TellerSessionRemote;
+import bean.stateless.VotingSessionRemote;
 import entity.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
-import pojos.ControllerException;
+import pojo.ControllerException;
 
 /**
  *

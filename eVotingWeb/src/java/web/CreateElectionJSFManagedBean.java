@@ -7,7 +7,7 @@ package web;
 
 
 import com.sun.org.apache.xpath.internal.patterns.ContextMatchStepPattern;
-import ejb.CreatingElectionSessionRemote;
+import bean.stateless.CreatingElectionSessionRemote;
 import entity.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import javax.faces.model.SelectItem;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import pojos.ControllerException;
+import pojo.ControllerException;
 
 /** 
  *

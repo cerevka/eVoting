@@ -4,9 +4,9 @@
  */
 package web;
 
-import ejb.GeneratingResultsSessionRemote;
-import ejb.NominatingSessionRemote;
-import ejb.TellerSessionRemote;
+import bean.stateless.GeneratingResultsSessionRemote;
+import bean.stateless.NominatingSessionRemote;
+import bean.stateless.TellerSessionRemote;
 import entity.Candidate;
 import entity.ElectionEvent;
 import entity.ElectionResult;
@@ -24,7 +24,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
-import pojos.ControllerException;
+import pojo.ControllerException;
 
 /**
  *
