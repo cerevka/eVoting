@@ -6,25 +6,32 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author defiler
  */
 @Entity
+@Table(name="electionResult", catalog="evoting")
 public class ElectionResult implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Integer id;
     @OneToOne
+    @JoinColumn(name="candidate")
     private Candidate candidate;
+    @Column(name="votes")
     private Integer votes;
     @ManyToOne
     private ElectionEvent electionEvent;

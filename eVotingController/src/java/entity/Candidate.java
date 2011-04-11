@@ -13,16 +13,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import entity.Programme;
+import javax.persistence.Column;
 import javax.persistence.JoinTable;
+import javax.persistence.Table;
 
 /**
  *
  * @author defiler
  */
 @Entity
+@Table(name="Candidate", catalog="evoting")
 public class Candidate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @Column(name="login")
     private String login;
     @OneToMany
     @JoinTable(name="eventProgramme")
@@ -30,6 +34,7 @@ public class Candidate implements Serializable {
     @ManyToMany
     private Collection<ElectionEvent> votedInEvents;
     //candidateRole rozlisuje role profesor/student
+    @Column(name="candidateRole")
     private String candidateRole;
 /**
  * returns the candidate login

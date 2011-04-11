@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,26 +15,31 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author defiler
  */
 @Entity
+@Table(name="Election")
 @NamedQueries({
     @NamedQuery(name = "Election.findAll", query = "SELECT e FROM Election e")})
 public class Election implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Integer id;
+    @Column(name="name")
     private String name;
     @ManyToMany(mappedBy = "elections")
     private Collection<Commissioner> commissioners;
     @OneToMany
     private Collection<ElectionEvent> electionEvents;
     //private byte[] publicKey;
+    @Column(name="type")
     private String type;
 
     public Integer getId() {

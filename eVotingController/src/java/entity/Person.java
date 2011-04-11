@@ -1,32 +1,38 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author lordondrak
  */
-@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="persongroup")
+
 @Entity
+@Table(name="person", catalog="evoting")
+@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="persongroup")
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByLogin", query = "SELECT p FROM Person p WHERE p.login = :login")})
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @Column(name="login")
     private String login;
-
+    @Column(name="firstName")
     private String firstname;
+    @Column(name="lastName")
     private String lastname;
-
+    @Column(name="personGroup")
     private String personGroup;
-
+    @Column(name="password")
     private String password;
 
 

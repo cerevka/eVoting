@@ -6,23 +6,27 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author defiler
  */
 @Entity
+@Table(name="electionEvent")
 public class ElectionEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Integer id;
     @ManyToMany(mappedBy = "votedInEvents")
     private Collection<Candidate> candidates;
@@ -30,10 +34,15 @@ public class ElectionEvent implements Serializable {
     private Collection<Voter> voters;
     @OneToMany(mappedBy = "electionEvent")
     private Collection<ElectionResult> electionResults;
+    @Column(name="name")
     private String name;
+    @Column(name="info")
     private String info;
+    @Column(name="votingStarted")
     private Boolean votingStarted;
+    @Column(name="nominatingStarted")
     private Boolean nominatingStarted;
+    @Column(name="finished")
     private Boolean finished;
     @ManyToMany(mappedBy = "eventsToEndNominating")
     private Collection<Commissioner> comAgreeEndNominating;

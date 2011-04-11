@@ -9,25 +9,31 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author lordondrak
  */
 @Entity
+@Table(name="Commissioner", catalog="evoting")
 public class Commissioner implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id   
+    @Id
+    @Column(name="login")
     private String login;
     
     @ManyToMany
     private Collection<Election> elections;
+    @Column(name="firstName")
     private String firstName;
+    @Column(name="lastName")
     private String lastName;
    @ManyToMany
    @JoinTable(name="end_nominating_com_ee")

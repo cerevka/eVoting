@@ -7,23 +7,27 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author defiler
  */
 @Entity
+@Table(name="voter", catalog="evoting")
 @NamedQueries({
     @NamedQuery(name = "Voter.findAll", query = "SELECT v FROM Voter v"),
     @NamedQuery(name = "Voter.findByLogin", query = "SELECT v FROM Voter v WHERE v.login = :login")})
 public class Voter implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @Column(name="login")
     private String login;
     @ManyToMany
     private Collection<ElectionEvent> electionEvents;
