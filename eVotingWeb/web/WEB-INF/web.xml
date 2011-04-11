@@ -144,7 +144,7 @@
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>file</realm-name>
+        <realm-name>evotingRealm</realm-name>
         <form-login-config>
             <form-login-page>/login.jsf</form-login-page>
             <form-error-page>/error.jsf</form-error-page>

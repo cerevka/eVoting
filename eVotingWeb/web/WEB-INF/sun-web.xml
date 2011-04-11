@@ -2,6 +2,24 @@
 <!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD GlassFish Application Server 3.0 Servlet 3.0//EN" "http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
 <sun-web-app error-url="">
   <context-root>/evoting</context-root>
+  <security-role-mapping>
+    <role-name>administrators</role-name>
+    <group-name>administrators</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>commissioners</role-name>
+    <group-name>commissioners</group-name>
+    <group-name>votAndComm</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>nobody</role-name>
+    <group-name>nobody</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>voters</role-name>
+    <group-name>voters</group-name>
+    <group-name>votAndCom</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

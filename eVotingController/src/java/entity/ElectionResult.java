@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author defiler
  */
 @Entity
-@Table(name="electionResult", catalog="evoting")
+@Table(name="electionResult")
 public class ElectionResult implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

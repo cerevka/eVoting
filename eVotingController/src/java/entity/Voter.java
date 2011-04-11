@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author defiler
  */
 @Entity
-@Table(name="voter", catalog="evoting")
+@Table(name="voter")
 @NamedQueries({
     @NamedQuery(name = "Voter.findAll", query = "SELECT v FROM Voter v"),
     @NamedQuery(name = "Voter.findByLogin", query = "SELECT v FROM Voter v WHERE v.login = :login")})

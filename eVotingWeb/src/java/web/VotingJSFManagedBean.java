@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -34,9 +35,13 @@ import pojo.ControllerException;
 public class VotingJSFManagedBean {
 
     private ListDataModel AllVoterModel;
+    @EJB
     private TellerSessionRemote tellerSessionBean;
+    @EJB
     private VotingSessionRemote votingSessionBean;
+    @EJB
     private CreatingElectionSessionRemote creatingElectionSessionBean;
+    @EJB
     private NominatingSessionRemote nominatingSessionBean;
     private Voter voter = null;
     private Integer eventId = null;
@@ -45,10 +50,10 @@ public class VotingJSFManagedBean {
         Context context;
         try {
             context = new InitialContext();
-            tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
-            votingSessionBean = (VotingSessionRemote) context.lookup("ejb.VotingSessionRemote");
-            creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
-            nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
+            //tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
+            //votingSessionBean = (VotingSessionRemote) context.lookup("ejb.VotingSessionRemote");
+            //creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
+            //nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
             // getAllVotersModel();
         } catch (NamingException ex) {
             Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);

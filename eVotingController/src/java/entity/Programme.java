@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author defiler
  */
 @Entity
-@Table(name="programme", catalog="evoting")
+@Table(name="programme")
 public class Programme implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

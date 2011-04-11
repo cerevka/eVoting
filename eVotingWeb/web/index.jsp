@@ -10,6 +10,7 @@
     <h:outputText rendered="#{default.commissioner}">Welcome </h:outputText>
     <h:outputText rendered="#{default.voter}">Vítejte </h:outputText>
     <h:outputText value="#{default.usersName}" />
+    <h:outputText value="#{default.role}" />
     <h:form>
     <h:commandLink value="Klikněte zde pro pokračování na výběr voličských akcí" action="voters" rendered="#{default.voter}" />
     <h:commandLink value="Click here to continue, commissioner" action="commissioners" rendered="#{default.commissioner}" />

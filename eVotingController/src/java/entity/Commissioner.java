@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author lordondrak
  */
 @Entity
-@Table(name="Commissioner", catalog="evoting")
+@Table(name="commissioner")
 public class Commissioner implements Serializable {
 
     private static final long serialVersionUID = 1L;

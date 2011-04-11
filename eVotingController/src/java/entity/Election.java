@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author defiler
  */
 @Entity
-@Table(name="Election")
+@Table(name="election")
 @NamedQueries({
     @NamedQuery(name = "Election.findAll", query = "SELECT e FROM Election e")})
 public class Election implements Serializable {

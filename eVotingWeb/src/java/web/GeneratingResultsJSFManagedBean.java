@@ -32,8 +32,11 @@ import pojo.ControllerException;
  */
 public class GeneratingResultsJSFManagedBean {
 
+    @EJB
     private GeneratingResultsSessionRemote generatingResultsBean;
+    @EJB
     private TellerSessionRemote tellerSessionBean;
+    @EJB
     private NominatingSessionRemote nominatingSessionBean;
     private String eventName;
     private Integer eventId;
@@ -44,9 +47,9 @@ public class GeneratingResultsJSFManagedBean {
         Context context;
         try {
             context = new InitialContext();
-            nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
-            tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
-            generatingResultsBean = (GeneratingResultsSessionRemote) context.lookup("ejb.GeneratingResultsSessionRemote");
+            //nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
+            //tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
+            //generatingResultsBean = (GeneratingResultsSessionRemote) context.lookup("ejb.GeneratingResultsSessionRemote");
         } catch (NamingException ex) {
             Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }

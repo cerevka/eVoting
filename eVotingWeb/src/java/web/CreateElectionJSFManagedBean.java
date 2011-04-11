@@ -6,7 +6,6 @@
 package web;
 
 
-import com.sun.org.apache.xpath.internal.patterns.ContextMatchStepPattern;
 import bean.stateless.CreatingElectionSessionRemote;
 import entity.*;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -28,6 +28,8 @@ import pojo.ControllerException;
  */
 
 public class CreateElectionJSFManagedBean {
+
+    @EJB
     private CreatingElectionSessionRemote creatingElectionSessionBean;
 
     private String name;
@@ -43,7 +45,7 @@ public class CreateElectionJSFManagedBean {
         Context context;
         try {
             context = new InitialContext();
-            creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
+            //creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
         } catch (NamingException ex) {
             Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }

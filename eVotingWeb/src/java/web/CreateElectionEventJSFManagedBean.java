@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -32,9 +33,12 @@ import pojo.ControllerException;
  */
 public class CreateElectionEventJSFManagedBean {
 
+    @EJB
     private CreatingElectionSessionRemote electionSessionBean;
+    @EJB
     private TellerSessionRemote tellerSessionBean;
     private DataModel candidatesModel;
+    @EJB
     private NominatingSessionRemote nominatingSessionBean;
     private String eventName;
     private String voterLogin;
@@ -46,6 +50,7 @@ public class CreateElectionEventJSFManagedBean {
     private List<SelectItem> voterSel;
     private DataModel unfinishedElectionEvents;
     private Candidate candidate;
+    @EJB
     private VotingSessionRemote votingSessionBean;
     private String commissionersAgreeTableHeader;
 
@@ -53,10 +58,10 @@ public class CreateElectionEventJSFManagedBean {
         Context context;
         try {
             context = new InitialContext();
-            electionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
-            nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
-            tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
-            votingSessionBean = (VotingSessionRemote) context.lookup("ejb.VotingSessionRemote");
+            //electionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
+            //nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
+            //tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
+            //votingSessionBean = (VotingSessionRemote) context.lookup("ejb.VotingSessionRemote");
             fill();
         } catch (NamingException ex) {
             Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);

@@ -16,8 +16,8 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="person", catalog="evoting")
-@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="persongroup")
+@Table(name="person")
+@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="personGroup")
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByLogin", query = "SELECT p FROM Person p WHERE p.login = :login")})
