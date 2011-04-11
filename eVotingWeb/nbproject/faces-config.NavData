@@ -25,8 +25,8 @@
         <Node id="goodbye.jsp" x="900" y="600" zoom="true"/>
         <Node id="commission/viewEvent.jsp" x="900" y="150" zoom="true"/>
         <Node id="administrator/addCommissioner.jsp" x="900" y="450" zoom="true"/>
-        <Node id="footer.jsp" x="1150" y="300" zoom="true"/>
         <Node id="login.jsp" x="150" y="300" zoom="true"/>
+        <Node id="footer.jsp" x="1150" y="300" zoom="true"/>
         <Node id="commission/createNewEvent.jsp" x="1150" y="450" zoom="true"/>
         <Node id="welcome.jsp" x="150" y="900" zoom="true"/>
     </Scope>
