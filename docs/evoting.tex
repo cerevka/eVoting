@@ -312,7 +312,7 @@ V úvodu se autor zabývá teoretických rámcem od legislativní problematiky v
 Zbytek práce se již orientuje více prakticky na návrh konceptuálního řešení distribuovaného volebního schématu a stanovuje hypotézy pro experimentální ověření hypotéz. První hypotéza předpokládá, že elektronizace volebního procesu za využití internetového volebního systému je možná a že je přínosem pro voliče. Druhá hypotéza prohlašuje využití webové aplikace jako základního řešení za výhodné, protože každému uživateli je přístupná a dostupná v čase a místě jemu vyhovujícím.
 
 \subsection{Hlasovací systém pro samosprávné orgány vysokých škol}
-Problematikou elektronických voleb se zabývá i diplomová práce Michala Petříka \textit{Hlasovací systém pro samosprávné orgány vysokých škol} \cite{art:petrik}. Zde se autor zaměřuje hlavně na potřeby samosprávných orgánů vysokých škol, speciálněho Akademického senátu FIT ČVUT. 
+Problematikou elektronických voleb se zabývá i diplomová práce Michala Petříka \textit{Hlasovací systém pro samosprávné orgány vysokých škol} \cite{art:petrik}. Zde se autor zaměřuje hlavně na potřeby samosprávných orgánů vysokých škol, speciálního Akademického senátu FIT ČVUT. 
 
 Tento systém je navržen tak, aby dokázal zautomatizovat online hlasování, správu jednotlivých hlasování v rámci zasedání, generování usnesení ze zasedání a prezentaci vybraných informací na webové stránky. Je zde propracován systém oprávnění, který umožňuje přidělovat libovolná administrátorská práva uživateli nebo skupině uživatelů. Autentizace uživatelů je velmi rozsáhlá, neboť poskytuje několik různých cest: přes uživatelské účty v databázi LDAP, pomocí identifikační karty či samotným systémem. 
 
@@ -330,7 +330,7 @@ Jako nejlepší volba se jeví elektroluminiscenční snímač, jelikož pořizu
 
 \subsection{Electronic Voting in Europe - Technology, Law, Politics and Society}
 
-Ve dnech 7. a 9. července 2004 se konal první mezinárodní workshop \textit{Electronic Voting in Europe - Technology, Law, Politics and Society} \cite{book:prosser} v Schloß Hofenenu v Rakousku. Z tohoto workshopu vznikla stejnojmenná kniha v podobě sborníku prací. Kniha rozebírá problematiku elektronických voleb ze všech možných úhlů a představuje systémy používané v Evropě. Dotýká se témat bezpečnosti, hrozích rizik a jejich řešení, biometrických systémů, technických požadavků a legislativních principů.
+Ve dnech 7. a 9. července 2004 se konal první mezinárodní workshop \textit{Electronic Voting in Europe - Technology, Law, Politics and Society} \cite{book:prosser} v Schloß Hofenenu v Rakousku. Z tohoto workshopu vznikla stejnojmenná kniha v podobě sborníku prací. Kniha rozebírá problematiku elektronických voleb ze všech možných úhlů a představuje systémy používané v Evropě. Dotýká se témat bezpečnosti, hrozících rizik a jejich řešení, biometrických systémů, technických požadavků a legislativních principů.
 
 \subsection{Evolby u nás a ve světě}
 
@@ -368,7 +368,7 @@ Kandidát je nominovaný volič a může být zvolen. Má možnost upravovat svo
 
 \section{Případy užití}
 
-Případy užití jsou částečně popsané v předchozích kapitolách. Pro úplnost je na obrázku \ref{fig:pripady_uziti} znázroněn use case diagram. Oproti předchozím kapitolám jsou na něm zachyceny i systémové role v podobě uživatelů \uv{Systém} a \uv{Čas}. Systémový uživatel představuje činnosti, které jsou v systému zautomatizovány a nahrazují lidskou práci. Uživatel Čas je abstraktní podobou toku času a znázorňuje možnost automatického spouštění daných činností v nadefinovanou dobu. 
+Případy užití jsou částečně popsané v předchozích kapitolách. Pro úplnost je na obrázku \ref{fig:pripady_uziti} znázorněn use case diagram. Oproti předchozím kapitolám jsou na něm zachyceny i systémové role v podobě uživatelů \uv{Systém} a \uv{Čas}. Systémový uživatel představuje činnosti, které jsou v systému zautomatizovány a nahrazují lidskou práci. Uživatel Čas je abstraktní podobou toku času a znázorňuje možnost automatického spouštění daných činností v nadefinovanou dobu. 
 
 
 \begin{figure}[h!]
@@ -405,21 +405,17 @@ Java SE slouží k tvorbě desktopových aplikací, které běží pod JVM. Je t
 
 \subsection{Vývojové a testovací prostředí}
 
-Vývoj probíhal na operačním systém Ubuntu 10.10 a bylo použito vývojové prostředí NetBeans IDE ve verzi 9.1. Jedná se o komplexní prostředí, které poskytuje snadnou správu kódu s integrací SVN pro verzování. Zároveň umožňuje ovládání aplikačního serveru Glassfish a napojení JDBC ovladačů na databázový stroj.
+Vývoj probíhal na operačním systém Ubuntu 11.04 a bylo použito vývojové prostředí NetBeans IDE ve verzi 7. Jedná se o komplexní prostředí, které poskytuje snadnou správu kódu s integrací SVN pro verzování. Zároveň umožňuje ovládání aplikačního serveru Glassfish a napojení JDBC ovladačů na databázový stroj.
 
-Pro testování webového prostředí posloužil webový prohlížeč Firefox 3.6.
+Pro testování webového prostředí posloužil webový prohlížeč Firefox 4.0.1.
 
 \section{Architektura}
 
 \subsection{MVC}
 
 %*****************************************************************************
-\chapter{Návrh řešení}
+\chapter{Návrh řešení a realizace}
 Návrh implementace (volby implementačního prostředí).
-
-
-%*****************************************************************************
-\chapter{Realizace}
 Popis implementace/realizace se zaměřením na nestandardní části řešení.
 
 
