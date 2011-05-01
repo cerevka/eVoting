@@ -80,8 +80,8 @@
             </not>
         </condition>
         <property name="build.web.excludes" value="${build.classes.excludes}"/>
-        <condition property="do.compile.jsps">
-            <istrue value="${compile.jsps}"/>
+        <condition property="do.compile.xhtmls">
+            <istrue value="${compile.xhtmls}"/>
         </condition>
         <condition property="do.debug.server">
             <or>
@@ -594,9 +594,9 @@ exists or setup the property manually. For example like this:
     <target depends="init,deps-jar,-pre-pre-compile,-pre-compile-single,-do-compile-single,-post-compile-single" name="compile-single"/>
     <property name="jspc.schemas" value="/resources/schemas/"/>
     <property name="jspc.dtds" value="/resources/dtds/"/>
-    <target depends="compile" description="Test compile JSP pages to expose compilation errors." if="do.compile.jsps" name="compile-jsps">
+    <target depends="compile" description="Test compile JSP pages to expose compilation errors." if="do.compile.xhtmls" name="compile-jsps">
         <mkdir dir="${build.generated.dir}/src"/>
-        <java classname="org.netbeans.modules.web.project.ant.JspC" failonerror="true" fork="true">
+        <java classname="org.netbeans.modules.web.project.ant.xhtmlC" failonerror="true" fork="true">
             <arg value="-uriroot"/>
             <arg file="${basedir}/${build.web.dir}"/>
             <arg value="-d"/>
@@ -607,16 +607,16 @@ exists or setup the property manually. For example like this:
             <arg value="-compilerSourceVM ${javac.source}"/>
             <arg value="-compilerTargetVM ${javac.target}"/>
             <arg value="-javaEncoding ${source.encoding}"/>
-            <arg value="-sysClasspath ${libs.jsp-compilation-syscp.classpath}"/>
-            <classpath path="${java.home}/../lib/tools.jar:${libs.jsp-compiler.classpath}:${libs.jsp-compilation.classpath}"/>
+            <arg value="-sysClasspath ${libs.xhtml-compilation-syscp.classpath}"/>
+            <classpath path="${java.home}/../lib/tools.jar:${libs.xhtml-compiler.classpath}:${libs.xhtml-compilation.classpath}"/>
         </java>
         <mkdir dir="${build.generated.dir}/classes"/>
-        <webproject2:javac classpath="${build.classes.dir}:${libs.jsp-compilation.classpath}:${javac.classpath}:${j2ee.platform.classpath}" destdir="${build.generated.dir}/classes" srcdir="${build.generated.dir}/src"/>
+        <webproject2:javac classpath="${build.classes.dir}:${libs.xhtml-compilation.classpath}:${javac.classpath}:${j2ee.platform.classpath}" destdir="${build.generated.dir}/classes" srcdir="${build.generated.dir}/src"/>
     </target>
     <target depends="compile" if="jsp.includes" name="-do-compile-single-jsp">
-        <fail unless="javac.jsp.includes">Must select some files in the IDE or set javac.jsp.includes</fail>
+        <fail unless="javac.xhtml.includes">Must select some files in the IDE or set javac.xhtml.includes</fail>
         <mkdir dir="${build.generated.dir}/src"/>
-        <java classname="org.netbeans.modules.web.project.ant.JspCSingle" failonerror="true" fork="true">
+        <java classname="org.netbeans.modules.web.project.ant.xhtmlCSingle" failonerror="true" fork="true">
             <arg value="-uriroot"/>
             <arg file="${basedir}/${build.web.dir}"/>
             <arg value="-d"/>
@@ -624,18 +624,18 @@ exists or setup the property manually. For example like this:
             <arg value="-die1"/>
             <arg value="-schemas ${jspc.schemas}"/>
             <arg value="-dtds ${jspc.dtds}"/>
-            <arg value="-sysClasspath ${libs.jsp-compilation-syscp.classpath}"/>
+            <arg value="-sysClasspath ${libs.xhtml-compilation-syscp.classpath}"/>
             <arg value="-jspc.files"/>
             <arg path="${jsp.includes}"/>
             <arg value="-compilerSourceVM ${javac.source}"/>
             <arg value="-compilerTargetVM ${javac.target}"/>
             <arg value="-javaEncoding ${source.encoding}"/>
-            <classpath path="${java.home}/../lib/tools.jar:${libs.jsp-compiler.classpath}:${libs.jsp-compilation.classpath}"/>
+            <classpath path="${java.home}/../lib/tools.jar:${libs.xhtml-compiler.classpath}:${libs.xhtml-compilation.classpath}"/>
         </java>
         <mkdir dir="${build.generated.dir}/classes"/>
-        <webproject2:javac classpath="${build.classes.dir}:${libs.jsp-compilation.classpath}:${javac.classpath}:${j2ee.platform.classpath}" destdir="${build.generated.dir}/classes" srcdir="${build.generated.dir}/src">
+        <webproject2:javac classpath="${build.classes.dir}:${libs.xhtml-compilation.classpath}:${javac.classpath}:${j2ee.platform.classpath}" destdir="${build.generated.dir}/classes" srcdir="${build.generated.dir}/src">
             <customize>
-                <patternset includes="${javac.jsp.includes}"/>
+                <patternset includes="${javac.xhtml.includes}"/>
             </customize>
         </webproject2:javac>
     </target>

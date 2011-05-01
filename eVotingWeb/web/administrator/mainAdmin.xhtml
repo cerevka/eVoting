@@ -1,0 +1,16 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:param name="title" value="Administrator" />
+    <ui:define name="content">
+        <f:view>
+            <ui:insert name="left">
+                <ui:include src="/WEB-INF/templates/menus/administrator.xhtml" />
+            </ui:insert>
+            <h:messages />
+            <p>Hello administrator, please choose from the menu above.</p>
+        </f:view>
+    </ui:define>
+</ui:composition>

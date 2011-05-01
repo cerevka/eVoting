@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <div class="menu">
+        <ul class="buttons">
+            <li>
+            <h:outputLink value="createElectionPage.xhtml">Create election</h:outputLink>
+            </li>
+            <li>
+            <h:outputLink value="viewElections.xhtml">View elections</h:outputLink>
+            </li>
+            <li>
+            <h:form>
+                <h:commandLink value="logout" action="#{default.logout}"/>
+            </h:form>
+            </li>
+        </ul>
+        <h1>Main page</h1>
+    </div>
+</ui:composition>

@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <div class="menu">
+        <ul class="buttons">
+            <li>
+            <h:outputLink value="nominating.xhtml" disabled="#{nominating.renderNominovat}">
+                Nominovat
+            </h:outputLink>
+            </li>
+            <li>
+            <h:outputLink  value="voting.xhtml"  disabled="#{voting.renderVolit}">
+                Hlasovat
+            </h:outputLink>
+            </li>
+            <li>
+            <h:outputLink  value="endedEvents.xhtml">
+                Výsledky
+            </h:outputLink>
+            </li>
+            <li>
+            <h:form>
+                <h:commandLink value="Odhlásit" action="#{default.logout}"/>
+            </h:form>
+            </li>
+        </ul>
+        <h1>Výsledky</h1>
+    </div>
+</ui:composition>

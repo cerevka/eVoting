@@ -2,10 +2,11 @@
 
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
 
-<faces-config version="1.2"
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
     <managed-bean>
         <managed-bean-name>createElection</managed-bean-name>
         <managed-bean-class>web.CreateElectionJSFManagedBean</managed-bean-class>
@@ -15,6 +16,7 @@
             <value>#{param.electionId}</value>
         </managed-property>
     </managed-bean>
+    
     <managed-bean>
         <managed-bean-name>createElectionEvent</managed-bean-name>
         <managed-bean-class>web.CreateElectionEventJSFManagedBean</managed-bean-class>
@@ -28,11 +30,13 @@
             <value>#{param.eventId}</value>
         </managed-property>
     </managed-bean>
+    
     <managed-bean>
         <managed-bean-name>voting</managed-bean-name>
         <managed-bean-class>web.VotingJSFManagedBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    
     <managed-bean>
         <managed-bean-name>nominating</managed-bean-name>
         <managed-bean-class>web.NominatingJSFManagedBean</managed-bean-class>
@@ -42,30 +46,32 @@
             <value>#{param.eventId}</value>
         </managed-property>
     </managed-bean>
+    
     <managed-bean>
         <managed-bean-name>generatingResults</managed-bean-name>
         <managed-bean-class>web.GeneratingResultsJSFManagedBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    
     <managed-bean>
         <managed-bean-name>default</managed-bean-name>
         <managed-bean-class>web.DefaultJSFManagedBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
-
-<!-- =========== NAVIGATION ================================== -->
+    
+    <!-- =========== NAVIGATION ================================== -->
     <navigation-rule>
-        <from-view-id>/administrator/createElectionPage.jsp</from-view-id>
+        <from-view-id>/administrator/createElectionPage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/administrator/viewElections.jsp</to-view-id>
+            <to-view-id>/administrator/viewElections.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/administrator/addCommissioner.jsp</from-view-id>
+        <from-view-id>/administrator/addCommissioner.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/administrator/viewElections.jsp</to-view-id>
+            <to-view-id>/administrator/viewElections.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -74,17 +80,17 @@
         <from-view-id>/commission/*</from-view-id>
         <navigation-case>
             <from-outcome>goMain</from-outcome>
-            <to-view-id>/commission/mainCommissioner.jsp</to-view-id>
+            <to-view-id>/commission/mainCommissioner.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewEvent</from-outcome>
-            <to-view-id>/commission/viewEvent.jsp</to-view-id>
+            <to-view-id>/commission/viewEvent.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewEvents</from-outcome>
-            <to-view-id>/commission/viewEvents.jsp</to-view-id>
+            <to-view-id>/commission/viewEvents.xhtml</to-view-id>
 
         </navigation-case>
     </navigation-rule>
@@ -93,19 +99,19 @@
         <from-view-id>/voters/*</from-view-id>
         <navigation-case>
             <from-outcome>goVote</from-outcome>
-            <to-view-id>/voters/votingApplet.jsp</to-view-id>
+            <to-view-id>/voters/votingApplet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>goNominate</from-outcome>
-            <to-view-id>/voters/nominating.jsp</to-view-id>
+            <to-view-id>/voters/nominating.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>goMain</from-outcome>
-            <to-view-id>/voters/mainVoter.jsp</to-view-id>
+            <to-view-id>/voters/mainVoter.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewResultEvent</from-outcome>
-            <to-view-id>/voters/resultEvent.jsp</to-view-id>
+            <to-view-id>/voters/resultEvent.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -114,38 +120,32 @@
         <from-view-id>/*</from-view-id>
         <navigation-case>
             <from-outcome>logout</from-outcome>
-            <to-view-id>/login.jsp</to-view-id>
+            <to-view-id>/login.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
-          <navigation-case>
+        <navigation-case>
             <from-outcome>login</from-outcome>
-            <to-view-id>/login.jsp</to-view-id>
+            <to-view-id>/login.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
 
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/index.jsp</from-view-id>
+        <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>voters</from-outcome>
-            <to-view-id>/voters/mainVoter.jsp</to-view-id>
+            <to-view-id>/voters/mainVoter.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>commissioners</from-outcome>
-            <to-view-id>/commission/mainCommissioner.jsp</to-view-id>
+            <to-view-id>/commission/mainCommissioner.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>administrators</from-outcome>
-            <to-view-id>/administrator/mainAdmin.jsp</to-view-id>
+            <to-view-id>/administrator/mainAdmin.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
 </faces-config>
-
-
-
-
-
-

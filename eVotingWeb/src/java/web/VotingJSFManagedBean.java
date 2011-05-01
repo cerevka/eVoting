@@ -192,6 +192,10 @@ public class VotingJSFManagedBean {
 
     public boolean getRenderVolit(){
         List si = getSelectItems();
-        return si.isEmpty();
+        boolean result = false;
+        if (si != null) {
+            result = si.isEmpty();
+        }
+        return result;
     }
 }

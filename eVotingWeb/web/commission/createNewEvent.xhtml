@@ -1,0 +1,44 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:param name="title" value="Create new event" />
+    <ui:define name="content">
+        <f:view>
+            <ui:insert name="menu">
+                <ui:include src="/WEB-INF/templates/menus/commissioner.xhtml" />
+            </ui:insert>
+            <h:messages styleClass="message"/>
+            <h:form>
+                <h:inputHidden value="#{createElectionEvent.elecId}" />
+                <table class="form">
+                    <tbody>
+                        <tr>
+                            <th>Event name:</th>
+                            <td><h:inputText style="width: 250px" required="true" requiredMessage="Event name is required" value="#{createElectionEvent.eventName}" /></td>
+                    </tr>
+                    <tr>
+                        <th>Info:</th>
+                        <td> <h:inputTextarea style="width: 250px" value="#{createElectionEvent.info}" /></td>
+                    </tr>
+                    <tr>
+                        <td class="button" colspan="2">
+                    <h:commandButton value="Create" action="#{createElectionEvent.createEvent}">
+                        <f:param name="elecId" value="#{createElectionEvent.elecId}"/>
+                    </h:commandButton>
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </h:form>
+            <br/>
+            <h:outputLink styleClass="button" value="mainCommissioner.xhtml">
+                Go back
+            </h:outputLink>
+        </f:view>
+
+    </ui:define>
+</ui:composition>

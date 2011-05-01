@@ -1,0 +1,37 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:param name="title" value="Voting applet" />
+    <ui:define name="content">
+        <f:view>
+            <h:messages styleClass="message" />
+            <ui:insert name="menu">
+                <ui:include src="/WEB-INF/templates/menus/voter.xhtml" />
+            </ui:insert>
+            <f:verbatim>
+
+                <jsp:plugin type="applet"
+                            archive="VoteApplet2.jar"
+                            code="voteapplet2.Main"
+                            codebase=""
+                            width="250"
+                            height="350"
+                            jreversion="1.5"
+                            >
+                    <jsp:params>
+                        <jsp:param name="jnlp_href" value="VoteApplet2_browser.jnlp" />
+                        <jsp:param name='voter' value='${voting.token}' />
+                        <jsp:param name='event' value='${voting.eventId}' />
+                        <jsp:param name='host' value='127.0.0.1' />
+                        <jsp:param name='port' value='3700' />
+                    </jsp:params>
+                    <jsp:fallback>
+                        <B>Unable to start plugin!</B>
+                    </jsp:fallback>
+                </jsp:plugin>
+            </f:verbatim>
+        </f:view>
+    </ui:define>
+</ui:composition>

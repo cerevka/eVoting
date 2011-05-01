@@ -4,7 +4,7 @@
   <module>
     <web>
       <web-uri>eVotingWeb.war</web-uri>
-      <context-root>/evoting</context-root>
+      <context-root>evoting</context-root>
     </web>
   </module>
   <module>

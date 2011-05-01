@@ -12,13 +12,13 @@
     <group-name>votAndComm</group-name>
   </security-role-mapping>
   <security-role-mapping>
-    <role-name>nobody</role-name>
-    <group-name>nobody</group-name>
-  </security-role-mapping>
-  <security-role-mapping>
     <role-name>voters</role-name>
     <group-name>voters</group-name>
     <group-name>votAndCom</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>nobody</role-name>
+    <group-name>nobody</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>

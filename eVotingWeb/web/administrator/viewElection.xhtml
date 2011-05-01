@@ -1,0 +1,56 @@
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:param name="title" value="Election" />
+    <ui:define name="content">
+        <f:view>
+            <ui:insert name="left">
+                <ui:include src="/WEB-INF/templates/menus/administrator.xhtml" />
+            </ui:insert>
+            <h:messages styleClass="message"/>
+            <h2>Information</h2>
+            <div class="elinfo">
+                <table>
+                    <tr><th>ID:</th><td><h:outputText value="#{createElection.election.id}"/><td></tr>
+                    <tr><th>Name:</th><td><h:outputText value="#{createElection.election.name}"/></td></tr>
+                    <tr><th>Type:</th><td><h:outputText value="#{createElection.election.type}"/></td></tr>
+                </table>
+            </div>
+
+            <div class="electionCommisioners">
+                <h2>Commisioners associated with these elections</h2>
+                <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{createElection.electionCommissioners}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Login"/>
+                        </f:facet>
+                        <h:outputText value="#{item.login}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="First name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.firstName}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Last name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.lastName}"/>
+                    </h:column>
+
+                </h:dataTable>
+                <ul class="buttons">
+                    <li><h:outputLink value="addCommissioner.xhtml">
+                        add commissioner
+                        <f:param name="electionId" value="#{createElection.electionId}"/>
+                    </h:outputLink></li>
+                </ul>
+            </div>
+        </f:view>
+    </ui:define>
+</ui:composition>
+
