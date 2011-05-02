@@ -448,19 +448,25 @@ Pro vývoj jsem tedy zvolil SDK od společnosti Digital Persona a jejich sníma�
 
 Vzhledem k tomu, že systém vychází z prototypu eVolby, který již má své řešení navržené, budu v této práci popisovat jednotlivé iterace, ve kterých jsem ho modifikoval, přičemž v každé iteraci se zaměřím na problémy, se kterými jsme se setkal a popíši postup, kterým jsem se dopracoval k funkčnímu řešení. 
 
-\section{První iterace}
+\section{První iterace} \label{sec:iterace:prvni}
 
 \subsection{Cíl}
 
-Jako první jsem si stanovil za cíl migraci z Glassfishe 2.0.1 na Glassfish verze 3.1. K tomuto rozhodnutí mě vedla hlavně podpora nejnovějších technologií Javy Enterprise Edition 6\footnote{\url{http://glassfish.java.net/public/comparing_v2_and_v3.html}}. S tím se pojí i možnost unit testů v EJB, jak uvádí i závěrečné zpráva z vývoje prototypu eVolby\cite{www:prototyp}.
+Jako první jsem si stanovil za cíl migraci z Glassfishe 2.0.1 na Glassfish verze 3.1. K tomuto rozhodnutí mě vedla hlavně podpora nejnovějších technologií Javy Enterprise Edition 6\footnote{\url{http://glassfish.java.net/public/comparing_v2_and_v3.html}}. S tím se pojí i možnost unit testů v EJB, jak uvádí i závěrečná zpráva z vývoje prototypu eVolby\cite{www:prototyp}.
 
-\subsection{Problémy}
+\subsection{Postup}
 
-Zatímco Glassfish 2.0.1 byl certifikován pro Java EE 5, jeho novější verze Glassfish 3.1 je již certifikován pro Java EE 6. S tím s pojí změna některých standardů, která měla na svědomí problémy při migraci. Zjistil jsem, že při deploy aplikace dochází k vyhazování chyby, že EJB moduly neobsahují žádné EJB. Bylo to způsobováno tím, že Glassfish vynechával ty EJB, ve kterých narazil na jakoukoliv chybu. Problém tkvěl ve sdílené knihovně POJO objektů, které slouží jako přepravní kontejnery mezi EJB moduly. Jakmile remote interface dané EJB obsahoval referenci na takový sdílený POJO objekt, Glassfish 3.1 zahlásil, že takový objekt nezná.
+\subsubsection{Sdílené knihovny}
 
-Takováto situace se dá řešit dvěma různými způsoby. První spočívá v umístění sdílené knihovny mezi knihovny přímo do Glassfishe. Já jsem zvolil druhý způsob, který je jednodušší na nasazení. A to, že jsem všechny tři EJB moduly spolu s webovým modulem zastřešil pod jednu Enterprise aplikaci. 
+Zatímco Glassfish 2.0.1 byl certifikován pro Java EE 5, jeho novější verze Glassfish 3.1 je již certifikována pro Java EE 6. S tím souvisí změna některých standardů, která měla na svědomí problémy při migraci. Zjistil jsem, že při deploy aplikace dochází k vyhazování chyby, že EJB moduly neobsahují žádné EJB. Bylo to způsobováno tím, že Glassfish vynechával ty EJB, ve kterých narazil na jakoukoliv chybu. Problém tkvěl ve sdílené knihovně POJO objektů, které slouží jako přepravní kontejnery mezi EJB moduly. Jakmile remote interface dané EJB obsahoval referenci na takový sdílený POJO objekt, Glassfish 3.1 zahlásil, že takový objekt nezná.
 
-Dále se objevily chyby v definici entit, kdy některé entity neměly pojmenované spojovací sloupce. To způsobovalo nevygenerování tabulek do databáze.
+Takováto situace se dá řešit dvěma různými způsoby. První spočívá v umístění sdílené knihovny mezi knihovny přímo do Glassfishe. Já jsem zvolil druhý způsob, který je jednodušší na nasazení. A to, že jsem všechny tři EJB moduly spolu s webovým modulem zastřešil pod jednu Enterprise aplikaci, která se následně deployuje namísto každého modulu zvlášť. 
+
+\subsubsection{Entity}
+
+Dále se objevily chyby v definici entit, kdy některé entity neměly pojmenované joinovací sloupce. To způsobovalo nevygenerování tabulek do databáze.
+
+\subsubsection{Databáze}
 
 V původním návrhu je EJB modul Controller napojen na dvě databáze - první databáze obsahuje data o volebních událostech a druhá data o uživatelích systému. Jelikož uživatelská databáze měla pouze jednu tabulku, sloučil jsem tyto databáze do jedné, což vede k zjednodušení konfigurace při nasazení na server.
 
@@ -473,15 +479,35 @@ Po skončení této iterace jsem měl funkční deploy pro Glassfish 3.1 využí
 
 \subsection{Cíl}
 
-\subsection{Problémy}
+Druhým krokem bylo zprovoznění základní funkcionality a její otestování společně se zlepšením zabezpečení.
+
+\subsection{Postup}
+
+\subsubsection{Autentizační realm}
+
+Původní projekt využíval pro autentizaci uživatelů file realm Glassfishe. Toto nicméně vedlo k duplikaci dat, neboť každý uživatel musel být jak v tomto file realmu, tak v databázi uživatelů. Nakonfiguroval jsem tedy v Glassfishi JDBC realm, který přes JNDI přistupuje do interní databáze uživatelů a zajišťuje jejich autentizaci na základě dat v uvedených tabulkách.
+
+\subsubsection{JSF 2.0}
+
+Jak již bylo zmíněno v první iteraci \ref{sec:iterace:prvni}, nová verze Glassfishe 3.1 s sebou přináší nejnovější technologie. To v sobě zahrnuje i přechod z JSF 1.2 na verzi JSF 2.0. Původní prototyp systému eVolby\cite{www:prototyp} využíval střídavě technologií JSP i tohoto zastaralého JSF.
+
+Předělal jsem všechny webové stránky tak, aby jednotně používaly JSF 2.0 za využití systému šablon. Stránky tedy není neincludují hlavičku a patičku, jak tomu bylo původně, nýbrž využívají šablonovacího systému.
+
+\subsubsection{Volební applet}
+
+Applet napsaný v Javě FX se při testování prototypu systému eVolby\cite{www:prototyp} ukázal jako nepoužitelný. Hlavním problémem byla verze nainstalované Javy na klientském počítači, ke se applet spouštěl, společně s problematickou komunikací s hostitelským serverem.
+
+Na doporučení ze závěrečné zprávy jsem tento applet z projektu vyřadil a nahradil ho klasickým formulářem. Ten zajišťuje mnohem pohodlnější, rychlejší a hlavně funkční hlasování.
 
 \subsection{Výstup}
+
+Na konci druhé iterace je projekt ve své základní funkční podobě, umožňuje snadnější přidávání uživatelů a bezproblémové hlasování.
 
 \section{Třetí iterace}
 
 \subsection{Cíl}
 
-\subsection{Problémy}
+\subsection{Postup}
 
 \subsection{Výstup}
 
@@ -537,6 +563,8 @@ Po skončení této iterace jsem měl funkční deploy pro Glassfish 3.1 využí
 \item[Java EE] Java Enterprise Edition
 \item[Java SE] Java Standart Edition
 \item[JDBC] Java Database Connectivity
+\item[JSF] Java Server Faces
+\item[JSP] Java Server Pages
 \item[JVM] Java Virtual Machine
 \item[HTTP] Hypertext Transfer Protocol
 \item[HTTPS] Hypertext Transfer Protocol Secure
