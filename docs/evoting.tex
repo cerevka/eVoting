@@ -23,27 +23,29 @@
 \newcommand\FirstandFamilyName{Tomáš Čerevka}
 \newcommand\Supervisor{Ing. Martin Komárek}
 
+
+
 % Zvyraznovani odkazu.
-\usepackage[
-pdftitle={\WorkTitle},
-pdfauthor={\FirstandFamilyName},
-bookmarks=true,
-colorlinks=true,
-breaklinks=true,
-urlcolor=red,
-citecolor=blue,
-linkcolor=blue,
-unicode=true,
-]
-{hyperref}
+%\usepackage[
+%pdftitle={\WorkTitle},
+%pdfauthor={\FirstandFamilyName},
+%bookmarks=true,
+%colorlinks=true,
+%breaklinks=true,
+%rlcolor=blue,
+%citecolor=blue,
+%linkcolor=blue,
+%unicode=true,
+%]
+%{hyperref}
 
 
 \usepackage[square, numbers]{natbib} % sazba pouzite literatury
-%\usepackage{url}
+\usepackage[hyphens]{url}
 %\DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>}\urlstyle{tt}}  %rm/sf/tt
 %\renewcommand{\emph}[1]{\textsl{#1}}    % melo by byt kurziva nebo sklonene,
-\let\oldUrl\url
-\renewcommand\url[1]{<\texttt{\oldUrl{#1}}>}
+%\let\oldUrl\url
+%\renewcommand\url[1]{<\texttt{\oldUrl{#1}}>}
 
 \begin{document}
 
@@ -183,6 +185,56 @@ V současné době probíhá většina voleb bez jakéhokoliv elektronického sy
 
 Tento způsob voleb je sice funkční a léty prověřený, ovšem jeho realizace je časově a personálně náročná na přípravu, na samotný průběh voleb a následné sčítání hlasů. Jeho slabinou je možnost selhání lidského faktoru, na kterém je tento proces příliš závislý. To by mohlo zapříčinit jak neúmyslné chyby, tak zcela cílevědomé ovlivnění výsledků.
 
+\section{Rešerše} 
+
+Elektronické volby jsou tématem, které již bylo mnohokrát zpracováváno. Následující odstavce rozebírají několik zdrojů, ze kterých tato práce vychází, a stručně popisují jejich obsah.
+
+\subsection{Prototyp systému eVolby}
+
+Implementační část této bakalářské práce vychází z prototypu systému internetových elektronických voleb pro Akademický senát ČVUT, který vznikl v rámci předmětů Y36SI2 a Y36SI3 \cite{www:prototyp}. Tento systém se sestává pouze ze serveru napsaném v Enterprise Javě, který zajišťuje jak administraci voleb, tak samotné hlasování voličů přes internet. 
+
+Prototyp je koncipován pouze pro personální volby, kdy se nejprve z řad voličů nominují kandidáti. Po ukončení nominací následuje hlasování, kdy voliči dávají své hlasy jednotlivým kandidátům. V této práci bude systém rozšířen o možnost i nepersonálních voleb, kdy předmět voleb a možnosti budou definovány explicitně při jejich zakládání.
+
+V systému figurují tři role uživatelů: administrátor, komisař a volič. Pro lepší správu kandidátů přidává nový koncept další uživatelskou roli: kandidáta. Administrátor je v systému pouze jeden a má pravomoc založit volby a jmenovat jim komisaře. Jedny volby mohou mít více komisařů a v případě důležitého rozhodnutí je třeba potvrzení alespoň nadpoloviční většiny. Komisaři pod volbami zakládají volební události představující jednotlivá kola voleb. K těm přiřazují oprávněné voliče a schvalují či vyřazují nominované kandidáty.
+
+\subsection{Experimentální ověření distribuovaného volebního schématu}
+Konceptuální návrh podobného systému zpracoval ve své disertační práci \textit{Experimentální ověření distribuovaného
+volebního schématu} Radek Šilhavý \cite{art:silhavy}. Tato práce se zabývá hlavně teoretickou rovinou a popisu procesů a požadavků na realizaci elektronických volebních systémů a dává k dispozici ucelený pohled na problematiku. Důraz je kladen hlavně na internetové volební systémy umožňující vzdálené hlasování bez nutnosti fyzické účasti ve volební místnosti.
+
+V úvodu se autor zabývá teoretických rámcem od legislativní problematiky v prostředí České republiky až po praktické využití ve světě. Popisuje, v jaké podobě byly elektronické volby testovány nasazovány ve Spojených státech amerických, Německu, Velké Británii, Španělsku, Švýcarsku a Estonsku.
+
+Zbytek práce se již orientuje více prakticky na návrh konceptuálního řešení distribuovaného volebního schématu a stanovuje hypotézy pro experimentální ověření hypotéz. První hypotéza předpokládá, že elektronizace volebního procesu za využití internetového volebního systému je možná a že je přínosem pro voliče. Druhá hypotéza prohlašuje využití webové aplikace jako základního řešení za výhodné, protože každému uživateli je přístupná a dostupná v čase a místě jemu vyhovujícím.
+
+\subsection{Hlasovací systém pro samosprávné orgány vysokých škol}
+Problematikou elektronických voleb se zabývá i diplomová práce Michala Petříka \textit{Hlasovací systém pro samosprávné orgány vysokých škol} \cite{art:petrik}. Zde se autor zaměřuje hlavně na potřeby samosprávných orgánů vysokých škol, speciálního Akademického senátu FIT ČVUT. 
+
+Tento systém je navržen tak, aby dokázal zautomatizovat online hlasování, správu jednotlivých hlasování v rámci zasedání, generování usnesení ze zasedání a prezentaci vybraných informací na webové stránky. Je zde propracován systém oprávnění, který umožňuje přidělovat libovolná administrátorská práva uživateli nebo skupině uživatelů. Autentizace uživatelů je velmi rozsáhlá, neboť poskytuje několik různých cest: přes uživatelské účty v databázi LDAP, pomocí identifikační karty či samotným systémem. 
+
+\subsection{Mobilního hlasovacího zařízení}
+
+Hlavním účelem elektronických voleb je snaha o zpříjemnění a zrychlení práce se samotnými hlasy. Proto je také důležité zpracování terminálového klienta, který si za vzor bere \textit{Mobilní hlasovací zařízení} \cite{art:valenta} Jakuba Valenty. Autor se sice zabývá problematikou hlasovacího zařízení v podobě mobilního telefonu s technologií Wi-Fi, ale podobnost s terminálovým klientem z hlediska analýzy je značná. Kromě toho rozebírá síťovou komunikaci posíláním zpráv v jazyce XML přes protokol HTTP.
+
+Na implementaci je zajímavá vícevrstvá architektura dělená na prezentační, aplikační, datová, persistentní a síťovou vrstvu. Serverová část v sobě také zahrnuje modul pro generování výsledků, jehož studium v sobě skrývá potenciál využitelný při zpracovávání hlasů a prezentaci výsledků.
+
+\subsection{Rešerše algoritmů pro snímání a zpracování otisku prstů} \label{sec:reserse_otisky}
+
+Při volbách se voliči budou přihlašovat za pomoci otisku prstu a PINu. Pro tyto účely je pro třeba zvolit správnou čtečku otisků prstů, která zajistí spolehlivost, dlouhou životnost a cenovou dostupnost. \textit{Rešerše algoritmů pro snímání a zpracování otisku prstů} \cite{art:polackova} od Zuzany Poláčkové poskytuje podrobný náhled do oblasti daktyloskopie. Kromě jiného pojednává o základních biometrických systémech, zpracování otisků prstů a o algoritmech používaných v praxi. Nejdůležitější je pro mě kapitola o snímačích otisků prstů, kde porovnává výhody a nevýhody optoelektrických, kapacitních, teplotních, elektroluminiscenčních a ultrazvukových snímačů.
+
+Jako nejlepší volba se jeví elektroluminiscenční snímač, jelikož pořizuje kvalitní výstup v digitální podobě, nemá problémy se snímáním extrémně suché pokožky a je cenově dostupný. Mezi nevýhody sice patří menší odolnost a citlivost na prach a vodu, ale oproti ostatním snímačům je to zanedbatelné.
+
+\subsection{Electronic Voting in Europe - Technology, Law, Politics and Society}
+
+Ve dnech 7. a 9. července 2004 se konal první mezinárodní workshop \textit{Electronic Voting in Europe - Technology, Law, Politics and Society} \cite{book:prosser} v Schloß Hofenenu v Rakousku. Z tohoto workshopu vznikla stejnojmenná kniha v podobě sborníku prací. Kniha rozebírá problematiku elektronických voleb ze všech možných úhlů a představuje systémy používané v Evropě. Dotýká se témat bezpečnosti, hrozících rizik a jejich řešení, biometrických systémů, technických požadavků a legislativních principů.
+
+\subsection{Elektronické volby u nás a ve světě}
+
+Na portále \texttt{www.internetprovsechny.cz} vyšel rozsáhlý článek \cite{www:estonsko} pojednávající o elektronických volbách v Estonsku. Estonsko je pokládáno za internetově velmi vyspělou zemi. Už jen skutečnost, že jejich ústava zaručuje od roku 2000 všem jejich občanům přístup na internet je toho dostatečným důkazem.
+
+Důležitou skutečností, která výrazně pomohla zavedení elektronických voleb, bylo zavedení elektronických identifikačních průkazů\footnote{Obdoba našich občanských průkazů.}. ID karta obsahuje nejen strojově čitelný kód, ale i mikročip, který má na sobě uloženy dva digitální certifikáty a související privátní klíče chráněné PIN kódy. Jeden certifikát slouží k autentizaci, druhý k elektrickému podpisu, přičemž je každý může používat bez omezení. Nejsou tedy vázány jen na komunikaci se státem.
+
+Zajímavostí modelu hlasování je zabezpečení hlasů. Funguje na tzv. principu dvou obálek. Hlasovací lístek se zašifruje klíčem voleb, což tvoří vnitřní obálku. Vnější obálku představuje elektronický podpis vnitřní obálky. Díky tomuto systému je možné, aby hlas nebyl spojen s voličem, ale zároveň volič může hlasovat vícekrát, kdy se započítá jen poslední hlas. Tento koncept byl zvolen kvůli eliminaci hlasování pod tlakem. U klasických voleb přistupuje volič za plentu samostatně, ovšem u voleb přes internet nelze zajistit jeho soukromí. Kdyby někdo voliče nutil hlasovat jinak, než on sám chce, může tak učinit, ale pak svůj hlas může změnit.
+
+Portál \texttt{www.lupa.cz} \cite{www:lupa} uveřejnil článek, který se více orientuje na situaci v tuzemsku. Nejdříve ovšem popisuje výhody a nevýhody elektronických voleb a zkušenosti v zahraničí, načež informuje o tom, že ČSÚ je již přepraven na jejich modernizaci \cite{www:csu}. 
 
 \section{Požadavky}
 
@@ -190,7 +242,7 @@ Tento způsob voleb je sice funkční a léty prověřený, ovšem jeho realizac
 
 V této sekci jsou stanoveny požadavky, které se netýkají funkčnosti, nýbrž jsou kladeny na celkový návrh, použité technologie a zpracování.
 
-\subsubsection{Obecné požadavky}
+\subsubsection{Obecné požadavky} \label{sec:obecne_pozadavky}
 
 Na celkový návrh řešení a dokumentaci jsou kladeny následující požadavky:
 
@@ -292,62 +344,12 @@ Na druhé straně jsou hrozby, které mohou zabránit průběhu hlasování. Ty 
 
 U voleb musí byt zajištěno nezfalšování hlasů, proto je třeba, aby všechny volební terminály komunikovaly se serverem pomocí protokolu HTTPS a veškerá komunikace mezi nimi byla zašifrovaná. Dále je třeba zajistit, aby volba každého voliče byla tajná. Toho se docílí neevidování vazby mezi hlasem a voličem. Jakmile tedy volič odhlasuje, přičte se ke zvolené možnosti hlas, systém si uloží, že tento volič již hlasoval, a znemožní mu další hlasování v daném kole voleb.
 
-\section{Rešerše} 
-
-Elektronické volby jsou tématem, které již bylo mnohokrát zpracováváno. Následující odstavce rozebírají několik zdrojů, ze kterých tato práce vychází, a stručně popisují jejich obsah.
-
-\subsection{Prototyp systému eVolby}
-Implementační část této bakalářské práce vychází z prototypu systému internetových elektronických voleb pro Akademický senát ČVUT, který vznikl v rámci předmětů Y36SI2 a Y36SI3. Tento systém se sestává pouze ze serveru napsaném v Enterprise Javě, který zajišťuje jak administraci voleb, tak samotné hlasování voličů přes internet. 
-
-Prototyp je koncipován pouze pro personální volby, kdy se nejprve z řad voličů nominují kandidáti. Po ukončení nominací následuje hlasování, kdy voliči dávají své hlasy jednotlivým kandidátům. V této práci bude systém rozšířen o možnost i nepersonálních voleb, kdy předmět voleb a možnosti budou definovány explicitně při jejich zakládání.
-
-V systému figurují tři role uživatelů: administrátor, komisař a volič. Pro lepší správu kandidátů přidává nový koncept další uživatelskou roli: kandidáta. Administrátor je v systému pouze jeden a má pravomoc založit volby a jmenovat jim komisaře. Jedny volby mohou mít více komisařů a v případě důležitého rozhodnutí je třeba potvrzení alespoň nadpoloviční většiny. Komisaři pod volbami zakládají volební události představující jednotlivá kola voleb. K těm přiřazují oprávněné voliče a schvalují či vyřazují nominované kandidáty.
-
-\subsection{Experimentální ověření distribuovaného volebního schématu}
-Konceptuální návrh podobného systému zpracoval ve své disertační práci \textit{Experimentální ověření distribuovaného
-volebního schématu} Radek Šilhavý \cite{art:silhavy}. Tato práce se zabývá hlavně teoretickou rovinou a popisu procesů a požadavků na realizaci elektronických volebních systémů a dává k dispozici ucelený pohled na problematiku. Důraz je kladen hlavně na internetové volební systémy umožňující vzdálené hlasování bez nutnosti fyzické účasti ve volební místnosti.
-
-V úvodu se autor zabývá teoretických rámcem od legislativní problematiky v prostředí České republiky až po praktické využití ve světě. Popisuje, v jaké podobě byly elektronické volby testovány nasazovány ve Spojených státech amerických, Německu, Velké Británii, Španělsku, Švýcarsku a Estonsku.
-
-Zbytek práce se již orientuje více prakticky na návrh konceptuálního řešení distribuovaného volebního schématu a stanovuje hypotézy pro experimentální ověření hypotéz. První hypotéza předpokládá, že elektronizace volebního procesu za využití internetového volebního systému je možná a že je přínosem pro voliče. Druhá hypotéza prohlašuje využití webové aplikace jako základního řešení za výhodné, protože každému uživateli je přístupná a dostupná v čase a místě jemu vyhovujícím.
-
-\subsection{Hlasovací systém pro samosprávné orgány vysokých škol}
-Problematikou elektronických voleb se zabývá i diplomová práce Michala Petříka \textit{Hlasovací systém pro samosprávné orgány vysokých škol} \cite{art:petrik}. Zde se autor zaměřuje hlavně na potřeby samosprávných orgánů vysokých škol, speciálního Akademického senátu FIT ČVUT. 
-
-Tento systém je navržen tak, aby dokázal zautomatizovat online hlasování, správu jednotlivých hlasování v rámci zasedání, generování usnesení ze zasedání a prezentaci vybraných informací na webové stránky. Je zde propracován systém oprávnění, který umožňuje přidělovat libovolná administrátorská práva uživateli nebo skupině uživatelů. Autentizace uživatelů je velmi rozsáhlá, neboť poskytuje několik různých cest: přes uživatelské účty v databázi LDAP, pomocí identifikační karty či samotným systémem. 
-
-\subsection{Mobilního hlasovacího zařízení}
-
-Hlavním účelem elektronických voleb je snaha o zpříjemnění a zrychlení práce se samotnými hlasy. Proto je také důležité zpracování terminálového klienta, který si za vzor bere \textit{Mobilní hlasovací zařízení} \cite{art:valenta} Jakuba Valenty. Autor se sice zabývá problematikou hlasovacího zařízení v podobě mobilního telefonu s technologií Wi-Fi, ale podobnost s terminálovým klientem z hlediska analýzy je značná. Kromě toho rozebírá síťovou komunikaci posíláním zpráv v jazyce XML přes protokol HTTP.
-
-Na implementaci je zajímavá vícevrstvá architektura dělená na prezentační, aplikační, datová, persistentní a síťovou vrstvu. Serverová část v sobě také zahrnuje modul pro generování výsledků, jehož studium v sobě skrývá potenciál využitelný při zpracovávání hlasů a prezentaci výsledků.
-
-\subsection{Rešerše algoritmů pro snímání a zpracování otisku prstů}
-
-Při volbách se voliči budou přihlašovat za pomoci otisku prstu a PINu. Pro tyto účely je pro třeba zvolit správnou čtečku otisků prstů, která zajistí spolehlivost, dlouhou životnost a cenovou dostupnost. \textit{Rešerše algoritmů pro snímání a zpracování otisku prstů} \cite{art:polackova} od Zuzany Poláčkové poskytuje podrobný náhled do oblasti daktyloskopie. Kromě jiného pojednává o základních biometrických systémech, zpracování otisků prstů a o algoritmech používaných v praxi. Nejdůležitější je pro mě kapitola o snímačích otisků prstů, kde porovnává výhody a nevýhody optoelektrických, kapacitních, teplotních, elektroluminiscenčních a ultrazvukových snímačů.
-
-Jako nejlepší volba se jeví elektroluminiscenční snímač, jelikož pořizuje kvalitní výstup v digitální podobě, nemá problémy se snímáním extrémně suché pokožky a je cenově dostupný. Mezi nevýhody sice patří menší odolnost a citlivost na prach a vodu, ale oproti ostatním snímačům je to zanedbatelné.
-
-\subsection{Electronic Voting in Europe - Technology, Law, Politics and Society}
-
-Ve dnech 7. a 9. července 2004 se konal první mezinárodní workshop \textit{Electronic Voting in Europe - Technology, Law, Politics and Society} \cite{book:prosser} v Schloß Hofenenu v Rakousku. Z tohoto workshopu vznikla stejnojmenná kniha v podobě sborníku prací. Kniha rozebírá problematiku elektronických voleb ze všech možných úhlů a představuje systémy používané v Evropě. Dotýká se témat bezpečnosti, hrozících rizik a jejich řešení, biometrických systémů, technických požadavků a legislativních principů.
-
-\subsection{Evolby u nás a ve světě}
-
-Na portále \texttt{www.internetprovsechny.cz} vyšel rozsáhlý článek \cite{www:estonsko} pojednávající o elektronických volbách v Estonsku. Estonsko je pokládáno za internetově velmi vyspělou zemi. Už jen skutečnost, že jejich ústava zaručuje od roku 2000 všem jejich občanům přístup na internet je toho dostatečným důkazem.
-
-Důležitou skutečností, která výrazně pomohla zavedení elektronických voleb, bylo zavedení elektronických identifikačních průkazů\footnote{Obdoba našich občanských průkazů.}. ID karta obsahuje nejen strojově čitelný kód, ale i mikročip, který má na sobě uloženy dva digitální certifikáty a související privátní klíče chráněné PIN kódy. Jeden certifikát slouží k autentizaci, druhý k elektrickému podpisu, přičemž je každý může používat bez omezení. Nejsou tedy vázány jen na komunikaci se státem.
-
-Zajímavostí modelu hlasování je zabezpečení hlasů. Funguje na tzv. principu dvou obálek. Hlasovací lístek se zašifruje klíčem voleb, což tvoří vnitřní obálku. Vnější obálku představuje elektronický podpis vnitřní obálky. Díky tomuto systému je možné, aby hlas nebyl spojen s voličem, ale zároveň volič může hlasovat vícekrát, kdy se započítá jen poslední hlas. Tento koncept byl zvolen kvůli eliminaci hlasování pod tlakem. U klasických voleb přistupuje volič za plentu samostatně, ovšem u voleb přes internet nelze zajistit jeho soukromí. Kdyby někdo voliče nutil hlasovat jinak, než on sám chce, může tak učinit, ale pak svůj hlas může změnit.
-
-Portál \texttt{www.lupa.cz} \cite{www:lupa} uveřejnil článek, který se více orientuje na situaci v tuzemsku. Nejdříve ovšem popisuje výhody a nevýhody elektronických voleb a zkušenosti v zahraničí, načež informuje o tom, že ČSÚ je již přepraven na jejich modernizaci \cite{www:csu}. 
-
 %*****************************************************************************
 \chapter{Analýza}
 
 \section{Uživatelské role}
 
-Volební procesu se účastní mnoho osob, které se dělí do rolí, které při volbách představují. Pro snažší orientaci uvádím jejich výčet.
+Volební procesu se účastní mnoho osob, které se dělí do rolí, které při volbách představují. Pro snazší orientaci uvádím jejich výčet.
 
 \subsection{Administrátor}
 
@@ -391,11 +393,11 @@ Java Enterprise Edition je součást platformy Java určená pro vývoj podnikov
 
 \subsubsection{Aplikační server} \label{aplikacni_server}
 
-Prototyp eVoleb běžel na aplikačním serveru Glassfish 2.1.1. Tato verze již ovšem zastarává a je na ní problematické testování. Proto jsem zvolil aplikační server Glassfish 3.0.1, který přináší mnohá zlepšení. Glassfish jsem zvolil proto, že se jedná o referenční implementaci Javy EE6 přímo společností Sun Microsystems. Glassfish je open source projekt, ale existuje i jeho komerční verze, jenž se jmenuje Oracle Glassfish 3.0.1. Tyto dvě verze se od sebe v podstatě neliší, rozdíl je hlavně v podpoře a aktualizacích.
+Prototyp eVoleb běžel na aplikačním serveru Glassfish 2.1.1. Tato verze již ovšem zastarává a je na ní problematické testování \cite{www:prototyp}. Proto jsem zvolil aplikační server Glassfish 3.1 \url{http://glassfish.java.net}, který přináší mnohá zlepšení. Glassfish jsem zvolil proto, že se jedná o referenční implementaci Javy EE6 přímo společností Sun Microsystems. Glassfish je open source projekt, ale existuje i jeho komerční verze, jenž se jmenuje Oracle Glassfish 3.1. Tyto dvě verze se od sebe v podstatě neliší, rozdíl je hlavně v podpoře a aktualizacích.
 
 \subsubsection{Databáze}
 
-Java EE disponuje sadou různých databázových konektorů díky technologii JDBC, které umožňují databázový stroj kdykoliv změnit. Při vývoji bude používána databáze MySQL. Pro snadné nasazení je ale možné použití JavaDB, což je vestavěná databáze. Jedná se vlastně jen o knihovnu napsanou v jazyce Java a umožňuje přístup k datům uloženým na pevném disku za pomoci SQL dotazů.
+Java EE disponuje sadou různých databázových konektorů díky technologii JDBC, které umožňují databázový stroj kdykoliv změnit. Při vývoji bude používána databáze MySQL \url{http://www.mysql.com}. Pro snadné nasazení je ale možné použití JavaDB, což je vestavěná databáze. Jedná se vlastně jen o knihovnu napsanou v jazyce Java a umožňuje přístup k datům uloženým na pevném disku za pomoci SQL dotazů.
 
 \subsection{Klient}
 
@@ -405,13 +407,41 @@ Java SE slouží k tvorbě desktopových aplikací, které běží pod JVM. Je t
 
 \subsection{Vývojové a testovací prostředí}
 
-Vývoj probíhal na operačním systém Ubuntu 11.04 a bylo použito vývojové prostředí NetBeans IDE ve verzi 7. Jedná se o komplexní prostředí, které poskytuje snadnou správu kódu s integrací SVN pro verzování. Zároveň umožňuje ovládání aplikačního serveru Glassfish a napojení JDBC ovladačů na databázový stroj.
+Vývoj probíhal na operačním systém Ubuntu 11.04 a bylo použito vývojové prostředí NetBeans IDE ve verzi 7.0. Jedná se o komplexní prostředí, které poskytuje snadnou správu kódu s integrací SVN pro verzování. Zároveň umožňuje ovládání aplikačního serveru Glassfish a napojení JDBC ovladačů na databázový stroj.
 
 Pro testování webového prostředí posloužil webový prohlížeč Firefox 4.0.1.
 
-\section{Architektura}
+\section{Snímač otisků prstů}
 
-\subsection{MVC}
+V kapitole \ref{sec:reserse_otisky} jsem rozebíral výhody a nevýhody jednotlivých technologií pro snímání otisků prstů. Pro vývoj klientské části, která má umožňovat autentizaci na základně otisku prstu, je třeba vybrat konkrétní snímač s kompatibilním SDK, které umožňuje práci s Javou. Využitím s biometrických údajů se zabývá mnoho společností a většina z nich nabízí i vlastní SDK určené právě pro jejich čtečky, což omezuje výběr. 
+
+V úvahu je také třeba vzít ceny licencí SDK. V požadavcích v kapitole \ref{sec:obecne_pozadavky} je stanoveno, že budou využity open source či freeware technologie. Proto se klíčovým atributem pro výběr snímače otisků prstů stala cena licence SDK společně s podporou platformy Java. Při výběru jsem dbal i na to, aby SDK a snímače bylo možné používat pod operačními systémy MS Windows a Linux.
+
+Pro detailnější prozkoumání jsem se zaměřil na produkty následujících společností, které nabízí jak samotné snímače otisků prstů, tak i k nim kompatibilní SDK.
+
+\subsection{Griaule Biometrics}
+
+Griaule Biometrics\footnote{\url{http://www.griaulebiometrics.com}} nabízí velmi robustní Fingerprint SDK s podporou více než 40 snímačů, ovšem při detailním zkoumání se ukázalo, že jejich verze SDK pro Javu má tento výběr omezen na zhruba čtvrtinové množství. 
+
+SDK spolupracuje s mnoha platformami (C++ .NET, C\# .NET, Delphi 6-7, Visual Basic 6, VB .NET, ASP.net, Java, Java Applet) a je k dispozici i pro MS Windows i pro Linux. 
+
+Dále v neprospěch tohoto SDK hovoří i licenční politika, která vyžaduje uhrazení licence pro každý vývojářský počítač, na kterém bude Fingerprint SDK nainstalováno. Cena jedné licence se pohybuje kolem \$100.
+
+\subsection{Futronic}
+
+Společnost Futronic\footnote{\url{http://www.futronic-tech.com}} vyvinula pro svůj snímač otisků prstů Futronic FS80 vlastní SDK, které podporuje MS Windows, Linux i MacOS a může se pochlubit spoluprací s platformami VB6, VC6, Borland Delphi, VB.NET a VC.NET, VB.2005, VC.2005 a samozřejmě Javou.
+
+Bohužel toto SDK není veřejně dostupné a pro více informací či jeho získání je třeba kontaktovat přímo společnost Futronic. 
+
+\subsection{Digital Persona}
+
+Jako nejvhodnější se ukázalo SDK od společnosti Digital Persona\footnote{\url{http://www.digitalpersona.com}}, které je nabízeno jako freeware a k němuž je nabízen placený doplněk pro rychlejší porovnávání otisků prstů. Základní verze SDK však zcela postačuje, je k dispozici ve verzi pro MS Windows i pro Linux a spolupracuje s platformami Java, C, C++ a .NET.
+
+Digital Persona k tomuto SDK nabízí i svůj vlastní snímač otisků prstů pod označením U.are.U 4500 Fingerprint Reader v ceně \$99.
+
+\subsection{Vybrané SKD a snímač otisků prstů}
+
+Pro vývoj jsem tedy zvolil SDK od společnosti Digital Persona a jejich snímač otisků prstů U.are.U 4500 Fingerprint Reader. Volba padle na něj především díky freewarovému SDK, které mají ostatní společnosti zpoplatněné, podpoře MS Windows a Linux a platformy Java.
 
 %*****************************************************************************
 \chapter{Návrh řešení a realizace}
@@ -443,6 +473,7 @@ Popis implementace/realizace se zaměřením na nestandardní části řešení.
 % latex). Druhy z nich alespon 2x, aby se poresily odkazy.
 
 % maximalizuje příjmení autora a špatně zvětšuje diakritiku
+
 \bibliographystyle{abbrv}
 %\bibliographystyle{csplainnat}
 %\bibliographystyle{plain}
@@ -454,8 +485,6 @@ Popis implementace/realizace se zaměřením na nestandardní části řešení.
 %*****************************************************************************
 
 \appendix
-
-
 
 %*****************************************************************************
 \chapter{Seznam použitých zkratek}
@@ -476,6 +505,7 @@ Popis implementace/realizace se zaměřením na nestandardní části řešení.
 \item[HTTPS] Hypertext Transfer Protocol Secure
 \item[IDE] Integrated Development Environment
 \item[LDAP] Lightweight Directory Access Protocol
+\item[SDK] Software Development Kit
 \item[SQL] Structured Query Language
 \item[UML] Unified Modeling Language
 \item[UTB] Univerzita Tomáše Bati ve Zlíně
