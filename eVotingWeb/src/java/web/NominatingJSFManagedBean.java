@@ -135,7 +135,7 @@ public class NominatingJSFManagedBean {
 
     public boolean getRenderNominovat(){
         List si = getSelectItems();
-        boolean result = false;
+        boolean result = true;
         if (si != null) {
             result = si.isEmpty();
         }
