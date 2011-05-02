@@ -445,8 +445,45 @@ Pro vývoj jsem tedy zvolil SDK od společnosti Digital Persona a jejich sníma�
 
 %*****************************************************************************
 \chapter{Návrh řešení a realizace}
-Návrh implementace (volby implementačního prostředí).
-Popis implementace/realizace se zaměřením na nestandardní části řešení.
+
+Vzhledem k tomu, že systém vychází z prototypu eVolby, který již má své řešení navržené, budu v této práci popisovat jednotlivé iterace, ve kterých jsem ho modifikoval, přičemž v každé iteraci se zaměřím na problémy, se kterými jsme se setkal a popíši postup, kterým jsem se dopracoval k funkčnímu řešení. 
+
+\section{První iterace}
+
+\subsection{Cíl}
+
+Jako první jsem si stanovil za cíl migraci z Glassfishe 2.0.1 na Glassfish verze 3.1. K tomuto rozhodnutí mě vedla hlavně podpora nejnovějších technologií Javy Enterprise Edition 6\footnote{\url{http://glassfish.java.net/public/comparing_v2_and_v3.html}}. S tím se pojí i možnost unit testů v EJB, jak uvádí i závěrečné zpráva z vývoje prototypu eVolby\cite{www:prototyp}.
+
+\subsection{Problémy}
+
+Zatímco Glassfish 2.0.1 byl certifikován pro Java EE 5, jeho novější verze Glassfish 3.1 je již certifikován pro Java EE 6. S tím s pojí změna některých standardů, která měla na svědomí problémy při migraci. Zjistil jsem, že při deploy aplikace dochází k vyhazování chyby, že EJB moduly neobsahují žádné EJB. Bylo to způsobováno tím, že Glassfish vynechával ty EJB, ve kterých narazil na jakoukoliv chybu. Problém tkvěl ve sdílené knihovně POJO objektů, které slouží jako přepravní kontejnery mezi EJB moduly. Jakmile remote interface dané EJB obsahoval referenci na takový sdílený POJO objekt, Glassfish 3.1 zahlásil, že takový objekt nezná.
+
+Takováto situace se dá řešit dvěma různými způsoby. První spočívá v umístění sdílené knihovny mezi knihovny přímo do Glassfishe. Já jsem zvolil druhý způsob, který je jednodušší na nasazení. A to, že jsem všechny tři EJB moduly spolu s webovým modulem zastřešil pod jednu Enterprise aplikaci. 
+
+Dále se objevily chyby v definici entit, kdy některé entity neměly pojmenované spojovací sloupce. To způsobovalo nevygenerování tabulek do databáze.
+
+V původním návrhu je EJB modul Controller napojen na dvě databáze - první databáze obsahuje data o volebních událostech a druhá data o uživatelích systému. Jelikož uživatelská databáze měla pouze jednu tabulku, sloučil jsem tyto databáze do jedné, což vede k zjednodušení konfigurace při nasazení na server.
+
+\subsection{Výstup}
+
+Po skončení této iterace jsem měl funkční deploy pro Glassfish 3.1 využívající pouze tři databáze namísto čtyř s korektně vygenerovanými tabulkami.
+
+
+\section{Druhá iterace}
+
+\subsection{Cíl}
+
+\subsection{Problémy}
+
+\subsection{Výstup}
+
+\section{Třetí iterace}
+
+\subsection{Cíl}
+
+\subsection{Problémy}
+
+\subsection{Výstup}
 
 
 %*****************************************************************************
@@ -505,6 +542,7 @@ Popis implementace/realizace se zaměřením na nestandardní části řešení.
 \item[HTTPS] Hypertext Transfer Protocol Secure
 \item[IDE] Integrated Development Environment
 \item[LDAP] Lightweight Directory Access Protocol
+\item[POJO] Plain Old Java Object
 \item[SDK] Software Development Kit
 \item[SQL] Structured Query Language
 \item[UML] Unified Modeling Language
