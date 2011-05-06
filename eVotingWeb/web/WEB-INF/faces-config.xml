@@ -9,7 +9,7 @@
 
     <managed-bean>
         <managed-bean-name>createElection</managed-bean-name>
-        <managed-bean-class>web.ElectionManagedBean</managed-bean-class>
+        <managed-bean-class>evoting.web.ElectionManagedBean</managed-bean-class>
     
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
@@ -19,7 +19,7 @@
     
     <managed-bean>
         <managed-bean-name>createElectionEvent</managed-bean-name>
-        <managed-bean-class>web.ElectionEventManagedBean</managed-bean-class>
+        <managed-bean-class>evoting.web.ElectionEventManagedBean</managed-bean-class>
     
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
@@ -33,29 +33,29 @@
     
     <managed-bean>
         <managed-bean-name>voting</managed-bean-name>
-        <managed-bean-class>web.VotingManagedBean</managed-bean-class>
+        <managed-bean-class>evoting.web.VotingManagedBean</managed-bean-class>
     
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     
     <managed-bean>
         <managed-bean-name>nominating</managed-bean-name>
-        <managed-bean-class>web.NominatingJSFManagedBean</managed-bean-class>
+        <managed-bean-class>evoting.web.NominatingJSFManagedBean</managed-bean-class>
+    
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>eventId</property-name>
             <value>#{param.eventId}</value>
-        </managed-property>
-    </managed-bean>
+        </managed-property></managed-bean>
     
     <managed-bean>
         <managed-bean-name>generatingResults</managed-bean-name>
-        <managed-bean-class>web.ResultsManagedBean</managed-bean-class>
+        <managed-bean-class>evoting.web.ResultsManagedBean</managed-bean-class>
     
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     
     <managed-bean>
         <managed-bean-name>default</managed-bean-name>
-        <managed-bean-class>web.DefaultManagedBean</managed-bean-class>
+        <managed-bean-class>evoting.web.DefaultManagedBean</managed-bean-class>
     
         <managed-bean-scope>request</managed-bean-scope></managed-bean>
     
