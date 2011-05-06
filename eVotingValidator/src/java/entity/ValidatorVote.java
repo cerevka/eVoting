@@ -8,6 +8,7 @@ package entity;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +27,9 @@ public class ValidatorVote implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Date recievedDate;
-    @OneToMany
+    @OneToMany(cascade= CascadeType.PERSIST)
     Collection<ValidatorCandidate> votedCandidates;
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.PERSIST)
     private ValidatorElectionEvent electionEvent;
 
     public ValidatorElectionEvent getElectionEvent() {

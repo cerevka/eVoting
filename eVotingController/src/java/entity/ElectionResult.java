@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,12 +29,12 @@ public class ElectionResult implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
-    @OneToOne
+    @OneToOne(cascade= CascadeType.PERSIST)
     @JoinColumn(name="candidate")
     private Candidate candidate;
     @Column(name="votes")
     private Integer votes;
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.PERSIST)
     private ElectionEvent electionEvent;
     //elected integer = 1 YES, 2 NO BECAUSE OF LACK OF SPACE, 3 NO BECAUSE OF INSUFFICENT votes
     private int elected;

@@ -7,6 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -21,11 +22,11 @@ public class ValidatorElectionEvent implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private Integer id;
-    @ManyToMany(mappedBy="votedInEvents")
+    @ManyToMany(mappedBy="votedInEvents", cascade= CascadeType.PERSIST)
     private Collection<ValidatorCandidate> candidates;
-    @ManyToMany(mappedBy="electionEvents")
+    @ManyToMany(mappedBy="electionEvents", cascade= CascadeType.PERSIST)
     private Collection<ValidatorVoter> voters;
-    @OneToMany(mappedBy="electionEvent")
+    @OneToMany(mappedBy="electionEvent", cascade= CascadeType.PERSIST)
     private Collection<ValidatorVote> votes;
     private Boolean votingStarted;
 

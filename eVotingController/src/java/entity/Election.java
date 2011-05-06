@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,9 +35,9 @@ public class Election implements Serializable {
     private Integer id;
     @Column(name="name")
     private String name;
-    @ManyToMany(mappedBy = "elections")
+    @ManyToMany(mappedBy = "elections", cascade= CascadeType.PERSIST)
     private Collection<Commissioner> commissioners;
-    @OneToMany
+    @OneToMany(cascade= CascadeType.PERSIST)
     private Collection<ElectionEvent> electionEvents;
     //private byte[] publicKey;
     @Column(name="type")

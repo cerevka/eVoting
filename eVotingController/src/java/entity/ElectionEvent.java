@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,11 +29,11 @@ public class ElectionEvent implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
-    @ManyToMany(mappedBy = "votedInEvents")
+    @ManyToMany(mappedBy = "votedInEvents", cascade= CascadeType.PERSIST)
     private Collection<Candidate> candidates;
-    @ManyToMany(mappedBy = "electionEvents")
+    @ManyToMany(mappedBy = "electionEvents", cascade= CascadeType.PERSIST)
     private Collection<Voter> voters;
-    @OneToMany(mappedBy = "electionEvent")
+    @OneToMany(mappedBy = "electionEvent", cascade= CascadeType.PERSIST)
     private Collection<ElectionResult> electionResults;
     @Column(name="name")
     private String name;
@@ -44,11 +45,11 @@ public class ElectionEvent implements Serializable {
     private Boolean nominatingStarted;
     @Column(name="finished")
     private Boolean finished;
-    @ManyToMany(mappedBy = "eventsToEndNominating")
+    @ManyToMany(mappedBy = "eventsToEndNominating", cascade= CascadeType.PERSIST)
     private Collection<Commissioner> comAgreeEndNominating;
-    @ManyToMany(mappedBy = "eventsToStartVoting")
+    @ManyToMany(mappedBy = "eventsToStartVoting", cascade= CascadeType.PERSIST)
     private Collection<Commissioner> comAgreeStartVoting;
-    @ManyToMany(mappedBy = "eventsToEndVoting")
+    @ManyToMany(mappedBy = "eventsToEndVoting", cascade= CascadeType.PERSIST)
     private Collection<Commissioner> comAgreeEndVoting;
 
     public Collection<Commissioner> getComAgreeEndVoting() {

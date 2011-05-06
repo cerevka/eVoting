@@ -4,6 +4,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -18,9 +19,9 @@ public class CounterCandidate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String candidateLogin;
-    @ManyToMany
+    @ManyToMany(cascade= CascadeType.PERSIST)
     private Collection<CounterElectionEvent> votedInEvents;
-    @OneToMany(mappedBy="candidate")
+    @OneToMany(mappedBy="candidate", cascade= CascadeType.PERSIST)
     private Collection<VotesCount> votesCount;
 
      //candidateRole rozlisuje role profesor/student

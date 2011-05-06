@@ -7,6 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Voter implements Serializable {
     @Id
     @Column(name="login")
     private String login;
-    @ManyToMany
+    @ManyToMany(cascade= CascadeType.PERSIST)
     private Collection<ElectionEvent> electionEvents;
 
     public Collection<ElectionEvent> getElectionEvents() {

@@ -9,17 +9,18 @@
 
     <managed-bean>
         <managed-bean-name>createElection</managed-bean-name>
-        <managed-bean-class>web.CreateElectionJSFManagedBean</managed-bean-class>
+        <managed-bean-class>web.ElectionManagedBean</managed-bean-class>
+    
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>electionId</property-name>
             <value>#{param.electionId}</value>
-        </managed-property>
-    </managed-bean>
+        </managed-property></managed-bean>
     
     <managed-bean>
         <managed-bean-name>createElectionEvent</managed-bean-name>
-        <managed-bean-class>web.CreateElectionEventJSFManagedBean</managed-bean-class>
+        <managed-bean-class>web.ElectionEventManagedBean</managed-bean-class>
+    
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>elecId</property-name>
@@ -28,14 +29,13 @@
         <managed-property>
             <property-name>eventId</property-name>
             <value>#{param.eventId}</value>
-        </managed-property>
-    </managed-bean>
+        </managed-property></managed-bean>
     
     <managed-bean>
         <managed-bean-name>voting</managed-bean-name>
-        <managed-bean-class>web.VotingJSFManagedBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>web.VotingManagedBean</managed-bean-class>
+    
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     
     <managed-bean>
         <managed-bean-name>nominating</managed-bean-name>
@@ -49,15 +49,15 @@
     
     <managed-bean>
         <managed-bean-name>generatingResults</managed-bean-name>
-        <managed-bean-class>web.GeneratingResultsJSFManagedBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>web.ResultsManagedBean</managed-bean-class>
+    
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     
     <managed-bean>
         <managed-bean-name>default</managed-bean-name>
-        <managed-bean-class>web.DefaultJSFManagedBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+        <managed-bean-class>web.DefaultManagedBean</managed-bean-class>
+    
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     
     <!-- =========== NAVIGATION ================================== -->
     <navigation-rule>

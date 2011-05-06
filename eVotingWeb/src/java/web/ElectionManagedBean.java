@@ -27,8 +27,8 @@ import pojo.ControllerException;
  * @author lordondrak
  */
 
-public class CreateElectionJSFManagedBean {
-
+public class ElectionManagedBean {
+   
     @EJB
     private CreatingElectionSessionRemote creatingElectionSessionBean;
 
@@ -41,13 +41,13 @@ public class CreateElectionJSFManagedBean {
     private String stringperson;
 
 
-    public CreateElectionJSFManagedBean() {
+    public ElectionManagedBean() {
         Context context;
         try {
             context = new InitialContext();
-            //creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
+            creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup(CreatingElectionSessionRemote.class.getName());
         } catch (NamingException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -57,7 +57,7 @@ public class CreateElectionJSFManagedBean {
             FacesMessage m = new FacesMessage("The election "+name+" was successfully created");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
         return "success";
@@ -80,7 +80,7 @@ public class CreateElectionJSFManagedBean {
             FacesMessage m = new FacesMessage("The commissioner "+personOut.getLogin()+" was successfully added");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
         return "";
@@ -90,7 +90,7 @@ public class CreateElectionJSFManagedBean {
         try {
             return creatingElectionSessionBean.getElectionCommissioners(electionId);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -144,7 +144,7 @@ public class CreateElectionJSFManagedBean {
         try {
             return creatingElectionSessionBean.getElection(electionId);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

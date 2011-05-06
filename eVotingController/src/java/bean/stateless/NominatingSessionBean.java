@@ -19,6 +19,8 @@ import javax.annotation.Resource;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.Session;
 
@@ -33,7 +35,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
     private ValidatorSessionRemote validatorBean;
     @EJB
     private CounterRemote counterBean;
-    @PersistenceContext
+    @PersistenceContext(unitName="eVotingControllerPU")
     private EntityManager em;
     private Boolean nominatingDone = false;
 
@@ -43,6 +45,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param electionEventId where the voter want to become a candidate.
      * @param programme
      */
+    @Override
     public void nominate(final String candidateLogin, final Integer electionEventId, final String programme) throws ControllerException {
         ElectionEvent event = em.find(ElectionEvent.class, electionEventId);
         if (event == null) {
@@ -80,6 +83,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param login of the voter
      * @return returns list of election events which are in the nominating state
      */
+    @Override
     public List<ElectionEvent> getVoterElectionEvents(String login) throws ControllerException {
         Voter voter = em.find(Voter.class, login);
         if (voter == null) {
@@ -99,6 +103,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * Sets the given election event to nominating state.
      * @param eventId
      */
+    @Override
     public void startNominating(final Integer eventId) {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         event.setNominatingStarted(true);
@@ -110,6 +115,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * Ends the nominating state in the givent election event.
      * @param eventId
      */
+    @Override
     public void endNominating(final Integer eventId) {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         event.setNominatingStarted(false);
@@ -122,11 +128,19 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param eventId
      * @return candidates who are in the given election event.
      */
+    @Override
     public Collection<Candidate> getCandidates(final Integer eventId) {
+        System.out.println("Event id pro kandidaty je: " + eventId);
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
-        Collection<Candidate> candidates = event.getCandidates();
-        candidates.size();
-        return candidates;
+        if (event != null) {
+            System.out.println("Udalost je: " + event.toString());
+            Collection<Candidate> candidates = event.getCandidates();
+            candidates.size();
+            return candidates;
+        } else {
+            Logger.getLogger(NominatingSessionBean.class.getName()).log(Level.SEVERE, "Event not found.");
+            return null;            
+        }
     }
 
     /**
@@ -135,6 +149,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param eventId if voting event
      * @throws ControllerException if voter not found.
      */
+    @Override
     public void deleteCandidateFromEvent(Candidate candidate, Integer eventId) throws ControllerException {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         Collection<Candidate> candidates = event.getCandidates();
@@ -159,6 +174,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param eventId id of voting event
      * @return true if nominating already started
      */
+    @Override
     public Boolean isStartedNominating(Integer eventId) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         if (ee.getNominatingStarted()) {
@@ -173,6 +189,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param eventId id of event
      * @param login login of commissioner
      */
+    @Override
     public void supportEndNominating(Integer eventId, String login) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         Commissioner com = em.find(Commissioner.class, login);
@@ -236,6 +253,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @return Collection of commissioners that agreed with end of
      * nomination in ElectionEvent with given ID
      */
+    @Override
     public Collection<Commissioner> getComToEndNominating(Integer eventId) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         Collection<Commissioner> ret = ee.getComAgreeEndNominating();
@@ -249,6 +267,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param login login of commissioner
      * @return true if commmissioner agreed with end of nominating
      */
+    @Override
     public Boolean isComToEndNominating(Integer eventId, String login) {
         Collection<Commissioner> comCol = getComToEndNominating(eventId);
         Commissioner com = em.find(Commissioner.class, login);
@@ -266,8 +285,10 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param elecId id of Election
      * @return true, if there is some important action for commissioner
      */
+    @Override
     public Boolean alertCommissioner(Integer eventId, String login, Integer elecId, String collectionName) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
+
         Commissioner com = em.find(Commissioner.class, login);
         Election e = em.find(Election.class, elecId);
         Collection coll;
@@ -295,6 +316,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * values: END_NOMINATIG, START_VOTING, END_VOTING
      * @return true if there is majority count of commissioners in some issue
      */
+    @Override
     public Boolean isMajority(Integer eventId, String collectionName) {
         Integer collectionSize;
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
@@ -325,6 +347,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param eventId ID of ElectionEvent
      * @return determines election from given electionEventId
      */
+    @Override
     public Election getElectionFromEvent(Integer eventId) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         Collection<Election> elCol = em.createNamedQuery("Election.findAll").getResultList();
@@ -340,5 +363,9 @@ public class NominatingSessionBean implements NominatingSessionRemote {
         }
 
         return null;
+    }
+
+    public void persist(Object object) {
+        em.persist(object);
     }
 }

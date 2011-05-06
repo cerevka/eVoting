@@ -30,12 +30,12 @@ import pojo.ControllerException;
  *
  * @author defiler
  */
-public class GeneratingResultsJSFManagedBean {
+public class ResultsManagedBean {
 
     @EJB
-    private GeneratingResultsSessionRemote generatingResultsBean;
+    private GeneratingResultsSessionRemote generatingResultsBean;    
     @EJB
-    private TellerSessionRemote tellerSessionBean;
+    private TellerSessionRemote tellerSessionBean;   
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
     private String eventName;
@@ -43,15 +43,15 @@ public class GeneratingResultsJSFManagedBean {
     private DataModel eeResultModel;
 
 
-    public GeneratingResultsJSFManagedBean() {
+    public ResultsManagedBean() {
         Context context;
         try {
             context = new InitialContext();
-            //nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
-            //tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
-            //generatingResultsBean = (GeneratingResultsSessionRemote) context.lookup("ejb.GeneratingResultsSessionRemote");
+            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
+            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
+            generatingResultsBean = (GeneratingResultsSessionRemote) context.lookup(GeneratingResultsSessionRemote.class.getName());
         } catch (NamingException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -60,7 +60,7 @@ public class GeneratingResultsJSFManagedBean {
         try {
             return generatingResultsBean.getEndedEvents(login);
         } catch (ControllerException ex) {
-            Logger.getLogger(GeneratingResultsJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ResultsManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -163,7 +163,7 @@ public class GeneratingResultsJSFManagedBean {
             return results;
         } catch (ControllerException ex) {
             System.out.println("Vyplul som null");
-            Logger.getLogger(GeneratingResultsJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ResultsManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

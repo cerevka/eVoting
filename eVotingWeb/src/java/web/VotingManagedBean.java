@@ -32,31 +32,31 @@ import pojo.ControllerException;
  *
  * @author defiler
  */
-public class VotingJSFManagedBean {
+public class VotingManagedBean {
 
-    private ListDataModel AllVoterModel;
+    private ListDataModel AllVoterModel;  
     @EJB
     private TellerSessionRemote tellerSessionBean;
     @EJB
-    private VotingSessionRemote votingSessionBean;
+    private VotingSessionRemote votingSessionBean;    
     @EJB
-    private CreatingElectionSessionRemote creatingElectionSessionBean;
+    private CreatingElectionSessionRemote creatingElectionSessionBean; 
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
     private Voter voter = null;
     private Integer eventId = null;
 
-    public VotingJSFManagedBean() throws ControllerException {
+    public VotingManagedBean() throws ControllerException {
         Context context;
         try {
             context = new InitialContext();
-            //tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
-            //votingSessionBean = (VotingSessionRemote) context.lookup("ejb.VotingSessionRemote");
-            //creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
-            //nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
-            // getAllVotersModel();
+            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
+            votingSessionBean = (VotingSessionRemote) context.lookup(VotingSessionRemote.class.getName());
+            creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup(CreatingElectionSessionRemote.class.getName());
+            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
+            getAllVotersModel();
         } catch (NamingException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -84,7 +84,7 @@ public class VotingJSFManagedBean {
             FacesContext.getCurrentInstance().addMessage("", m);
             return "";
         } catch (ControllerException ex) {
-            Logger.getLogger(VotingJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
@@ -102,7 +102,7 @@ public class VotingJSFManagedBean {
             FacesContext.getCurrentInstance().addMessage("", m);
             return "";
         } catch (ControllerException ex) {
-            Logger.getLogger(VotingJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
     }
@@ -115,7 +115,7 @@ public class VotingJSFManagedBean {
             FacesMessage m = new FacesMessage("Voter " + voter.getLogin() + " was successfully removed");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(VotingJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
         return "";
@@ -135,7 +135,7 @@ public class VotingJSFManagedBean {
             }
             return items;
         } catch (ControllerException ex) {
-            Logger.getLogger(VotingJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -178,9 +178,11 @@ public class VotingJSFManagedBean {
 
     public List<Voter> getEventVoters() {
         try {
-            return (List<Voter>) creatingElectionSessionBean.getEventVoters(getEventId());
+            if (getEventId() != null) {
+                return (List<Voter>) creatingElectionSessionBean.getEventVoters(getEventId());
+            }
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -31,7 +31,7 @@ import pojo.ControllerException;
  *
  * @author lordondrak
  */
-public class CreateElectionEventJSFManagedBean {
+public class ElectionEventManagedBean {
 
     @EJB
     private CreatingElectionSessionRemote electionSessionBean;
@@ -54,17 +54,17 @@ public class CreateElectionEventJSFManagedBean {
     private VotingSessionRemote votingSessionBean;
     private String commissionersAgreeTableHeader;
 
-    public CreateElectionEventJSFManagedBean() {
+    public ElectionEventManagedBean() {
         Context context;
         try {
             context = new InitialContext();
-            //electionSessionBean = (CreatingElectionSessionRemote) context.lookup("ejb.CreatingElectionSessionRemote");
-            //nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
-            //tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
-            //votingSessionBean = (VotingSessionRemote) context.lookup("ejb.VotingSessionRemote");
+            electionSessionBean = (CreatingElectionSessionRemote) context.lookup(CreatingElectionSessionRemote.class.getName());
+            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
+            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
+            votingSessionBean = (VotingSessionRemote) context.lookup(VotingSessionRemote.class.getName());
             fill();
         } catch (NamingException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -78,7 +78,7 @@ public class CreateElectionEventJSFManagedBean {
             this.eventName = electionEvent.getName();
             this.info = electionEvent.getInfo();
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -88,7 +88,7 @@ public class CreateElectionEventJSFManagedBean {
             FacesMessage m = new FacesMessage("Event \"" + eventName + "\" was succesfully created");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
         setElecId(elecId);
@@ -109,7 +109,7 @@ public class CreateElectionEventJSFManagedBean {
             FacesMessage m = new FacesMessage("Event was succesfully changed");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
 
@@ -133,7 +133,7 @@ public class CreateElectionEventJSFManagedBean {
             FacesMessage m = new FacesMessage("Voter " + voterLogin + " was successfully added");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
         return "";
@@ -143,7 +143,7 @@ public class CreateElectionEventJSFManagedBean {
         try {
             return electionSessionBean.getEventVoters(getEventId());
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -192,7 +192,7 @@ public class CreateElectionEventJSFManagedBean {
         try {
             return electionSessionBean.getUnfinishedElectionEvents(elecId);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -207,7 +207,7 @@ public class CreateElectionEventJSFManagedBean {
         try {
             return electionSessionBean.getEndedEvents(login);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -217,7 +217,7 @@ public class CreateElectionEventJSFManagedBean {
         try {
             return electionSessionBean.getCommissionerElection(login);
         } catch (ControllerException ex) {
-            Logger.getLogger(CreateElectionEventJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -236,13 +236,15 @@ public class CreateElectionEventJSFManagedBean {
 
     public String getAlertText() {
         ElectionEvent ee = (ElectionEvent) unfinishedElectionEvents.getRowData();
-        String login = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_NOMINATING")) {
-            return "!! End of nominating was suggested !!";
-        } else if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "START_VOTING")) {
-            return "!! Start of voting was suggested !!";
-        } else if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_VOTING")) {
-            return "!! End of voting was suggested !!";
+        if (ee != null) {
+            String login = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+            if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_NOMINATING")) {
+                return "!! End of nominating was suggested !!";
+            } else if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "START_VOTING")) {
+                return "!! Start of voting was suggested !!";
+            } else if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_VOTING")) {
+                return "!! End of voting was suggested !!";
+            }
         }
         return "";
     }
@@ -342,7 +344,7 @@ public class CreateElectionEventJSFManagedBean {
             FacesMessage m = new FacesMessage("Candidate " + candidate.getLogin() + " was successfully removed");
             FacesContext.getCurrentInstance().addMessage("nic", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(VotingJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
         return "";
@@ -366,7 +368,7 @@ public class CreateElectionEventJSFManagedBean {
         this.elecId = elecId;
     }
 
-    public Integer getElecId(){
+    public Integer getElecId() {
         return elecId;
     }
 

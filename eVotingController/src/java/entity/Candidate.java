@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import entity.Programme;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
@@ -28,10 +29,10 @@ public class Candidate implements Serializable {
     @Id
     @Column(name="login")
     private String login;
-    @OneToMany
+    @OneToMany(cascade= CascadeType.PERSIST)
     @JoinTable(name="eventProgramme")
     private Map<ElectionEvent, Programme> programmes;
-    @ManyToMany
+    @ManyToMany(cascade= CascadeType.PERSIST)
     private Collection<ElectionEvent> votedInEvents;
     //candidateRole rozlisuje role profesor/student
     @Column(name="candidateRole")

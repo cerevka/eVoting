@@ -9,7 +9,6 @@ import bean.stateless.TellerSessionRemote;
 import entity.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +29,7 @@ import pojo.ControllerException;
  */
 public class NominatingJSFManagedBean {
 
+   
     @EJB
     private TellerSessionRemote tellerSessionBean;
     @EJB
@@ -41,10 +41,10 @@ public class NominatingJSFManagedBean {
         Context context;
         try {
             context = new InitialContext();
-            //tellerSessionBean = (TellerSessionRemote) context.lookup("ejb.TellerSessionRemote");
-            //nominatingSessionBean = (NominatingSessionRemote) context.lookup("ejb.NominatingSessionRemote");
+            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
+            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
         } catch (NamingException ex) {
-            Logger.getLogger(CreateElectionJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

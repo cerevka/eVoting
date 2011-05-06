@@ -35,9 +35,9 @@ import pojo.ValidatorException;
 @Stateless
 public class ValidatorSessionBean implements ValidatorSessionRemote {
 
-    @Resource(name = "jms/validatedVotes")
+    @Resource(lookup = "jms/validatedVotes") 	
     private Queue validatedVotes;
-    @Resource(name = "jms/validatedVotesFactory")
+    @Resource(lookup = "jms/validatedVotesFactory")
     private ConnectionFactory validatedVotesFactory;
     @PersistenceContext
     private EntityManager em;
@@ -86,6 +86,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
      * @throws ValidatorException if the given election event not found
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void addVoter(final String voterLogin, final Integer eventId) throws ValidatorException {
         ValidatorElectionEvent electionEvent = em.find(ValidatorElectionEvent.class, eventId);
         if (electionEvent == null) {
@@ -110,6 +111,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
      * @throws ValidatorException if election event not found
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void startVoting(Integer eventId) throws ValidatorException {
         ValidatorElectionEvent electionEvent = em.find(ValidatorElectionEvent.class, eventId);
         if (electionEvent == null) {
@@ -128,6 +130,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
      * @todo change signature of voting (for instance to session id)
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void sendVote(final VotingCardDTO votingCard) throws ValidatorException {
         ValidatorElectionEvent electionEvent = em.find(ValidatorElectionEvent.class, votingCard.getElectionEvent());
         if (electionEvent == null) {
@@ -185,6 +188,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
      * @throws ValidatorException if election event not found
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void endVoting(Integer eventId) throws ValidatorException {
         ValidatorElectionEvent electionEvent = em.find(ValidatorElectionEvent.class, eventId);
         if (electionEvent == null) {
@@ -202,6 +206,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
      * @throws ValidatorException if ... //TODO description
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void endElectionEvent(final Integer electionEventId) throws ValidatorException {
         ValidatorElectionEvent electionEvent = em.find(ValidatorElectionEvent.class, electionEventId);
         VotesDTO votes = new VotesDTO();
@@ -258,6 +263,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void deleteVoterFromEvent(String login, Integer eventId) {
         ValidatorElectionEvent event = em.find(ValidatorElectionEvent.class, eventId);
         Collection<ValidatorVoter> voters = event.getVoters();
@@ -272,6 +278,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void deleteCandidateFromEvent(String login, Integer eventId) {
         ValidatorElectionEvent event = em.find(ValidatorElectionEvent.class, eventId);
         Collection<ValidatorCandidate> candidates = event.getCandidates();

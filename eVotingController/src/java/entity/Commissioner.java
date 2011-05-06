@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -29,21 +30,21 @@ public class Commissioner implements Serializable {
     @Column(name="login")
     private String login;
     
-    @ManyToMany
+    @ManyToMany(cascade= CascadeType.PERSIST)
     private Collection<Election> elections;
     @Column(name="firstName")
     private String firstName;
     @Column(name="lastName")
     private String lastName;
-   @ManyToMany
+   @ManyToMany(cascade= CascadeType.PERSIST)
    @JoinTable(name="end_nominating_com_ee")
     private List<ElectionEvent> eventsToEndNominating;
 
-   @ManyToMany
+   @ManyToMany(cascade= CascadeType.PERSIST)
    @JoinTable(name="start_voting_com_ee")
     private List<ElectionEvent> eventsToStartVoting;
 
-   @ManyToMany
+   @ManyToMany(cascade= CascadeType.PERSIST)
    @JoinTable(name="end_voting_com_ee")
     private List<ElectionEvent> eventsToEndVoting;
 

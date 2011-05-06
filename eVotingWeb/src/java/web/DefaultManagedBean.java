@@ -12,12 +12,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author defiler
  */
-public class DefaultJSFManagedBean {
+public class DefaultManagedBean {
 
     private String role;
 
-    /** Creates a new instance of DefaultJSFManagedBean */
-    public DefaultJSFManagedBean() {
+    /** Creates a new instance of DefaultManagedBean */
+    public DefaultManagedBean() {
     }
 
     public String logout() {

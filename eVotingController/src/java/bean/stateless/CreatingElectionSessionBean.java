@@ -39,6 +39,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @param electionType
      * @throws ControllerException //TODO description
      */
+    @Override
     public void createElection(final String electionName, final String electionType) throws ControllerException {
         Election el = new Election();
         el.setName(electionName);
@@ -59,6 +60,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      *
      * @return all persons in database
      */
+    @Override
     public Collection<Person> getAllPerson() {
         Query query = em.createQuery("SELECT p FROM Person p");
         return query.getResultList();
@@ -70,6 +72,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return elections where is the given commissioner
      * @throws ControllerException if commissioner not found
      */
+    @Override
     public Collection<Election> getCommissionerElection(final String commissionerLogin) throws ControllerException {
         Commissioner com = em.find(Commissioner.class, commissionerLogin);
         if (com == null) {
@@ -86,6 +89,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return election events of the given election
      * @throws ControllerException if election not found
      */
+    @Override
     public Collection<ElectionEvent> getUnfinishedElectionEvents(final Integer electionId) throws ControllerException {
         Election election = em.find(Election.class, electionId);
         if (election == null) {
@@ -107,6 +111,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @param eventId Id of the given election event
      * @throws ControllerException if election event not found
      */
+    @Override
     public void addVoter(final String voterLogin, final Integer eventId) throws ControllerException {
         ElectionEvent electionEvent = em.find(ElectionEvent.class, eventId);
         if (electionEvent == null) {
@@ -142,6 +147,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @param electionId Id of the given election
      * @throws ControllerException if election not found
      */
+    @Override
     public void addCommissioner(final Person person, final Integer electionId) throws ControllerException {
         Election election = em.find(Election.class, electionId);
         if (election == null) {
@@ -166,6 +172,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      *
      * @return all elections in database
      */
+    @Override
     public Collection<Election> getAllElection() {
         Query query = em.createQuery("SELECT e FROM Election e");
         return query.getResultList();
@@ -177,6 +184,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return commissioners of the given election
      * @throws ControllerException if election not found.
      */
+    @Override
     public Collection<Commissioner> getElectionCommissioners(final Integer electionId) throws ControllerException {
         Election election = em.find(Election.class, electionId);
         if (election == null) {
@@ -193,6 +201,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return election event of the given Id
      * @throws ControllerException if election event not found
      */
+    @Override
     public ElectionEvent getElectionEvent(final Integer eventId) throws ControllerException {
         ElectionEvent electionEvent = em.find(ElectionEvent.class, eventId);
         if (electionEvent == null) {
@@ -205,6 +214,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * Persists the given election event.
      * @param electionEvent
      */
+    @Override
     public void changeEvent(ElectionEvent electionEvent) {
         em.merge(electionEvent);
     }
@@ -216,6 +226,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @param info info ot the new election event
      * @throws ControllerException if election not found and .. //TODO description
      */
+    @Override
     public void createElectionEvent(final Integer electionId, final String name, final String info) throws ControllerException {
         Election election = em.find(Election.class, electionId);
         if (election == null) {
@@ -245,6 +256,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return voters who vote in the given election event
      * @throws ControllerException if election event not found.
      */
+    @Override
     public Collection<Voter> getEventVoters(final Integer eventId) throws ControllerException {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         if (event == null) {
@@ -261,6 +273,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return void
      * @throws ControllerException if voter not found.
      */
+    @Override
       public void deleteVoterFromEvent(Voter voter, Integer eventId) throws ControllerException {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         Collection<Voter> voters = event.getVoters();
@@ -286,6 +299,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return ended election events of the given voter
      * @throws ControllerException if voter not found.
      */
+    @Override
     public Collection<ElectionEvent> getEndedEvents(final String login) throws ControllerException {
         Voter voter = em.find(Voter.class, login);
         if (voter == null) {
@@ -306,6 +320,7 @@ public class CreatingElectionSessionBean implements CreatingElectionSessionRemot
      * @return election of the given election Id
      * @throws ControllerException if election not found.
      */
+    @Override
     public Election getElection(final Integer electionId) throws ControllerException {
         Election election = em.find(Election.class, electionId);
         if (election == null) {

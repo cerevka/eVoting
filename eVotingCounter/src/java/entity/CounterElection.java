@@ -9,6 +9,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,7 +24,7 @@ public class CounterElection implements Serializable {
     @Id
     private Integer id;
     //private byte[] privateKey;
-    @OneToMany(mappedBy="election")
+    @OneToMany(mappedBy="election", cascade= CascadeType.PERSIST)
     private Collection<CounterElectionEvent> electionEvents;
     
     public Collection<CounterElectionEvent> getElectionEvents() {
