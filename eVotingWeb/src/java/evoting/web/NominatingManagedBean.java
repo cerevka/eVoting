@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.web;
 
 import evoting.controller.bean.stateless.NominatingSessionRemote;
@@ -17,35 +13,25 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 
-/**
- *
- * @author defiler
- */
+@ManagedBean(name = "nominating")
+@RequestScoped
 public class NominatingManagedBean {
 
-   
     @EJB
     private TellerSessionRemote tellerSessionBean;
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
+    @ManagedProperty(value = "#{param.eventId}")
     private Integer eventId;
     private String programme;
 
     public NominatingManagedBean() {
-        Context context;
-        try {
-            context = new InitialContext();
-            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
-            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
-        } catch (NamingException ex) {
-            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public String goNominate() {
@@ -133,7 +119,7 @@ public class NominatingManagedBean {
         this.programme = programme;
     }
 
-    public boolean getRenderNominovat(){
+    public boolean getRenderNominovat() {
         List si = getSelectItems();
         boolean result = true;
         if (si != null) {

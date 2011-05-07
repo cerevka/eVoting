@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.web;
 
 import evoting.controller.bean.stateless.ElectionSessionRemote;
@@ -21,54 +17,45 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 
-/**
- *
- * @author lordondrak
- */
+@ManagedBean(name = "createElectionEvent")
+@RequestScoped
 public class ElectionEventManagedBean {
 
     @EJB
     private ElectionSessionRemote electionSessionBean;
     @EJB
     private TellerSessionRemote tellerSessionBean;
-    private DataModel candidatesModel;
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
+    @EJB
+    private VotingSessionRemote votingSessionBean;
+    @ManagedProperty(value = "#{param.elecId}")
+    private Integer elecId;
+    @ManagedProperty(value = "#{param.eventId}")
+    private Integer eventId;
+    private DataModel candidatesModel;
     private String eventName;
     private String voterLogin;
     private String info;
-    private Integer elecId;
-    private Integer eventId;
     private String voterName;
     private ElectionEvent electionEvent;
     private List<SelectItem> voterSel;
     private DataModel unfinishedElectionEvents;
     private Candidate candidate;
-    @EJB
-    private VotingSessionRemote votingSessionBean;
     private String commissionersAgreeTableHeader;
 
     public ElectionEventManagedBean() {
-        Context context;
-        try {
-            context = new InitialContext();
-            electionSessionBean = (ElectionSessionRemote) context.lookup(ElectionSessionRemote.class.getName());
-            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
-            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
-            votingSessionBean = (VotingSessionRemote) context.lookup(VotingSessionRemote.class.getName());
-            fill();
-        } catch (NamingException ex) {
-            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
-    public void fill() {
+    @PostConstruct
+    public void init() {
         Integer id = getEventId();
         if (id == null) {
             return;

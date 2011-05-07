@@ -1,17 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.web;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author defiler
- */
+@ManagedBean(name="default")
+@RequestScoped
 public class DefaultManagedBean {
 
     private String role;
@@ -26,8 +22,6 @@ public class DefaultManagedBean {
         session.invalidate();
         return "logout";
     }
-
-
 
     public String getRole() {
 

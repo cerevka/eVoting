@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.web;
 
 import evoting.controller.bean.stateless.ResultsSessionRemote;
@@ -23,11 +19,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
-/**
- *
- * @author defiler
- */
+@ManagedBean(name = "generatingResults")
+@RequestScoped
 public class ResultsManagedBean {
 
     @EJB
@@ -41,15 +37,6 @@ public class ResultsManagedBean {
     private DataModel eeResultModel;
 
     public ResultsManagedBean() {
-        Context context;
-        try {
-            context = new InitialContext();
-            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
-            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
-            generatingResultsBean = (ResultsSessionRemote) context.lookup(ResultsSessionRemote.class.getName());
-        } catch (NamingException ex) {
-            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public Collection<ElectionEvent> getEndedEvents() {

@@ -1,6 +1,5 @@
 package evoting.web;
 
-
 import evoting.controller.bean.stateless.ElectionSessionRemote;
 import evoting.controller.entity.*;
 import java.util.ArrayList;
@@ -12,44 +11,33 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import evoting.controller.pojo.ControllerException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 
-/** 
- *
- * @author lordondrak
- */
-
+@ManagedBean(name = "createElection")
+@RequestScoped
 public class ElectionManagedBean {
-   
+
     @EJB
     private ElectionSessionRemote creatingElectionSessionBean;
-
+    @ManagedProperty(value = "#{param.electionId}")
+    private Integer electionId;
     private String name;
     private String currentType = "Internet";
     private String commissioners;
     private List<SelectItem> personSel;
-    private Integer electionId;
     private String commissionerName;
     private String stringperson;
 
-
     public ElectionManagedBean() {
-        Context context;
-        try {
-            context = new InitialContext();
-            creatingElectionSessionBean = (ElectionSessionRemote) context.lookup(ElectionSessionRemote.class.getName());
-        } catch (NamingException ex) {
-            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
-    public String create(){
+    public String create() {
         try {
             creatingElectionSessionBean.createElection(name, currentType);
-            FacesMessage m = new FacesMessage("The election "+name+" was successfully created");
+            FacesMessage m = new FacesMessage("The election " + name + " was successfully created");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,21 +46,21 @@ public class ElectionManagedBean {
         return "success";
     }
 
-    public String addCommissioner(){
+    public String addCommissioner() {
         Collection<Person> personList = getPersonList();
         Person personOut = null;
-        for(Person p : personList) {
-            if(p.toString().equals(stringperson)) {
+        for (Person p : personList) {
+            if (p.toString().equals(stringperson)) {
                 personOut = p;
                 break;
             }
         }
-        if(personOut == null) {
+        if (personOut == null) {
             return "";
         }
         try {
             creatingElectionSessionBean.addCommissioner(personOut, electionId);
-            FacesMessage m = new FacesMessage("The commissioner "+personOut.getLogin()+" was successfully added");
+            FacesMessage m = new FacesMessage("The commissioner " + personOut.getLogin() + " was successfully added");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +81,7 @@ public class ElectionManagedBean {
     public List<SelectItem> getPersonSel() {
         Collection<Person> col = getPersonList();
         personSel = new ArrayList<SelectItem>();
-        for(Person p : col){
+        for (Person p : col) {
             personSel.add(new SelectItem(p.toString()));
         }
         return personSel;

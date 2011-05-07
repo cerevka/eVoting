@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.web;
 
 import evoting.controller.bean.stateless.ElectionSessionRemote;
@@ -21,16 +17,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
-/**
- *
- * @author defiler
- */
+@ManagedBean(name="voting")
+@RequestScoped
 public class VotingManagedBean {
 
     private ListDataModel AllVoterModel;  
@@ -46,22 +39,15 @@ public class VotingManagedBean {
     private Integer eventId = null;
 
     public VotingManagedBean() throws ControllerException {
-        Context context;
-        try {
-            context = new InitialContext();
-            tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
-            votingSessionBean = (VotingSessionRemote) context.lookup(VotingSessionRemote.class.getName());
-            creatingElectionSessionBean = (ElectionSessionRemote) context.lookup(ElectionSessionRemote.class.getName());
-            nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
-            getAllVotersModel();
-        } catch (NamingException ex) {
-            Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @PostConstruct
-    public void validate() {
-        //TODO kontrola jestli komisarovi patri electionID a eventId
+    public void init() {
+        try {
+            getAllVotersModel();
+        } catch (ControllerException ex) {
+            Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String goVote() {
