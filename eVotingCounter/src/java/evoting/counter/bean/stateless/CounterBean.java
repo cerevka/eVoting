@@ -1,8 +1,8 @@
 package evoting.counter.bean.stateless;
 
 import DTO.*;
-import evoting.counter.entity.CounterCandidate;
-import evoting.counter.entity.CounterElection;
+import evoting.counter.entity.Candidate;
+import evoting.counter.entity.Election;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.logging.Level;
@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import evoting.counter.entity.CounterElectionEvent;
+import evoting.counter.entity.ElectionEvent;
 import evoting.counter.entity.VotesCount;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -42,7 +42,7 @@ public class CounterBean implements CounterRemote {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public ElectionEventResultDTO getElectionEventResult(final Integer electionEventId) throws CounterException {
         ElectionEventResultDTO result = new ElectionEventResultDTO();
-        CounterElectionEvent electionEvent = em.find(CounterElectionEvent.class, electionEventId);
+        ElectionEvent electionEvent = em.find(ElectionEvent.class, electionEventId);
         if (electionEvent == null) {
             throw new CounterException("Election event not found.");
         }
@@ -84,7 +84,7 @@ public class CounterBean implements CounterRemote {
             throws CounterException {
         try {
             //KeyPair pair = generateKeyPair(electionId);
-            CounterElection election = new CounterElection();
+            Election election = new Election();
             election.setId(electionId);
             //election.setPrivateKey(pair.getPrivate().getEncoded());
             em.persist(election);
@@ -104,9 +104,9 @@ public class CounterBean implements CounterRemote {
     public void createNewElectionEvent(final Integer electionId, final Integer electionEventId)
             throws CounterException {
         try {
-            CounterElectionEvent electionEvent = new CounterElectionEvent();
+            ElectionEvent electionEvent = new ElectionEvent();
             electionEvent.setId(electionEventId);
-            CounterElection election = em.find(CounterElection.class, electionId);
+            Election election = em.find(Election.class, electionId);
             election.getElectionEvents().add(electionEvent);
             electionEvent.setElection(election);
             em.persist(electionEvent);
@@ -123,15 +123,15 @@ public class CounterBean implements CounterRemote {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void addCandidate(final String candidateLogin, final Integer electionEventId) throws CounterException {
-        CounterElectionEvent electionEvent = em.find(CounterElectionEvent.class, electionEventId);
+        ElectionEvent electionEvent = em.find(ElectionEvent.class, electionEventId);
         if (electionEvent == null) {
             throw new CounterException("Election event not found.");
         }
-        CounterCandidate candidate = em.find(CounterCandidate.class, candidateLogin);
+        Candidate candidate = em.find(Candidate.class, candidateLogin);
         if (candidate == null) {
-            candidate = new CounterCandidate();
+            candidate = new Candidate();
             candidate.setCandidateLogin(candidateLogin);
-            Collection<CounterElectionEvent> electionEvents = new ArrayList<CounterElectionEvent>();
+            Collection<ElectionEvent> electionEvents = new ArrayList<ElectionEvent>();
             candidate.setVotedInEvents(electionEvents);
         }
         candidate.getVotedInEvents().add(electionEvent);
@@ -174,12 +174,12 @@ public class CounterBean implements CounterRemote {
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void deleteCandidateFromEvent(String login, Integer eventId) {
-        CounterElectionEvent event = em.find(CounterElectionEvent.class, eventId);
-        Collection<CounterCandidate> candidates = event.getCandidates();
+        ElectionEvent event = em.find(ElectionEvent.class, eventId);
+        Collection<Candidate> candidates = event.getCandidates();
         candidates.size();
-        CounterCandidate candidate = em.find(CounterCandidate.class, login);
+        Candidate candidate = em.find(Candidate.class, login);
         candidates.remove(candidate);
-        Collection<CounterElectionEvent> events = candidate.getVotedInEvents();
+        Collection<ElectionEvent> events = candidate.getVotedInEvents();
         events.size();
         events.remove(event);
         candidates.remove(candidate);

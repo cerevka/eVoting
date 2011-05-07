@@ -4,7 +4,7 @@
  */
 package evoting.web;
 
-import evoting.controller.bean.stateless.GeneratingResultsSessionRemote;
+import evoting.controller.bean.stateless.ResultsSessionRemote;
 import evoting.controller.bean.stateless.NominatingSessionRemote;
 import evoting.controller.bean.stateless.TellerSessionRemote;
 import evoting.controller.entity.*;
@@ -31,7 +31,7 @@ import evoting.controller.pojo.ControllerException;
 public class ResultsManagedBean {
 
     @EJB
-    private GeneratingResultsSessionRemote generatingResultsBean;
+    private ResultsSessionRemote generatingResultsBean;
     @EJB
     private TellerSessionRemote tellerSessionBean;
     @EJB
@@ -46,7 +46,7 @@ public class ResultsManagedBean {
             context = new InitialContext();
             nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
             tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
-            generatingResultsBean = (GeneratingResultsSessionRemote) context.lookup(GeneratingResultsSessionRemote.class.getName());
+            generatingResultsBean = (ResultsSessionRemote) context.lookup(ResultsSessionRemote.class.getName());
         } catch (NamingException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }

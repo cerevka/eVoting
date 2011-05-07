@@ -17,12 +17,12 @@ import javax.persistence.ManyToMany;
  * @author defiler
  */
 @Entity
-public class ValidatorCandidate implements Serializable {
+public class Candidate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String login;
     @ManyToMany(cascade= CascadeType.PERSIST)
-    private Collection<ValidatorElectionEvent> votedInEvents;
+    private Collection<ElectionEvent> votedInEvents;
 
      //candidateRole rozlisuje role profesor/student
     private String candidateRole;
@@ -35,11 +35,11 @@ public class ValidatorCandidate implements Serializable {
         this.login = login;
     }
 
-    public Collection<ValidatorElectionEvent> getVotedInEvents() {
+    public Collection<ElectionEvent> getVotedInEvents() {
         return votedInEvents;
     }
 
-    public void setVotedInEvents(Collection<ValidatorElectionEvent> votedInEvents) {
+    public void setVotedInEvents(Collection<ElectionEvent> votedInEvents) {
         this.votedInEvents = votedInEvents;
     }
 
@@ -63,10 +63,10 @@ public class ValidatorCandidate implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ValidatorCandidate)) {
+        if (!(object instanceof Candidate)) {
             return false;
         }
-        ValidatorCandidate other = (ValidatorCandidate) object;
+        Candidate other = (Candidate) object;
         if ((this.login == null && other.login != null) || (this.login != null && !this.login.equals(other.login))) {
             return false;
         }

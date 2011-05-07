@@ -4,7 +4,7 @@
  */
 package evoting.web;
 
-import evoting.controller.bean.stateless.CreatingElectionSessionRemote;
+import evoting.controller.bean.stateless.ElectionSessionRemote;
 import evoting.controller.bean.stateless.NominatingSessionRemote;
 import evoting.controller.bean.stateless.TellerSessionRemote;
 import evoting.controller.bean.stateless.VotingSessionRemote;
@@ -34,7 +34,7 @@ import evoting.controller.pojo.ControllerException;
 public class ElectionEventManagedBean {
 
     @EJB
-    private CreatingElectionSessionRemote electionSessionBean;
+    private ElectionSessionRemote electionSessionBean;
     @EJB
     private TellerSessionRemote tellerSessionBean;
     private DataModel candidatesModel;
@@ -58,7 +58,7 @@ public class ElectionEventManagedBean {
         Context context;
         try {
             context = new InitialContext();
-            electionSessionBean = (CreatingElectionSessionRemote) context.lookup(CreatingElectionSessionRemote.class.getName());
+            electionSessionBean = (ElectionSessionRemote) context.lookup(ElectionSessionRemote.class.getName());
             nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
             tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
             votingSessionBean = (VotingSessionRemote) context.lookup(VotingSessionRemote.class.getName());

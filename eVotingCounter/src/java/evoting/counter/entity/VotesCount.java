@@ -26,9 +26,9 @@ public class VotesCount implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @ManyToOne(cascade= CascadeType.PERSIST)
-    private CounterElectionEvent electionEvent;
+    private ElectionEvent electionEvent;
     @ManyToOne(cascade= CascadeType.PERSIST)
-    private CounterCandidate candidate;
+    private Candidate candidate;
     private Integer count;
 
     public Integer getId() {
@@ -47,19 +47,19 @@ public class VotesCount implements Serializable {
         this.count = count;
     }
 
-    public CounterElectionEvent getElectionEvent() {
+    public ElectionEvent getElectionEvent() {
         return electionEvent;
     }
 
-    public void setElectionEvent(CounterElectionEvent electionEvent) {
+    public void setElectionEvent(ElectionEvent electionEvent) {
         this.electionEvent = electionEvent;
     }
 
-    public CounterCandidate getCandidate() {
+    public Candidate getCandidate() {
         return candidate;
     }
 
-    public void setCandidate(CounterCandidate candidate) {
+    public void setCandidate(Candidate candidate) {
         this.candidate = candidate;
     }
     

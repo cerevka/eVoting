@@ -29,7 +29,7 @@ import evoting.validator.pojo.ValidatorException;
  * @author defiler
  */
 @Stateless
-public class GeneratingResultsSessionBean implements GeneratingResultsSessionRemote {
+public class ResultsSessionBean implements ResultsSessionRemote {
 
     @EJB
     private ValidatorSessionRemote validatorSessionBean;

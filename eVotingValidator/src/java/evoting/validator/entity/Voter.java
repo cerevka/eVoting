@@ -18,20 +18,20 @@ import javax.persistence.OneToMany;
  * @author defiler
  */
 @Entity
-public class ValidatorVoter implements Serializable {
+public class Voter implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String login;
     @OneToMany(cascade= CascadeType.PERSIST)
-    private Collection<ValidatorVote> votes;
+    private Collection<Vote> votes;
     @ManyToMany(cascade= CascadeType.PERSIST)
-    private Collection<ValidatorElectionEvent> electionEvents;
+    private Collection<ElectionEvent> electionEvents;
 
-    public Collection<ValidatorElectionEvent> getElectionEvents() {
+    public Collection<ElectionEvent> getElectionEvents() {
         return electionEvents;
     }
 
-    public void setElectionEvents(Collection<ValidatorElectionEvent> electionEvents) {
+    public void setElectionEvents(Collection<ElectionEvent> electionEvents) {
         this.electionEvents = electionEvents;
     }
 
@@ -43,11 +43,11 @@ public class ValidatorVoter implements Serializable {
         this.login = login;
     }
 
-    public Collection<ValidatorVote> getVotes() {
+    public Collection<Vote> getVotes() {
         return votes;
     }
 
-    public void setVotes(Collection<ValidatorVote> votes) {
+    public void setVotes(Collection<Vote> votes) {
         this.votes = votes;
     }
 
@@ -61,10 +61,10 @@ public class ValidatorVoter implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ValidatorVoter)) {
+        if (!(object instanceof Voter)) {
             return false;
         }
-        ValidatorVoter other = (ValidatorVoter) object;
+        Voter other = (Voter) object;
         if ((this.login == null && other.login != null) || (login != null && !this.login.equals(other.login))) {
             return false;
         }

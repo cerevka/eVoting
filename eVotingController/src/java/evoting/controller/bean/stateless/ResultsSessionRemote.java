@@ -16,7 +16,7 @@ import evoting.controller.pojo.ControllerException;
  * @author defiler
  */
 @Remote
-public interface GeneratingResultsSessionRemote {
+public interface ResultsSessionRemote {
 
     void generateResult(final Integer eventId) throws ControllerException;
 

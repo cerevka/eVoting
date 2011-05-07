@@ -15,12 +15,12 @@ import javax.persistence.OneToMany;
  * @author mz
  */
 @Entity
-public class CounterCandidate implements Serializable {
+public class Candidate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String candidateLogin;
     @ManyToMany(cascade= CascadeType.PERSIST)
-    private Collection<CounterElectionEvent> votedInEvents;
+    private Collection<ElectionEvent> votedInEvents;
     @OneToMany(mappedBy="candidate", cascade= CascadeType.PERSIST)
     private Collection<VotesCount> votesCount;
 
@@ -35,11 +35,11 @@ public class CounterCandidate implements Serializable {
         this.candidateLogin = candidateLogin;
     }
 
-    public Collection<CounterElectionEvent> getVotedInEvents() {
+    public Collection<ElectionEvent> getVotedInEvents() {
         return votedInEvents;
     }
 
-    public void setVotedInEvents(Collection<CounterElectionEvent> votedInEvents) {
+    public void setVotedInEvents(Collection<ElectionEvent> votedInEvents) {
         this.votedInEvents = votedInEvents;
     }
 
@@ -69,10 +69,10 @@ public class CounterCandidate implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof CounterCandidate)) {
+        if (!(object instanceof Candidate)) {
             return false;
         }
-        CounterCandidate other = (CounterCandidate) object;
+        Candidate other = (Candidate) object;
         if ((this.candidateLogin == null && other.candidateLogin != null) || (this.candidateLogin != null && !this.candidateLogin.equals(other.candidateLogin))) {
             return false;
         }

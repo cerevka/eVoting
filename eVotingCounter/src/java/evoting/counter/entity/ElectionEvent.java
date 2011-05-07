@@ -21,22 +21,22 @@ import javax.persistence.OneToMany;
  * @author mz
  */
 @Entity
-public class CounterElectionEvent implements Serializable {
+public class ElectionEvent implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private Integer id;
     @ManyToOne(cascade= CascadeType.PERSIST)
-    private CounterElection election;
+    private Election election;
     @ManyToMany(mappedBy="votedInEvents", cascade= CascadeType.PERSIST)
-    private Collection<CounterCandidate> candidates;
+    private Collection<Candidate> candidates;
     @OneToMany(mappedBy="electionEvent", cascade= CascadeType.PERSIST)
     private Collection<VotesCount> votesCounts;
 
-    public Collection<CounterCandidate> getCandidates() {
+    public Collection<Candidate> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(Collection<CounterCandidate> candidates) {
+    public void setCandidates(Collection<Candidate> candidates) {
         this.candidates = candidates;
     }
 
@@ -48,11 +48,11 @@ public class CounterElectionEvent implements Serializable {
         this.id = id;
     }
     
-    public CounterElection getElection() {
+    public Election getElection() {
         return election;
     }
 
-    public void setElection(CounterElection election) {
+    public void setElection(Election election) {
         this.election = election;
     }
 
@@ -75,10 +75,10 @@ public class CounterElectionEvent implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof CounterElectionEvent)) {
+        if (!(object instanceof ElectionEvent)) {
             return false;
         }
-        CounterElectionEvent other = (CounterElectionEvent) object;
+        ElectionEvent other = (ElectionEvent) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

@@ -38,7 +38,7 @@ public class VotingSessionBean implements VotingSessionRemote {
     @EJB
     private ValidatorSessionRemote validatorSessionBean;
     @EJB
-    private GeneratingResultsSessionRemote generatingResultsSessionBean;
+    private ResultsSessionRemote generatingResultsSessionBean;
     @PersistenceContext
     private EntityManager em;
     

@@ -19,7 +19,7 @@ import evoting.controller.pojo.ControllerException;
  * @author defiler
  */
 @Remote
-public interface CreatingElectionSessionRemote {
+public interface ElectionSessionRemote {
 
     void createElection(final String electionName, final String electionType) throws ControllerException;
 

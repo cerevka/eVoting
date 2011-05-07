@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.web;
 
 
-import evoting.controller.bean.stateless.CreatingElectionSessionRemote;
+import evoting.controller.bean.stateless.ElectionSessionRemote;
 import evoting.controller.entity.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,7 +25,7 @@ import evoting.controller.pojo.ControllerException;
 public class ElectionManagedBean {
    
     @EJB
-    private CreatingElectionSessionRemote creatingElectionSessionBean;
+    private ElectionSessionRemote creatingElectionSessionBean;
 
     private String name;
     private String currentType = "Internet";
@@ -45,7 +40,7 @@ public class ElectionManagedBean {
         Context context;
         try {
             context = new InitialContext();
-            creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup(CreatingElectionSessionRemote.class.getName());
+            creatingElectionSessionBean = (ElectionSessionRemote) context.lookup(ElectionSessionRemote.class.getName());
         } catch (NamingException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }

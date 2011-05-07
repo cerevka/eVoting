@@ -26,7 +26,7 @@ import evoting.validator.pojo.ValidatorException;
  * @author defiler
  */
 @Stateless
-public class CreatingElectionSessionBean implements CreatingElectionSessionRemote {
+public class ElectionSessionBean implements ElectionSessionRemote {
 
     @EJB
     private ValidatorSessionRemote validatorBean;

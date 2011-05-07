@@ -27,7 +27,7 @@ import evoting.controller.pojo.ControllerException;
  *
  * @author defiler
  */
-public class NominatingJSFManagedBean {
+public class NominatingManagedBean {
 
    
     @EJB
@@ -37,7 +37,7 @@ public class NominatingJSFManagedBean {
     private Integer eventId;
     private String programme;
 
-    public NominatingJSFManagedBean() {
+    public NominatingManagedBean() {
         Context context;
         try {
             context = new InitialContext();
@@ -60,7 +60,7 @@ public class NominatingJSFManagedBean {
             FacesMessage m = new FacesMessage("Byl jste úspěšně nominován");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(NominatingJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NominatingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
         return "goMain";
@@ -101,7 +101,7 @@ public class NominatingJSFManagedBean {
             }
             return items;
         } catch (ControllerException ex) {
-            Logger.getLogger(NominatingJSFManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NominatingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

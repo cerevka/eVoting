@@ -4,7 +4,7 @@
  */
 package evoting.web;
 
-import evoting.controller.bean.stateless.CreatingElectionSessionRemote;
+import evoting.controller.bean.stateless.ElectionSessionRemote;
 import evoting.controller.bean.stateless.NominatingSessionRemote;
 import evoting.controller.bean.stateless.TellerSessionRemote;
 import evoting.controller.bean.stateless.VotingSessionRemote;
@@ -39,7 +39,7 @@ public class VotingManagedBean {
     @EJB
     private VotingSessionRemote votingSessionBean;    
     @EJB
-    private CreatingElectionSessionRemote creatingElectionSessionBean; 
+    private ElectionSessionRemote creatingElectionSessionBean; 
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
     private Voter voter = null;
@@ -51,7 +51,7 @@ public class VotingManagedBean {
             context = new InitialContext();
             tellerSessionBean = (TellerSessionRemote) context.lookup(TellerSessionRemote.class.getName());
             votingSessionBean = (VotingSessionRemote) context.lookup(VotingSessionRemote.class.getName());
-            creatingElectionSessionBean = (CreatingElectionSessionRemote) context.lookup(CreatingElectionSessionRemote.class.getName());
+            creatingElectionSessionBean = (ElectionSessionRemote) context.lookup(ElectionSessionRemote.class.getName());
             nominatingSessionBean = (NominatingSessionRemote) context.lookup(NominatingSessionRemote.class.getName());
             getAllVotersModel();
         } catch (NamingException ex) {

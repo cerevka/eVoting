@@ -18,23 +18,23 @@ import javax.persistence.OneToMany;
  * @author defiler
  */
 @Entity
-public class ValidatorElectionEvent implements Serializable {
+public class ElectionEvent implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private Integer id;
     @ManyToMany(mappedBy="votedInEvents", cascade= CascadeType.PERSIST)
-    private Collection<ValidatorCandidate> candidates;
+    private Collection<Candidate> candidates;
     @ManyToMany(mappedBy="electionEvents", cascade= CascadeType.PERSIST)
-    private Collection<ValidatorVoter> voters;
+    private Collection<Voter> voters;
     @OneToMany(mappedBy="electionEvent", cascade= CascadeType.PERSIST)
-    private Collection<ValidatorVote> votes;
+    private Collection<Vote> votes;
     private Boolean votingStarted;
 
-    public Collection<ValidatorCandidate> getCandidates() {
+    public Collection<Candidate> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(Collection<ValidatorCandidate> candidates) {
+    public void setCandidates(Collection<Candidate> candidates) {
         this.candidates = candidates;
     }
 
@@ -46,19 +46,19 @@ public class ValidatorElectionEvent implements Serializable {
         this.id = id;
     }
 
-    public Collection<ValidatorVoter> getVoters() {
+    public Collection<Voter> getVoters() {
         return voters;
     }
 
-    public void setVoters(Collection<ValidatorVoter> voters) {
+    public void setVoters(Collection<Voter> voters) {
         this.voters = voters;
     }
 
-    public Collection<ValidatorVote> getVotes() {
+    public Collection<Vote> getVotes() {
         return votes;
     }
 
-    public void setVotes(Collection<ValidatorVote> votes) {
+    public void setVotes(Collection<Vote> votes) {
         this.votes = votes;
     }
 
@@ -80,10 +80,10 @@ public class ValidatorElectionEvent implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ValidatorElectionEvent)) {
+        if (!(object instanceof ElectionEvent)) {
             return false;
         }
-        ValidatorElectionEvent other = (ValidatorElectionEvent) object;
+        ElectionEvent other = (ElectionEvent) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
