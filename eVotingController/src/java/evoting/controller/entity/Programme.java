@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.controller.entity;
 
 import java.io.Serializable;
@@ -13,19 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author defiler
- */
 @Entity
-@Table(name="programme")
+@Table(name = "programme")
 public class Programme implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
-    @Column(name="text")
+    @Column(name = "text")
     private String text;
 
     public Integer getId() {
@@ -43,7 +35,6 @@ public class Programme implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
-    
 
     @Override
     public int hashCode() {
@@ -69,5 +60,4 @@ public class Programme implements Serializable {
     public String toString() {
         return "entity.Program[id=" + id + "]";
     }
-
 }

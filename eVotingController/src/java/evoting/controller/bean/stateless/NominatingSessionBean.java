@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.controller.bean.stateless;
 
 import evoting.counter.bean.stateless.CounterRemote;
@@ -26,10 +22,6 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.Session;
 
-/**
- *
- * @author defiler
- */
 @Stateless
 public class NominatingSessionBean implements NominatingSessionRemote {
 
@@ -232,6 +224,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      * @param com The recipient of this message.
      * @param eventId Id of an event associated with this message.
      */
+    @Override
     public void sendMail(String recipient, String text) {
 
         recipient += "@fel.cvut.cz";
@@ -367,6 +360,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
         return null;
     }
 
+    @Override
     public void persist(Object object) {
         em.persist(object);
     }

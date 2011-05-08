@@ -1,12 +1,5 @@
 package evoting.counter.entity;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.CascadeType;
@@ -16,10 +9,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author mz
- */
 @Entity
 public class ElectionEvent implements Serializable {
     private static final long serialVersionUID = 1L;

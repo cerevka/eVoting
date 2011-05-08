@@ -1,7 +1,5 @@
 package evoting.counter.entity;
 
-
-
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.CascadeType;
@@ -10,10 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author mz
- */
 @Entity
 public class Candidate implements Serializable {
     private static final long serialVersionUID = 1L;

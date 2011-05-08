@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.controller.bean.stateless;
 
 import evoting.controller.entity.*;
@@ -11,10 +6,6 @@ import java.util.List;
 import javax.ejb.Remote;
 import evoting.controller.pojo.ControllerException;
 
-/**
- *
- * @author defiler
- */
 @Remote
 public interface NominatingSessionRemote {
 
@@ -44,6 +35,10 @@ public interface NominatingSessionRemote {
     public java.lang.Boolean isMajority(java.lang.Integer eventId, java.lang.String collectionName);
 
     public java.lang.Boolean alertCommissioner(java.lang.Integer eventId, java.lang.String login, java.lang.Integer elecId, java.lang.String collectionName);
+
+    public void persist(java.lang.Object object);
+
+    public void sendMail(java.lang.String recipient, java.lang.String text);
 
     
 }

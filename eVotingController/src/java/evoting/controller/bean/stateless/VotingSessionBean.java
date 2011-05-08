@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.controller.bean.stateless;
 
 import evoting.validator.bean.stateless.ValidatorSessionRemote;
@@ -18,9 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import evoting.controller.pojo.ControllerException;
 import evoting.validator.pojo.ValidatorException;
-
 import java.util.Iterator;
-
 import javax.annotation.Resource;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -28,10 +22,6 @@ import java.util.Date;
 import javax.mail.Message;
 import javax.mail.Session;
 
-/**
- *
- * @author defiler
- */
 @Stateless
 public class VotingSessionBean implements VotingSessionRemote {
 
@@ -49,6 +39,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      * @return filled field of CandidateDTO of the given election event for voteApplet
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public CandidateDTO[] getCandidates(final Integer eventId) throws ControllerException {
         ElectionEvent electionEvent = em.find(ElectionEvent.class, eventId);
         if (electionEvent == null) {
@@ -98,6 +89,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      * @param login of the voter
      * @return list of election events which are in the voting state
      */
+    @Override
     public List<ElectionEvent> getVoterElectionEvents(final String login) throws ControllerException {
         Voter voter = em.find(Voter.class, login);
         if (voter == null) {
@@ -117,6 +109,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      * Sets the given election event to voting state.
      * @param eventId
      */
+    @Override
     public void startVoting(final Integer eventId) throws ControllerException {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         if (event == null) {
@@ -137,6 +130,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      * Notifies about it the validator modul.
      * @param eventId
      */
+    @Override
     public void endVoting(final Integer eventId) throws ControllerException {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         if (event == null) {
@@ -157,6 +151,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      *
      * @return all voters
      */
+    @Override
     public List<Voter> getAllVoters() {
         return (List<Voter>) em.createNamedQuery("Voter.findAll").getResultList();
     }
@@ -166,6 +161,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      * @param eventId - id of voting event
      * @return true if voting already started
      */
+    @Override
     public Boolean isStartedVoting(Integer eventId) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         if (ee.getVotingStarted()) {
@@ -175,6 +171,7 @@ public class VotingSessionBean implements VotingSessionRemote {
         }
     }
 
+    @Override
     public void supportStartVoting(Integer eventId, String login) {
         Commissioner com = em.find(Commissioner.class, login);
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
@@ -188,6 +185,7 @@ public class VotingSessionBean implements VotingSessionRemote {
         em.persist(ee);
     }
 
+    @Override
     public void supportEndVoting(Integer eventId, String login) {
         Commissioner com = em.find(Commissioner.class, login);
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
@@ -199,6 +197,7 @@ public class VotingSessionBean implements VotingSessionRemote {
         em.persist(com);
     }
 
+    @Override
     public void prepareMail(ElectionEvent ee, Commissioner com, String action) {
         Integer eventId = ee.getId();
         int numCom = 0;
@@ -238,6 +237,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      * @param com The recipient of this message.
      * @param eventId Id of an event associated with this message.
      */
+    @Override
     public void sendMail(String recipient, String text) {
 
         recipient += "@fel.cvut.cz";
@@ -262,6 +262,7 @@ public class VotingSessionBean implements VotingSessionRemote {
      * @param eventId ID of ElectionEvent
      * @return determines election from given electionEventId
      */
+    @Override
     public Election getElectionFromEvent(Integer eventId) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         Collection<Election> elCol = em.createNamedQuery("Election.findAll").getResultList();
@@ -279,6 +280,7 @@ public class VotingSessionBean implements VotingSessionRemote {
         return null;
     }
 
+    @Override
     public Collection<Commissioner> getComToStartVoting(Integer eventId) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         Collection<Commissioner> ret = ee.getComAgreeStartVoting();
@@ -286,6 +288,7 @@ public class VotingSessionBean implements VotingSessionRemote {
         return ret;
     }
 
+    @Override
     public Collection<Commissioner> getComToEndVoting(Integer eventId) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         Collection<Commissioner> ret = ee.getComAgreeEndVoting();
@@ -293,6 +296,7 @@ public class VotingSessionBean implements VotingSessionRemote {
         return ret;
     }
 
+    @Override
     public Boolean isComToStartVoting(Integer eventId, String login) {
         Collection<Commissioner> comCol = getComToStartVoting(eventId);
         Commissioner com = em.find(Commissioner.class, login);
@@ -303,6 +307,7 @@ public class VotingSessionBean implements VotingSessionRemote {
         }
     }
 
+    @Override
     public Boolean isComToEndVoting(Integer eventId, String login) {
         Collection<Commissioner> comCol = getComToEndVoting(eventId);
         Commissioner com = em.find(Commissioner.class, login);

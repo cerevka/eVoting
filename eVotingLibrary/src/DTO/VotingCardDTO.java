@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Defines Voting card as a Data Transfer Object.
- * @author defiler
  */
 public class VotingCardDTO implements Serializable {
 

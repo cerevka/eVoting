@@ -1,20 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.counter.bean.stateless;
 
 import DTO.*;
 import evoting.counter.entity.*;
-import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.spec.EncodedKeySpec;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -22,10 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import evoting.counter.pojo.CounterException;
 
-/**
- *
- * @author mz
- */
 @Stateless
 public class ValidatedVotesSessionBean implements ValidatedVotesSessionLocal
 {
@@ -39,6 +23,7 @@ public class ValidatedVotesSessionBean implements ValidatedVotesSessionLocal
      * @param votesDTO data transfer object with votes from election event
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW )
+    @Override
     public void saveValidatedVotes(final VotesDTO votesDTO) throws CounterException {
         ElectionEvent electionEvent = em.find(ElectionEvent.class, votesDTO.getElectionEventID());
         if(electionEvent == null) {

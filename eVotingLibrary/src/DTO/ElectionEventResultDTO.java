@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Defines the result of an election event as a Data Transfer Object.
- * @author defiler
  */
 public class ElectionEventResultDTO implements Serializable {
 

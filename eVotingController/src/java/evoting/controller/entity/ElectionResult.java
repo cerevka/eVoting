@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.controller.entity;
 
 import java.io.Serializable;
@@ -17,10 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author defiler
- */
 @Entity
 @Table(name="electionResult")
 public class ElectionResult implements Serializable {

@@ -1,18 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.validator.bean.stateless;
 
 import DTO.VotingCardDTO;
 import javax.ejb.Remote;
 import evoting.validator.pojo.ValidatorException;
 
-/**
- *
- * @author defiler
- */
 @Remote
 public interface ValidatorSessionRemote {
 

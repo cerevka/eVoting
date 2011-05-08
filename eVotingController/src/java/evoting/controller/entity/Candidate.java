@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.controller.entity;
 
 import java.io.Serializable;
@@ -12,69 +7,71 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import evoting.controller.entity.Programme;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
 
-/**
- *
- * @author defiler
- */
 @Entity
-@Table(name="candidate")
+@Table(name = "candidate")
 public class Candidate implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name="login")
+    @Column(name = "login")
     private String login;
-    @OneToMany(cascade= CascadeType.PERSIST)
-    @JoinTable(name="eventProgramme")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "eventProgramme")
     private Map<ElectionEvent, Programme> programmes;
-    @ManyToMany(cascade= CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Collection<ElectionEvent> votedInEvents;
     //candidateRole rozlisuje role profesor/student
-    @Column(name="candidateRole")
+    @Column(name = "candidateRole")
     private String candidateRole;
-/**
- * returns the candidate login
- * @return
- */
+
+    /**
+     * returns the candidate login
+     * @return
+     */
     public String getLogin() {
         return login;
     }
-/**
- * sets the candidate login
- * @param login
- */
+
+    /**
+     * sets the candidate login
+     * @param login
+     */
     public void setLogin(String login) {
         this.login = login;
     }
-/*
- * Returns a map of programs to the election events of this candidate
- */
+    /*
+     * Returns a map of programs to the election events of this candidate
+     */
+
     public Map<ElectionEvent, Programme> getProgrammes() {
         return programmes;
     }
-/**
- * Sets a map of programmes for this candidate
- * @param programmes
- */
+
+    /**
+     * Sets a map of programmes for this candidate
+     * @param programmes
+     */
     public void setProgrammes(Map<ElectionEvent, Programme> programmes) {
         this.programmes = programmes;
     }
-/**
- * Returns the events this candidate has voted in
- * @return
- */
+
+    /**
+     * Returns the events this candidate has voted in
+     * @return
+     */
     public Collection<ElectionEvent> getVotedInEvents() {
         return votedInEvents;
     }
-/**
- * sets the events this candidate has voted in
- * @param votedInEvents
- */
+
+    /**
+     * sets the events this candidate has voted in
+     * @param votedInEvents
+     */
     public void setVotedInEvents(Collection<ElectionEvent> votedInEvents) {
         this.votedInEvents = votedInEvents;
     }
@@ -87,8 +84,6 @@ public class Candidate implements Serializable {
         this.candidateRole = candidateRole;
     }
 
-
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -108,13 +103,13 @@ public class Candidate implements Serializable {
         }
         return true;
     }
-/**
- * returns the login of the candicate
- * @return
- */
+
+    /**
+     * returns the login of the candicate
+     * @return
+     */
     @Override
     public String toString() {
         return login;
     }
-
 }

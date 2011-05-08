@@ -1,12 +1,5 @@
 package evoting.counter.entity;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.CascadeType;
@@ -14,19 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author mz
- */
 @Entity
 public class Election implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     private Integer id;
     //private byte[] privateKey;
-    @OneToMany(mappedBy="election", cascade= CascadeType.PERSIST)
+    @OneToMany(mappedBy = "election", cascade = CascadeType.PERSIST)
     private Collection<ElectionEvent> electionEvents;
-    
+
     public Collection<ElectionEvent> getElectionEvents() {
         return electionEvents;
     }
@@ -42,15 +32,16 @@ public class Election implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-/*
+    /*
     public byte[] getPrivateKey() {
-        return privateKey;
+    return privateKey;
     }
-
+    
     public void setPrivateKey(byte[] privateKey) {
-        this.privateKey = privateKey;
+    this.privateKey = privateKey;
     }
-*/
+     */
+
     @Override
     public int hashCode() {
         int hash = 0;

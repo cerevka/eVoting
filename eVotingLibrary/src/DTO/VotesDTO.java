@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Defines Votes as an Data Transfer Object
- * @author defiler
  */
 public class VotesDTO implements Serializable {
 

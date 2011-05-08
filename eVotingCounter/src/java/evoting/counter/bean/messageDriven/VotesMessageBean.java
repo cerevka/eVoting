@@ -36,6 +36,7 @@ public class VotesMessageBean implements MessageListener {
      * do entity {@link ElectionEventResult} a ulozi do {@code counterdb} databaze.
      * @param message Prichozi zprava do {@code jms/validatedVotes} fronty.
      */
+    @Override
     public void onMessage(Message message) {
         ObjectMessage om = (ObjectMessage) message;
         VotesDTO votesDTO = new VotesDTO();

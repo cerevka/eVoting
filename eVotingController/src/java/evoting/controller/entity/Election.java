@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.controller.entity;
 
 import java.io.Serializable;
@@ -18,12 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author defiler
- */
 @Entity
-@Table(name="election")
+@Table(name = "election")
 @NamedQueries({
     @NamedQuery(name = "Election.findAll", query = "SELECT e FROM Election e")})
 public class Election implements Serializable {
@@ -31,16 +23,16 @@ public class Election implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @ManyToMany(mappedBy = "elections", cascade= CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "elections", cascade = CascadeType.PERSIST)
     private Collection<Commissioner> commissioners;
-    @OneToMany(cascade= CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private Collection<ElectionEvent> electionEvents;
     //private byte[] publicKey;
-    @Column(name="type")
+    @Column(name = "type")
     private String type;
 
     public Integer getId() {
@@ -62,7 +54,7 @@ public class Election implements Serializable {
     public byte[] getPublicKey() {
     return publicKey;
     }
-
+    
     public void setPublicKey(byte[] publicKey) {
     this.publicKey = publicKey;
     }

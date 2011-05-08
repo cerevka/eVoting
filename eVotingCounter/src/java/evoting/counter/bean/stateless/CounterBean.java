@@ -40,6 +40,7 @@ public class CounterBean implements CounterRemote {
      * @return ElectionEventResultDTO with election event results
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public ElectionEventResultDTO getElectionEventResult(final Integer electionEventId) throws CounterException {
         ElectionEventResultDTO result = new ElectionEventResultDTO();
         ElectionEvent electionEvent = em.find(ElectionEvent.class, electionEventId);
@@ -80,6 +81,7 @@ public class CounterBean implements CounterRemote {
      * @return encoded election public key
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public byte[] createNewElection(final Integer electionId)
             throws CounterException {
         try {
@@ -101,6 +103,7 @@ public class CounterBean implements CounterRemote {
      * @throws Exception
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void createNewElectionEvent(final Integer electionId, final Integer electionEventId)
             throws CounterException {
         try {
@@ -122,6 +125,7 @@ public class CounterBean implements CounterRemote {
      * @param electionEventId id of the given election event
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void addCandidate(final String candidateLogin, final Integer electionEventId) throws CounterException {
         ElectionEvent electionEvent = em.find(ElectionEvent.class, electionEventId);
         if (electionEvent == null) {
@@ -168,11 +172,13 @@ public class CounterBean implements CounterRemote {
      * @todo implement
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void finishElection(Integer electionId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void deleteCandidateFromEvent(String login, Integer eventId) {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         Collection<Candidate> candidates = event.getCandidates();

@@ -1,12 +1,5 @@
 package evoting.counter.entity;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,19 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-/**
- *
- * @author defiler
- */
 @Entity
 public class VotesCount implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @ManyToOne(cascade= CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ElectionEvent electionEvent;
-    @ManyToOne(cascade= CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Candidate candidate;
     private Integer count;
 
@@ -62,7 +52,6 @@ public class VotesCount implements Serializable {
     public void setCandidate(Candidate candidate) {
         this.candidate = candidate;
     }
-    
 
     @Override
     public int hashCode() {
@@ -88,5 +77,4 @@ public class VotesCount implements Serializable {
     public String toString() {
         return "entityCounter.VotesCount[id=" + id + "]";
     }
-
 }

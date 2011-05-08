@@ -4,10 +4,6 @@ import DTO.*;
 import javax.ejb.Remote;
 import evoting.counter.pojo.CounterException;
 
-/**
- *
- * @author mz
- */
 @Remote
 public interface CounterRemote {
 

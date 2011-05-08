@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.controller.bean.stateless;
 
 import evoting.counter.bean.stateless.CounterRemote;
@@ -21,10 +17,6 @@ import javax.persistence.Query;
 import evoting.controller.pojo.ControllerException;
 import evoting.validator.pojo.ValidatorException;
 
-/**
- *
- * @author defiler
- */
 @Stateless
 public class ElectionSessionBean implements ElectionSessionRemote {
 

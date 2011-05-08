@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package evoting.controller.bean.stateless;
 
 import evoting.counter.bean.stateless.CounterRemote;
@@ -24,10 +20,6 @@ import evoting.controller.pojo.ControllerException;
 import evoting.counter.pojo.CounterException;
 import evoting.validator.pojo.ValidatorException;
 
-/**
- *
- * @author defiler
- */
 @Stateless
 public class ResultsSessionBean implements ResultsSessionRemote {
 
@@ -43,6 +35,7 @@ public class ResultsSessionBean implements ResultsSessionRemote {
      * @param eventId id of the given election event
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void finishElectionEvent(final Integer eventId) throws ControllerException {
         ElectionEvent electionEvent = em.find(ElectionEvent.class, eventId);
         if (electionEvent == null) {
@@ -63,6 +56,7 @@ public class ResultsSessionBean implements ResultsSessionRemote {
      * @param electionId id of the given election
      * @todo implement election finishing
      */
+    @Override
     public void finishElection(final Integer electionId) {
         //counterBean.finishElection(electionId);
         throw new UnsupportedOperationException("Not supported yet.");
@@ -73,6 +67,7 @@ public class ResultsSessionBean implements ResultsSessionRemote {
      * @param eventId Id of the given election event
      * @throws ControllerException if election event not found
      */
+    @Override
     public void generateResult(final Integer eventId) throws ControllerException {
         int numberOfSenators = 1;
         System.out.println("GENERATING RESULTS");
@@ -194,6 +189,7 @@ public class ResultsSessionBean implements ResultsSessionRemote {
      * @return ended election events of the given voter
      * @throws if voter not found
      */
+    @Override
     public Collection<ElectionEvent> getEndedEvents(final String login) throws ControllerException {
         Voter voter = em.find(Voter.class, login);
         if (voter == null) {
@@ -214,6 +210,7 @@ public class ResultsSessionBean implements ResultsSessionRemote {
      * @return ElectionResults of the given election event
      * @throws if election event not found
      */
+    @Override
     public Collection<ElectionResult> getElectionEventResults(final Integer eventId) throws ControllerException {
         ElectionEvent electionEvent = em.find(ElectionEvent.class, eventId);
         if (electionEvent == null) {

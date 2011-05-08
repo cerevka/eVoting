@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * Defines candidate as a Data Transfer Object
- * @author defiler
  */
 public class CandidateDTO implements Serializable {
 

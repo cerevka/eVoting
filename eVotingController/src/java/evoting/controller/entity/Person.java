@@ -10,31 +10,26 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/**
- *
- * @author lordondrak
- */
-
 @Entity
-@Table(name="person")
-@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="personGroup")
+@Table(name = "person")
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "personGroup")
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByLogin", query = "SELECT p FROM Person p WHERE p.login = :login")})
 public class Person implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name="login")
+    @Column(name = "login")
     private String login;
-    @Column(name="firstName")
+    @Column(name = "firstName")
     private String firstname;
-    @Column(name="lastName")
+    @Column(name = "lastName")
     private String lastname;
-    @Column(name="personGroup")
+    @Column(name = "personGroup")
     private String personGroup;
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
-
 
     public String getLastname() {
         return lastname;
@@ -76,7 +71,6 @@ public class Person implements Serializable {
         this.password = password;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -98,6 +92,6 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return this.firstname+" "+this.lastname+" ("+this.login+")";
+        return this.firstname + " " + this.lastname + " (" + this.login + ")";
     }
 }

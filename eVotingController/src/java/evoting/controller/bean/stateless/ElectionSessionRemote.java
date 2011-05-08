@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.controller.bean.stateless;
 
 import evoting.controller.entity.Commissioner;
@@ -14,10 +9,6 @@ import java.util.Collection;
 import javax.ejb.Remote;
 import evoting.controller.pojo.ControllerException;
 
-/**
- *
- * @author defiler
- */
 @Remote
 public interface ElectionSessionRemote {
 

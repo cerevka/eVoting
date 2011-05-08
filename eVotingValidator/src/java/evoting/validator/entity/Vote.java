@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.validator.entity;
 
 import java.io.Serializable;
@@ -16,10 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author defiler
- */
 @Entity
 public class Vote implements Serializable {
     private static final long serialVersionUID = 1L;

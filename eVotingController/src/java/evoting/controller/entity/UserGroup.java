@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package evoting.controller.entity;
 
 import java.io.Serializable;
@@ -11,18 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author lordondrak
- */
 @Entity
-@Table(name="userGroup")
+@Table(name = "userGroup")
 public class UserGroup implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name="login")
+    @Column(name = "login")
     private String login;
-    @Column(name="userGroup")
+    @Column(name = "userGroup")
     private String userGroup;
 
     public String getLogin() {
@@ -64,5 +56,4 @@ public class UserGroup implements Serializable {
     public String toString() {
         return "entity.UserGroup[id=" + login + "]";
     }
-
 }
