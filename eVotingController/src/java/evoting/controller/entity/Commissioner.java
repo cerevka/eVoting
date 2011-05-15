@@ -12,30 +12,34 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="commissioner")
+@Table(name = "commissioner")
 public class Commissioner implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
-    @Column(name="login")
+    @Column(name = "login")
     private String login;
-    
-    @ManyToMany(cascade= CascadeType.PERSIST)
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Collection<Election> elections;
-    @Column(name="firstName")
+
+    @Column(name = "firstName")
     private String firstName;
-    @Column(name="lastName")
+
+    @Column(name = "lastName")
     private String lastName;
-   @ManyToMany(cascade= CascadeType.PERSIST)
-   @JoinTable(name="end_nominating_com_ee")
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "end_nominating_com_ee")
     private List<ElectionEvent> eventsToEndNominating;
 
-   @ManyToMany(cascade= CascadeType.PERSIST)
-   @JoinTable(name="start_voting_com_ee")
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "start_voting_com_ee")
     private List<ElectionEvent> eventsToStartVoting;
 
-   @ManyToMany(cascade= CascadeType.PERSIST)
-   @JoinTable(name="end_voting_com_ee")
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "end_voting_com_ee")
     private List<ElectionEvent> eventsToEndVoting;
 
     public List<ElectionEvent> getEventsToEndVoting() {
@@ -46,8 +50,6 @@ public class Commissioner implements Serializable {
         this.eventsToEndVoting = eventsToEndVoting;
     }
 
-
-
     public List<ElectionEvent> getEventsToStartVoting() {
         return eventsToStartVoting;
     }
@@ -56,10 +58,7 @@ public class Commissioner implements Serializable {
         this.eventsToStartVoting = eventsToStartVoting;
     }
 
-   
-
-
-   public String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -70,9 +69,6 @@ public class Commissioner implements Serializable {
     public void setEventsToEndNominating(List<ElectionEvent> eventsToEndNominating) {
         this.eventsToEndNominating = eventsToEndNominating;
     }
-
-   
-
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -86,7 +82,6 @@ public class Commissioner implements Serializable {
         this.lastName = lastName;
     }
 
-    
     public String getLogin() {
         return login;
     }
@@ -126,5 +121,4 @@ public class Commissioner implements Serializable {
     public String toString() {
         return "entity.Commissioner[id=" + login + "]";
     }
-
 }

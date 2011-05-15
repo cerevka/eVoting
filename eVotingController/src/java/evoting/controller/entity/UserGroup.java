@@ -11,9 +11,11 @@ import javax.persistence.Table;
 public class UserGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "login")
     private String login;
+
     @Column(name = "userGroup")
     private String userGroup;
 

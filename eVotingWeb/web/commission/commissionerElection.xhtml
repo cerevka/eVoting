@@ -12,11 +12,13 @@
             <h:messages />
 
             <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{electionEvent.comElection}" var="item">
-                <h:column>
-                    <h:outputLink styleClass="link" value="viewEvents.xhtml">
-                        <h:outputText value="#{item.name}"/>
-                        <f:param name="elecId" value="#{item.id}"/>
-                    </h:outputLink>                    
+                <h:column>                     
+                    <h:form>
+                        <h:commandLink styleClass="link" action="#{election.viewElection}">
+                            <h:outputText value="#{item.name}" />
+                            <f:param name="electionId" value="#{item.id}" />
+                        </h:commandLink>
+                    </h:form>
                 </h:column>
             </h:dataTable>
 

@@ -11,7 +11,7 @@
             </ui:insert>
             <h:messages styleClass="message"/>
             <h:form>
-                <h:inputHidden value="#{electionEvent.elecId}" />
+                <h:inputHidden value="#{electionEvent.electionId}" />
                 <table class="form">
                     <tbody>
                         <tr>
@@ -25,7 +25,7 @@
                     <tr>
                         <td class="button" colspan="2">
                     <h:commandButton value="Create" action="#{electionEvent.createEvent}">
-                        <f:param name="elecId" value="#{electionEvent.elecId}"/>
+                        <f:param name="electionId" value="#{electionEvent.electionId}"/>
                     </h:commandButton>
                     </td>
                     </tr>

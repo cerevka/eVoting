@@ -13,7 +13,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import evoting.controller.pojo.ControllerException;
 import evoting.validator.pojo.ValidatorException;
 import javax.persistence.TypedQuery;
@@ -23,8 +22,10 @@ public class ElectionSessionBean implements ElectionSessionRemote {
 
     @EJB
     private ValidatorSessionRemote validatorBean;
+
     @EJB
     private CounterRemote counterBean;
+
     @PersistenceContext
     private EntityManager em;
 
@@ -56,7 +57,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      * @return all persons in database
      */
     @Override
-    public Collection<Person> getAllPerson() {        
+    public Collection<Person> getAllPerson() {
         TypedQuery<Person> query = em.createNamedQuery(Person.FIND_ALL, Person.class);
         return query.getResultList();
     }
@@ -68,7 +69,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      * @throws ControllerException if commissioner not found
      */
     @Override
-    public Collection<Election> getCommissionerElection(final String commissionerLogin) throws ControllerException {
+    public Collection<Election> getCommissionerElection(final String commissionerLogin) throws ControllerException {        
         Commissioner com = em.find(Commissioner.class, commissionerLogin);
         if (com == null) {
             throw new ControllerException("Commissioner not found.");
@@ -78,7 +79,6 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         return elections;
     }
 
-   
     /**
      * Return collection of unfinished events in given election.
      * @param election A given election.
@@ -158,7 +158,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      * @return all elections in database
      */
     @Override
-    public Collection<Election> getAllElection() {        
+    public Collection<Election> getAllElection() {
         TypedQuery<Election> query = em.createNamedQuery(Election.FIND_ALL, Election.class);
         return query.getResultList();
     }
@@ -171,6 +171,9 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      */
     @Override
     public Collection<Commissioner> getElectionCommissioners(final Integer electionId) throws ControllerException {
+        if (electionId == null) {
+            return null;
+        }
         Election election = em.find(Election.class, electionId);
         if (election == null) {
             throw new ControllerException("Election not found.");
@@ -309,10 +312,14 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      */
     @Override
     public Election getElection(final Integer electionId) throws ControllerException {
+        if (electionId == null) {
+            return null;
+        }
         Election election = em.find(Election.class, electionId);
         if (election == null) {
             throw new ControllerException("Election not found.");
         }
         return election;
+
     }
 }

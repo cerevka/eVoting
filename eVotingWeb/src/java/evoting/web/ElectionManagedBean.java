@@ -86,6 +86,10 @@ public class ElectionManagedBean {
         }
         return personSel;
     }
+    
+    public String viewElection() {        
+        return "goViewEvents";       
+    }
 
     public void setPersonSel(List<SelectItem> personSel) {
         this.personSel = personSel;

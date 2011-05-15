@@ -19,7 +19,7 @@
                         <h:commandLink styleClass="link"  action="#{electionEvent.viewEvent}">
                             <h:outputText value="#{item.name}"/>
                             <f:param name="eventId" value="#{item.id}"/>
-                            <f:param name="elecId" value="#{electionEvent.elecId}"/>
+                            <f:param name="electionId" value="#{electionEvent.electionId}"/>
                         </h:commandLink>
                     </h:form>
                 </h:column>
@@ -45,7 +45,7 @@
                 <li>
                 <h:outputLink  value="createNewEvent.xhtml">
                     Create new event
-                    <f:param name="elecId" value="#{electionEvent.elecId}"/>
+                    <f:param name="electionId" value="#{electionEvent.electionId}"/>
                 </h:outputLink>
                 </li>
             </ul>

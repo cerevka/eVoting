@@ -13,21 +13,27 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="electionResult")
+@Table(name = "electionResult")
 public class ElectionResult implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
-    @OneToOne(cascade= CascadeType.PERSIST)
-    @JoinColumn(name="candidate")
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "candidate")
     private Candidate candidate;
-    @Column(name="votes")
+
+    @Column(name = "votes")
     private Integer votes;
-    @ManyToOne(cascade= CascadeType.PERSIST)
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private ElectionEvent electionEvent;
     //elected integer = 1 YES, 2 NO BECAUSE OF LACK OF SPACE, 3 NO BECAUSE OF INSUFFICENT votes
+
     private int elected;
 
     public int getElected() {
@@ -38,7 +44,6 @@ public class ElectionResult implements Serializable {
         this.elected = elected;
     }
 
-
     public ElectionEvent getElectionEvent() {
         return electionEvent;
     }
@@ -46,7 +51,7 @@ public class ElectionResult implements Serializable {
     public void setElectionEvent(ElectionEvent electionEvent) {
         this.electionEvent = electionEvent;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -102,5 +107,4 @@ public class ElectionResult implements Serializable {
     public int getTVotes() {
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
 }

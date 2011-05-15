@@ -15,7 +15,8 @@ import javax.persistence.Table;
 @Table(name = "voter")
 @NamedQueries({
     @NamedQuery(name = Voter.FIND_ALL, query = "SELECT v FROM Voter v"),
-    @NamedQuery(name = Voter.FIND_BY_LOGIN, query = "SELECT v FROM Voter v WHERE v.login = :login")})
+    @NamedQuery(name = Voter.FIND_BY_LOGIN, query = "SELECT v FROM Voter v WHERE v.login = :login")
+})
 public class Voter implements Serializable {
 
     private static final long serialVersionUID = 1L;

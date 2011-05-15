@@ -40,8 +40,8 @@ public class ElectionEventManagedBean {
     @EJB
     private VotingSessionRemote votingSessionBean;
 
-    @ManagedProperty(value = "#{param.elecId}")
-    private Integer elecId;
+    @ManagedProperty(value = "#{param.electionId}")
+    private Integer electionId;
 
     @ManagedProperty(value = "#{param.eventId}")
     private Integer eventId;
@@ -84,14 +84,14 @@ public class ElectionEventManagedBean {
 
     public String createEvent() {
         try {
-            electionSessionBean.createElectionEvent(elecId, eventName, info);
+            electionSessionBean.createElectionEvent(electionId, eventName, info);
             FacesMessage m = new FacesMessage("Event \"" + eventName + "\" was succesfully created");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
-        setElecId(elecId);
+        setElectionId(electionId);
         return "goViewEvents";
     }
 
@@ -190,7 +190,7 @@ public class ElectionEventManagedBean {
 
     public Collection<ElectionEvent> getUnfinishedElectionEvents() {
         try {
-            return electionSessionBean.getUnfinishedElectionEvents(electionSessionBean.getElection(elecId));
+            return electionSessionBean.getUnfinishedElectionEvents(electionSessionBean.getElection(electionId));
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -333,12 +333,12 @@ public class ElectionEventManagedBean {
         return "goViewResultEvent";
     }
 
-    public void setElecId(Integer elecId) {
-        this.elecId = elecId;
+    public void setElectionId(Integer electionId) {
+        this.electionId = electionId;
     }
 
-    public Integer getElecId() {
-        return elecId;
+    public Integer getElectionId() {
+        return electionId;
     }
 
     public String getEventName() {

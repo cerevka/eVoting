@@ -20,7 +20,7 @@ public class Person implements Serializable {
 
     public static final String FIND_ALL = "Person.findAll";
 
-    public static final String FIND_BY_LOGIN = "Person.findByLogin";   
+    public static final String FIND_BY_LOGIN = "Person.findByLogin";
 
     private static final long serialVersionUID = 1L;
 

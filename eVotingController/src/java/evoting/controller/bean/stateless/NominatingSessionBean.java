@@ -278,15 +278,15 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      *
      * @param eventId id of event
      * @param login login of commissioner
-     * @param elecId id of Election
+     * @param electionId id of Election
      * @return true, if there is some important action for commissioner
      */
     @Override
-    public Boolean alertCommissioner(Integer eventId, String login, Integer elecId, String collectionName) {
+    public Boolean alertCommissioner(Integer eventId, String login, Integer electionId, String collectionName) {
         ElectionEvent ee = em.find(ElectionEvent.class, eventId);
 
         Commissioner com = em.find(Commissioner.class, login);
-        Election e = em.find(Election.class, elecId);
+        Election e = em.find(Election.class, electionId);
         Collection coll;
         if (collectionName.equals("END_NOMINATING")) {
             coll = ee.getComAgreeEndNominating();

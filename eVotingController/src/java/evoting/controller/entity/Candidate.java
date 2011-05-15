@@ -17,15 +17,19 @@ import javax.persistence.Table;
 public class Candidate implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "login")
     private String login;
+
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "eventProgramme")
     private Map<ElectionEvent, Programme> programmes;
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Collection<ElectionEvent> votedInEvents;
     //candidateRole rozlisuje role profesor/student
+
     @Column(name = "candidateRole")
     private String candidateRole;
 

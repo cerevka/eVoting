@@ -34,7 +34,7 @@ public interface NominatingSessionRemote {
 
     public java.lang.Boolean isMajority(java.lang.Integer eventId, java.lang.String collectionName);
 
-    public java.lang.Boolean alertCommissioner(java.lang.Integer eventId, java.lang.String login, java.lang.Integer elecId, java.lang.String collectionName);
+    public java.lang.Boolean alertCommissioner(java.lang.Integer eventId, java.lang.String login, java.lang.Integer electionId, java.lang.String collectionName);
 
     public void persist(java.lang.Object object);
 
