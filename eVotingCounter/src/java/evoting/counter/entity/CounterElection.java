@@ -8,20 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Election implements Serializable {
+public class CounterElection implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     private Integer id;
     //private byte[] privateKey;
     @OneToMany(mappedBy = "election", cascade = CascadeType.PERSIST)
-    private Collection<ElectionEvent> electionEvents;
+    private Collection<CounterElectionEvent> electionEvents;
 
-    public Collection<ElectionEvent> getElectionEvents() {
+    public Collection<CounterElectionEvent> getElectionEvents() {
         return electionEvents;
     }
 
-    public void setElectionEvents(Collection<ElectionEvent> electionEvents) {
+    public void setElectionEvents(Collection<CounterElectionEvent> electionEvents) {
         this.electionEvents = electionEvents;
     }
 
@@ -51,10 +51,10 @@ public class Election implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Election)) {
+        if (!(object instanceof CounterElection)) {
             return false;
         }
-        Election other = (Election) object;
+        CounterElection other = (CounterElection) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

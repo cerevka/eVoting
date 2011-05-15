@@ -10,7 +10,7 @@
                 <ui:include src="/WEB-INF/templates/menus/voter.xhtml" />
             </ui:insert>
             <h:messages styleClass="message" />
-            <h:dataTable styleClass="electionsInfo" cellspacing="1" value="#{createElectionEvent.endedEvents}" var="item">
+            <h:dataTable styleClass="electionsInfo" cellspacing="1" value="#{electionEvent.endedEvents}" var="item">
                 
                 <h:column>
                     <f:facet name="header">
@@ -30,7 +30,7 @@
                         <h:outputText value="Výsledek"/>
                     </f:facet>
                     <h:form>
-                        <h:commandLink value="výsledek" action="#{createElectionEvent.viewResultEvent}">
+                        <h:commandLink value="výsledek" action="#{electionEvent.viewResultEvent}">
                             <f:param name="eventId" value="#{item.id}"/>
                         </h:commandLink>
                     </h:form>

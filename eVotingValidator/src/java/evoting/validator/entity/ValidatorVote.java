@@ -12,22 +12,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Vote implements Serializable {
+public class ValidatorVote implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Date recievedDate;
     @OneToMany(cascade= CascadeType.PERSIST)
-    Collection<Candidate> votedCandidates;
+    Collection<ValidatorCandidate> votedCandidates;
     @ManyToOne(cascade= CascadeType.PERSIST)
-    private ElectionEvent electionEvent;
+    private ValidatorElectionEvent electionEvent;
 
-    public ElectionEvent getElectionEvent() {
+    public ValidatorElectionEvent getElectionEvent() {
         return electionEvent;
     }
 
-    public void setElectionEvent(ElectionEvent electionEvent) {
+    public void setElectionEvent(ValidatorElectionEvent electionEvent) {
         this.electionEvent = electionEvent;
     }
 
@@ -47,11 +47,11 @@ public class Vote implements Serializable {
         this.recievedDate = recievedDate;
     }
 
-    public Collection<Candidate> getVotedCandidates() {
+    public Collection<ValidatorCandidate> getVotedCandidates() {
         return votedCandidates;
     }
 
-    public void setVotedCandidates(Collection<Candidate> votedCandidates) {
+    public void setVotedCandidates(Collection<ValidatorCandidate> votedCandidates) {
         this.votedCandidates = votedCandidates;
     }
     
@@ -66,10 +66,10 @@ public class Vote implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vote)) {
+        if (!(object instanceof ValidatorVote)) {
             return false;
         }
-        Vote other = (Vote) object;
+        ValidatorVote other = (ValidatorVote) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

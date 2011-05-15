@@ -11,7 +11,7 @@
             </ui:insert>
             <h:messages styleClass="message" />
 
-            <h:dataTable styleClass="elections" cellspacing="1" value="#{generatingResults.eeResultModel}" var="item">
+            <h:dataTable styleClass="elections" cellspacing="1" value="#{results.eeResultModel}" var="item">
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="Kandidát"/>
@@ -28,7 +28,7 @@
                     <f:facet name="header">
                         <h:outputText value="Výsledek" />
                     </f:facet>
-                    <h:outputText value="#{generatingResults.votingResultLabel}"/>
+                    <h:outputText value="#{results.votingResultLabel}"/>
                 </h:column>
             </h:dataTable>
         </f:view>

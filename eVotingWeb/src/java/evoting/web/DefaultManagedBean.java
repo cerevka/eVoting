@@ -1,5 +1,6 @@
 package evoting.web;
 
+import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -16,8 +17,8 @@ public class DefaultManagedBean {
     public DefaultManagedBean() {
     }
 
-    public String logout() {
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+    public String logout() throws IOException {
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();       
         HttpSession session = (HttpSession) ec.getSession(true);
         session.invalidate();
         return "logout";

@@ -14,15 +14,15 @@
             <h2>Information</h2>
             <div class="elinfo">
                 <table>
-                    <tr><th>ID:</th><td><h:outputText value="#{createElection.election.id}"/></td></tr>
-                    <tr><th>Name:</th><td><h:outputText value="#{createElection.election.name}"/></td></tr>
-                    <tr><th>Type:</th><td><h:outputText value="#{createElection.election.type}"/></td></tr>
+                    <tr><th>ID:</th><td><h:outputText value="#{election.election.id}"/></td></tr>
+                    <tr><th>Name:</th><td><h:outputText value="#{election.election.name}"/></td></tr>
+                    <tr><th>Type:</th><td><h:outputText value="#{election.election.type}"/></td></tr>
                 </table>
             </div>
 
             <div class="electionCommisioners">
                 <h2>Commisioners associated with these elections</h2>
-                <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{createElection.electionCommissioners}" var="item">
+                <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{election.electionCommissioners}" var="item">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Login"/>
@@ -46,7 +46,7 @@
                 <ul class="buttons">
                     <li><h:outputLink value="addCommissioner.xhtml">
                         add commissioner
-                        <f:param name="electionId" value="#{createElection.electionId}"/>
+                        <f:param name="electionId" value="#{election.electionId}"/>
                     </h:outputLink></li>
                 </ul>
             </div>

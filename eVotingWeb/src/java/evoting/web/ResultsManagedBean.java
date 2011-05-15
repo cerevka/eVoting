@@ -14,20 +14,17 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name = "generatingResults")
+@ManagedBean(name = "results")
 @RequestScoped
 public class ResultsManagedBean {
 
     @EJB
-    private ResultsSessionRemote generatingResultsBean;
+    private ResultsSessionRemote resultsBean;
     @EJB
     private TellerSessionRemote tellerSessionBean;
     @EJB
@@ -42,7 +39,7 @@ public class ResultsManagedBean {
     public Collection<ElectionEvent> getEndedEvents() {
         String login = tellerSessionBean.getLoginLoggedUser();
         try {
-            return generatingResultsBean.getEndedEvents(login);
+            return resultsBean.getEndedEvents(login);
         } catch (ControllerException ex) {
             Logger.getLogger(ResultsManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -52,12 +49,12 @@ public class ResultsManagedBean {
     public Collection<ElectionResult> getElectionEventResults() {
         try {
             System.out.println("TRY");
-            Collection<ElectionResult> results = generatingResultsBean.getElectionEventResults(getEventId());
+            Collection<ElectionResult> results = resultsBean.getElectionEventResults(getEventId());
             Collection<Candidate> candidates = nominatingSessionBean.getCandidates(getEventId());
 
             if (results.isEmpty()) {
-                generatingResultsBean.generateResult(getEventId());
-                results = generatingResultsBean.getElectionEventResults(getEventId());
+                resultsBean.generateResult(getEventId());
+                results = resultsBean.getElectionEventResults(getEventId());
                 if (results.isEmpty() && candidates.isEmpty()) {
                     Candidate announce = new Candidate();
                     announce.setLogin("Event had no candidates");

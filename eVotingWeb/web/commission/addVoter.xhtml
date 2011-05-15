@@ -15,14 +15,14 @@
                     <tr>
                         <td>Select voter:</td>
                         <td>
-                    <h:selectOneMenu id="selectCom" value="#{createElectionEvent.voterLogin}" >
-                        <f:selectItems value="#{createElectionEvent.voterSel}" />
+                    <h:selectOneMenu id="selectCom" value="#{electionEvent.voterLogin}" >
+                        <f:selectItems value="#{electionEvent.voterSel}" />
                     </h:selectOneMenu>
                     </td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: right">
-                    <h:commandButton  value="Add voter" action="#{createElectionEvent.addVoter}"/>
+                    <h:commandButton  value="Add voter" action="#{electionEvent.addVoter}"/>
                     </td>
                     </tr>
                 </table>
@@ -31,7 +31,7 @@
                 <li>
                 <h:outputLink styleClass="buttons" value="viewEvent.xhtml">
                     Go back
-                    <f:param name="evenId" value="#{createElectionEvent.eventId}"/>
+                    <f:param name="evenId" value="#{electionEvent.eventId}"/>
                 </h:outputLink>
                 </li>
             </ul>

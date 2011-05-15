@@ -14,25 +14,25 @@
             <h:messages styleClass="message" />
 
             <h:form>
-                <h:inputHidden value="#{createElection.electionId}"/>
+                <h:inputHidden value="#{election.electionId}"/>
                 <table class="form">
                     <tbody>
                         <tr>
                             <th>Commissioner:</th>
-                            <td><h:selectOneMenu id="selectCom" value="#{createElection.stringperson}" >
-                        <f:selectItems value="#{createElection.personSel}" />
+                            <td><h:selectOneMenu id="selectCom" value="#{election.stringperson}" >
+                        <f:selectItems value="#{election.personSel}" />
                     </h:selectOneMenu></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="button">
-                    <h:commandButton value="Add" action="#{createElection.addCommissioner}"/>
+                    <h:commandButton value="Add" action="#{election.addCommissioner}"/>
                     </td>
                     </tr>
                     </tbody>
                 </table>
                 <br/><br />
                 <h:outputLink styleClass="button" value="viewElection.xhtml">
-                    <f:param name="electionId" value="#{createElection.electionId}"/>
+                    <f:param name="electionId" value="#{election.electionId}"/>
                     Back to Election event
                 </h:outputLink>
             </h:form>

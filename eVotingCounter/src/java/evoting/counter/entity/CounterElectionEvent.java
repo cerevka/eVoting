@@ -10,22 +10,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class ElectionEvent implements Serializable {
+public class CounterElectionEvent implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private Integer id;
     @ManyToOne(cascade= CascadeType.PERSIST)
-    private Election election;
+    private CounterElection election;
     @ManyToMany(mappedBy="votedInEvents", cascade= CascadeType.PERSIST)
-    private Collection<Candidate> candidates;
+    private Collection<CounterCandidate> candidates;
     @OneToMany(mappedBy="electionEvent", cascade= CascadeType.PERSIST)
-    private Collection<VotesCount> votesCounts;
+    private Collection<CounterVotesCount> votesCounts;
 
-    public Collection<Candidate> getCandidates() {
+    public Collection<CounterCandidate> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(Collection<Candidate> candidates) {
+    public void setCandidates(Collection<CounterCandidate> candidates) {
         this.candidates = candidates;
     }
 
@@ -37,19 +37,19 @@ public class ElectionEvent implements Serializable {
         this.id = id;
     }
     
-    public Election getElection() {
+    public CounterElection getElection() {
         return election;
     }
 
-    public void setElection(Election election) {
+    public void setElection(CounterElection election) {
         this.election = election;
     }
 
-    public Collection<VotesCount> getVotesCounts() {
+    public Collection<CounterVotesCount> getVotesCounts() {
         return votesCounts;
     }
 
-    public void setVotesCounts(Collection<VotesCount> votesCounts) {
+    public void setVotesCounts(Collection<CounterVotesCount> votesCounts) {
         this.votesCounts = votesCounts;
     }
 
@@ -64,10 +64,10 @@ public class ElectionEvent implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof ElectionEvent)) {
+        if (!(object instanceof CounterElectionEvent)) {
             return false;
         }
-        ElectionEvent other = (ElectionEvent) object;
+        CounterElectionEvent other = (CounterElectionEvent) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

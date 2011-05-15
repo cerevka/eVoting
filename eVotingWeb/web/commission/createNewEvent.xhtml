@@ -11,21 +11,21 @@
             </ui:insert>
             <h:messages styleClass="message"/>
             <h:form>
-                <h:inputHidden value="#{createElectionEvent.elecId}" />
+                <h:inputHidden value="#{electionEvent.elecId}" />
                 <table class="form">
                     <tbody>
                         <tr>
                             <th>Event name:</th>
-                            <td><h:inputText style="width: 250px" required="true" requiredMessage="Event name is required" value="#{createElectionEvent.eventName}" /></td>
+                            <td><h:inputText style="width: 250px" required="true" requiredMessage="Event name is required" value="#{electionEvent.eventName}" /></td>
                     </tr>
                     <tr>
                         <th>Info:</th>
-                        <td> <h:inputTextarea style="width: 250px" value="#{createElectionEvent.info}" /></td>
+                        <td> <h:inputTextarea style="width: 250px" value="#{electionEvent.info}" /></td>
                     </tr>
                     <tr>
                         <td class="button" colspan="2">
-                    <h:commandButton value="Create" action="#{createElectionEvent.createEvent}">
-                        <f:param name="elecId" value="#{createElectionEvent.elecId}"/>
+                    <h:commandButton value="Create" action="#{electionEvent.createEvent}">
+                        <f:param name="elecId" value="#{electionEvent.elecId}"/>
                     </h:commandButton>
                     </td>
                     </tr>

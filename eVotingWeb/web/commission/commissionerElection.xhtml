@@ -10,14 +10,16 @@
                 <ui:include src="/WEB-INF/templates/menus/commissioner.xhtml" />
             </ui:insert>
             <h:messages />
-            <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{createElectionEvent.comElection}" var="item">
+
+            <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{electionEvent.comElection}" var="item">
                 <h:column>
                     <h:outputLink styleClass="link" value="viewEvents.xhtml">
                         <h:outputText value="#{item.name}"/>
                         <f:param name="elecId" value="#{item.id}"/>
-                    </h:outputLink>
+                    </h:outputLink>                    
                 </h:column>
             </h:dataTable>
+
         </f:view>
     </ui:define>
 </ui:composition>

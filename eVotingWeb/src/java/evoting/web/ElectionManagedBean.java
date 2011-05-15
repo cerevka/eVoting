@@ -16,12 +16,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name = "createElection")
+@ManagedBean(name = "election")
 @RequestScoped
 public class ElectionManagedBean {
 
     @EJB
-    private ElectionSessionRemote creatingElectionSessionBean;
+    private ElectionSessionRemote electionSessionBean;
     @ManagedProperty(value = "#{param.electionId}")
     private Integer electionId;
     private String name;
@@ -36,7 +36,7 @@ public class ElectionManagedBean {
 
     public String create() {
         try {
-            creatingElectionSessionBean.createElection(name, currentType);
+            electionSessionBean.createElection(name, currentType);
             FacesMessage m = new FacesMessage("The election " + name + " was successfully created");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
@@ -59,7 +59,7 @@ public class ElectionManagedBean {
             return "";
         }
         try {
-            creatingElectionSessionBean.addCommissioner(personOut, electionId);
+            electionSessionBean.addCommissioner(personOut, electionId);
             FacesMessage m = new FacesMessage("The commissioner " + personOut.getLogin() + " was successfully added");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
@@ -71,12 +71,12 @@ public class ElectionManagedBean {
 
     public Collection<Commissioner> getElectionCommissioners() {
         try {
-            return creatingElectionSessionBean.getElectionCommissioners(electionId);
+            return electionSessionBean.getElectionCommissioners(electionId);
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-    }
+    }  
 
     public List<SelectItem> getPersonSel() {
         Collection<Person> col = getPersonList();
@@ -116,16 +116,16 @@ public class ElectionManagedBean {
     }
 
     public Collection<Person> getPersonList() {
-        return creatingElectionSessionBean.getAllPerson();
+        return electionSessionBean.getAllPerson();
     }
 
     public Collection<Election> getElections() {
-        return creatingElectionSessionBean.getAllElection();
+        return electionSessionBean.getAllElection();
     }
 
     public Election getElection() {
         try {
-            return creatingElectionSessionBean.getElection(electionId);
+            return electionSessionBean.getElection(electionId);
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;

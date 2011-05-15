@@ -8,39 +8,71 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "electionEvent")
+@NamedQueries({
+    @NamedQuery(name = ElectionEvent.FIND_UNFINISHED_BY_ELECTION_ID, query = "SELECT ee FROM ElectionEvent ee WHERE ee.finished = FALSE AND ee.election = :election")
+})
 public class ElectionEvent implements Serializable {
 
+    public static final String FIND_UNFINISHED_BY_ELECTION_ID = "findUnfinishedByElection";
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "electionId")
+    private Election election;
+
+    public Election getElectionId() {
+        return election;
+    }
+
+    public void setElectionId(Election election) {
+        this.election = election;
+    }
     @ManyToMany(mappedBy = "votedInEvents", cascade = CascadeType.PERSIST)
     private Collection<Candidate> candidates;
+
     @ManyToMany(mappedBy = "electionEvents", cascade = CascadeType.PERSIST)
     private Collection<Voter> voters;
+
     @OneToMany(mappedBy = "electionEvent", cascade = CascadeType.PERSIST)
     private Collection<ElectionResult> electionResults;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "info")
     private String info;
+
     @Column(name = "votingStarted")
     private Boolean votingStarted;
+
     @Column(name = "nominatingStarted")
     private Boolean nominatingStarted;
+
     @Column(name = "finished")
     private Boolean finished;
+
     @ManyToMany(mappedBy = "eventsToEndNominating", cascade = CascadeType.PERSIST)
     private Collection<Commissioner> comAgreeEndNominating;
+
     @ManyToMany(mappedBy = "eventsToStartVoting", cascade = CascadeType.PERSIST)
     private Collection<Commissioner> comAgreeStartVoting;
+
     @ManyToMany(mappedBy = "eventsToEndVoting", cascade = CascadeType.PERSIST)
     private Collection<Commissioner> comAgreeEndVoting;
 

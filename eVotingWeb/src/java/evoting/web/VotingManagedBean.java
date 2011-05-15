@@ -32,7 +32,7 @@ public class VotingManagedBean {
     @EJB
     private VotingSessionRemote votingSessionBean;    
     @EJB
-    private ElectionSessionRemote creatingElectionSessionBean; 
+    private ElectionSessionRemote electionSessionBean; 
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
     private Voter voter = null;
@@ -96,7 +96,7 @@ public class VotingManagedBean {
         voter = (Voter) AllVoterModel.getRowData();
         this.eventId = getEventId();
         try {
-            creatingElectionSessionBean.deleteVoterFromEvent(voter, eventId);
+            electionSessionBean.deleteVoterFromEvent(voter, eventId);
             FacesMessage m = new FacesMessage("Voter " + voter.getLogin() + " was successfully removed");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
@@ -164,7 +164,7 @@ public class VotingManagedBean {
     public List<Voter> getEventVoters() {
         try {
             if (getEventId() != null) {
-                return (List<Voter>) creatingElectionSessionBean.getEventVoters(getEventId());
+                return (List<Voter>) electionSessionBean.getEventVoters(getEventId());
             }
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);

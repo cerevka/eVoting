@@ -25,7 +25,7 @@ public class ValidatedVotesSessionBean implements ValidatedVotesSessionLocal
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW )
     @Override
     public void saveValidatedVotes(final VotesDTO votesDTO) throws CounterException {
-        ElectionEvent electionEvent = em.find(ElectionEvent.class, votesDTO.getElectionEventID());
+        CounterElectionEvent electionEvent = em.find(CounterElectionEvent.class, votesDTO.getElectionEventID());
         if(electionEvent == null) {
             throw new CounterException("Election event not found.");
         }
@@ -38,8 +38,8 @@ public class ValidatedVotesSessionBean implements ValidatedVotesSessionLocal
                 //TODO rozsifrovani kandidata
                 //String candidateLogin = decodeCandidate(key, candidates[j]);
                 String candidateLogin = candidates[j];
-                Candidate candidate = null;
-                for (Candidate c : electionEvent.getCandidates()) {
+                CounterCandidate candidate = null;
+                for (CounterCandidate c : electionEvent.getCandidates()) {
                     if (c.getCandidateLogin().equals(candidateLogin)) {
                         candidate = c;
                         break;
@@ -48,14 +48,14 @@ public class ValidatedVotesSessionBean implements ValidatedVotesSessionLocal
                 if (candidate == null) {
                     throw new CounterException("Candidate not found.");
                 }
-                VotesCount votesCount = null;
-                for(VotesCount vc : candidate.getVotesCount()) {
+                CounterVotesCount votesCount = null;
+                for(CounterVotesCount vc : candidate.getVotesCount()) {
                     if(vc.getElectionEvent().equals(electionEvent)) {
                         votesCount = vc;
                     }
                 }
                 if(votesCount == null) {
-                    votesCount = new VotesCount();
+                    votesCount = new CounterVotesCount();
                     votesCount.setCount(0);
                     votesCount.setElectionEvent(electionEvent);
                     votesCount.setCandidate(candidate);
@@ -78,7 +78,7 @@ public class ValidatedVotesSessionBean implements ValidatedVotesSessionLocal
      * @return election private key
      */
 /*    private PrivateKey getPrivateKey(Integer electionEventId) {
-        byte[] privateKeyBytes = em.find(ElectionEvent.class, electionEventId).getElection().getPrivateKey();
+        byte[] privateKeyBytes = em.find(CounterElectionEvent.class, electionEventId).getElection().getPrivateKey();
         KeyFactory keyFactory = null;
         PrivateKey privateKey = null;
         try {

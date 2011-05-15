@@ -9,14 +9,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Candidate implements Serializable {
+public class CounterCandidate implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String candidateLogin;
     @ManyToMany(cascade= CascadeType.PERSIST)
-    private Collection<ElectionEvent> votedInEvents;
+    private Collection<CounterElectionEvent> votedInEvents;
     @OneToMany(mappedBy="candidate", cascade= CascadeType.PERSIST)
-    private Collection<VotesCount> votesCount;
+    private Collection<CounterVotesCount> votesCount;
 
      //candidateRole rozlisuje role profesor/student
     private String candidateRole;
@@ -29,19 +29,19 @@ public class Candidate implements Serializable {
         this.candidateLogin = candidateLogin;
     }
 
-    public Collection<ElectionEvent> getVotedInEvents() {
+    public Collection<CounterElectionEvent> getVotedInEvents() {
         return votedInEvents;
     }
 
-    public void setVotedInEvents(Collection<ElectionEvent> votedInEvents) {
+    public void setVotedInEvents(Collection<CounterElectionEvent> votedInEvents) {
         this.votedInEvents = votedInEvents;
     }
 
-    public Collection<VotesCount> getVotesCount() {
+    public Collection<CounterVotesCount> getVotesCount() {
         return votesCount;
     }
 
-    public void setVotesCount(Collection<VotesCount> votesCount) {
+    public void setVotesCount(Collection<CounterVotesCount> votesCount) {
         this.votesCount = votesCount;
     }
 
@@ -63,10 +63,10 @@ public class Candidate implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Candidate)) {
+        if (!(object instanceof CounterCandidate)) {
             return false;
         }
-        Candidate other = (Candidate) object;
+        CounterCandidate other = (CounterCandidate) object;
         if ((this.candidateLogin == null && other.candidateLogin != null) || (this.candidateLogin != null && !this.candidateLogin.equals(other.candidateLogin))) {
             return false;
         }

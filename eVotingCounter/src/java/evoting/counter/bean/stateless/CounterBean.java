@@ -1,8 +1,8 @@
 package evoting.counter.bean.stateless;
 
 import DTO.*;
-import evoting.counter.entity.Candidate;
-import evoting.counter.entity.Election;
+import evoting.counter.entity.CounterCandidate;
+import evoting.counter.entity.CounterElection;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.logging.Level;
@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import evoting.counter.entity.ElectionEvent;
-import evoting.counter.entity.VotesCount;
+import evoting.counter.entity.CounterElectionEvent;
+import evoting.counter.entity.CounterVotesCount;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
@@ -43,7 +43,7 @@ public class CounterBean implements CounterRemote {
     @Override
     public ElectionEventResultDTO getElectionEventResult(final Integer electionEventId) throws CounterException {
         ElectionEventResultDTO result = new ElectionEventResultDTO();
-        ElectionEvent electionEvent = em.find(ElectionEvent.class, electionEventId);
+        CounterElectionEvent electionEvent = em.find(CounterElectionEvent.class, electionEventId);
         if (electionEvent == null) {
             throw new CounterException("Election event not found.");
         }
@@ -56,7 +56,7 @@ public class CounterBean implements CounterRemote {
         String[] candidates = new String[arraySize];
         int[] votes = new int[arraySize];
         int i = 0;
-        for (VotesCount vc : electionEvent.getVotesCounts()) {
+        for (CounterVotesCount vc : electionEvent.getVotesCounts()) {
             candidates[i] = vc.getCandidate().getCandidateLogin();
             votes[i] = vc.getCount();
             i++;
@@ -86,7 +86,7 @@ public class CounterBean implements CounterRemote {
             throws CounterException {
         try {
             //KeyPair pair = generateKeyPair(electionId);
-            Election election = new Election();
+            CounterElection election = new CounterElection();
             election.setId(electionId);
             //election.setPrivateKey(pair.getPrivate().getEncoded());
             em.persist(election);
@@ -107,9 +107,9 @@ public class CounterBean implements CounterRemote {
     public void createNewElectionEvent(final Integer electionId, final Integer electionEventId)
             throws CounterException {
         try {
-            ElectionEvent electionEvent = new ElectionEvent();
+            CounterElectionEvent electionEvent = new CounterElectionEvent();
             electionEvent.setId(electionEventId);
-            Election election = em.find(Election.class, electionId);
+            CounterElection election = em.find(CounterElection.class, electionId);
             election.getElectionEvents().add(electionEvent);
             electionEvent.setElection(election);
             em.persist(electionEvent);
@@ -127,15 +127,15 @@ public class CounterBean implements CounterRemote {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
     public void addCandidate(final String candidateLogin, final Integer electionEventId) throws CounterException {
-        ElectionEvent electionEvent = em.find(ElectionEvent.class, electionEventId);
+        CounterElectionEvent electionEvent = em.find(CounterElectionEvent.class, electionEventId);
         if (electionEvent == null) {
             throw new CounterException("Election event not found.");
         }
-        Candidate candidate = em.find(Candidate.class, candidateLogin);
+        CounterCandidate candidate = em.find(CounterCandidate.class, candidateLogin);
         if (candidate == null) {
-            candidate = new Candidate();
+            candidate = new CounterCandidate();
             candidate.setCandidateLogin(candidateLogin);
-            Collection<ElectionEvent> electionEvents = new ArrayList<ElectionEvent>();
+            Collection<CounterElectionEvent> electionEvents = new ArrayList<CounterElectionEvent>();
             candidate.setVotedInEvents(electionEvents);
         }
         candidate.getVotedInEvents().add(electionEvent);
@@ -180,12 +180,12 @@ public class CounterBean implements CounterRemote {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
     public void deleteCandidateFromEvent(String login, Integer eventId) {
-        ElectionEvent event = em.find(ElectionEvent.class, eventId);
-        Collection<Candidate> candidates = event.getCandidates();
+        CounterElectionEvent event = em.find(CounterElectionEvent.class, eventId);
+        Collection<CounterCandidate> candidates = event.getCandidates();
         candidates.size();
-        Candidate candidate = em.find(Candidate.class, login);
+        CounterCandidate candidate = em.find(CounterCandidate.class, login);
         candidates.remove(candidate);
-        Collection<ElectionEvent> events = candidate.getVotedInEvents();
+        Collection<CounterElectionEvent> events = candidate.getVotedInEvents();
         events.size();
         events.remove(event);
         candidates.remove(candidate);

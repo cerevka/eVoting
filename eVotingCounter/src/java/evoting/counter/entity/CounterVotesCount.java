@@ -9,16 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class VotesCount implements Serializable {
+public class CounterVotesCount implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private ElectionEvent electionEvent;
+    private CounterElectionEvent electionEvent;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Candidate candidate;
+    private CounterCandidate candidate;
     private Integer count;
 
     public Integer getId() {
@@ -37,19 +37,19 @@ public class VotesCount implements Serializable {
         this.count = count;
     }
 
-    public ElectionEvent getElectionEvent() {
+    public CounterElectionEvent getElectionEvent() {
         return electionEvent;
     }
 
-    public void setElectionEvent(ElectionEvent electionEvent) {
+    public void setElectionEvent(CounterElectionEvent electionEvent) {
         this.electionEvent = electionEvent;
     }
 
-    public Candidate getCandidate() {
+    public CounterCandidate getCandidate() {
         return candidate;
     }
 
-    public void setCandidate(Candidate candidate) {
+    public void setCandidate(CounterCandidate candidate) {
         this.candidate = candidate;
     }
 
@@ -63,10 +63,10 @@ public class VotesCount implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VotesCount)) {
+        if (!(object instanceof CounterVotesCount)) {
             return false;
         }
-        VotesCount other = (VotesCount) object;
+        CounterVotesCount other = (CounterVotesCount) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

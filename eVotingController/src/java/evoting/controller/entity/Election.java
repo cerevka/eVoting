@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -17,21 +18,32 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "election")
 @NamedQueries({
-    @NamedQuery(name = "Election.findAll", query = "SELECT e FROM Election e")})
+    @NamedQuery(name = Election.FIND_ALL, query = "SELECT e FROM Election e"),
+    @NamedQuery(name = Election.FIND_BY_ID, query= "SELECT e FROM Election e WHERE e.id = :id")
+})
 public class Election implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    public static final String FIND_ALL = "findAll";
+    
+    public static final String FIND_BY_ID = "findById";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "name")
     private String name;
+
     @ManyToMany(mappedBy = "elections", cascade = CascadeType.PERSIST)
     private Collection<Commissioner> commissioners;
-    @OneToMany(cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy="election", cascade = CascadeType.PERSIST)    
     private Collection<ElectionEvent> electionEvents;
     //private byte[] publicKey;
+
     @Column(name = "type")
     private String type;
 

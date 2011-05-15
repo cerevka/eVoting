@@ -24,31 +24,44 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name = "createElectionEvent")
+@ManagedBean(name = "electionEvent")
 @RequestScoped
 public class ElectionEventManagedBean {
 
     @EJB
     private ElectionSessionRemote electionSessionBean;
+
     @EJB
     private TellerSessionRemote tellerSessionBean;
+
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
+
     @EJB
     private VotingSessionRemote votingSessionBean;
+
     @ManagedProperty(value = "#{param.elecId}")
     private Integer elecId;
+
     @ManagedProperty(value = "#{param.eventId}")
     private Integer eventId;
+
     private DataModel candidatesModel;
+
     private String eventName;
+
     private String voterLogin;
+
     private String info;
+
     private String voterName;
+
     private ElectionEvent electionEvent;
+
     private List<SelectItem> voterSel;
-    private DataModel unfinishedElectionEvents;
+
     private Candidate candidate;
+
     private String commissionersAgreeTableHeader;
 
     public ElectionEventManagedBean() {
@@ -177,16 +190,12 @@ public class ElectionEventManagedBean {
 
     public Collection<ElectionEvent> getUnfinishedElectionEvents() {
         try {
-            return electionSessionBean.getUnfinishedElectionEvents(elecId);
+            return electionSessionBean.getUnfinishedElectionEvents(electionSessionBean.getElection(elecId));
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
-    }
 
-    public DataModel getUnfinishedElectionEventsModel() {
-        unfinishedElectionEvents = new ListDataModel((List) getUnfinishedElectionEvents());
-        return unfinishedElectionEvents;
     }
 
     public Collection<ElectionEvent> getEndedEvents() {
@@ -207,33 +216,6 @@ public class ElectionEventManagedBean {
             Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public boolean isRenderAlert() {
-        ElectionEvent ee = (ElectionEvent) unfinishedElectionEvents.getRowData();
-        String login = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-        if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_NOMINATING")
-                || nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "START_VOTING")
-                || nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_VOTING")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public String getAlertText() {
-        ElectionEvent ee = (ElectionEvent) unfinishedElectionEvents.getRowData();
-        if (ee != null) {
-            String login = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
-            if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_NOMINATING")) {
-                return "!! End of nominating was suggested !!";
-            } else if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "START_VOTING")) {
-                return "!! Start of voting was suggested !!";
-            } else if (nominatingSessionBean.alertCommissioner(ee.getId(), login, elecId, "END_VOTING")) {
-                return "!! End of voting was suggested !!";
-            }
-        }
-        return "";
     }
 
     public Collection<Commissioner> getAgreedCom() {

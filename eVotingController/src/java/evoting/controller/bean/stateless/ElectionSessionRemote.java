@@ -18,7 +18,7 @@ public interface ElectionSessionRemote {
 
     Collection<Election> getCommissionerElection(final String commissionerLogin) throws ControllerException;
 
-    Collection<ElectionEvent> getUnfinishedElectionEvents(final Integer electionId) throws ControllerException;
+    Collection<ElectionEvent> getUnfinishedElectionEvents(Election election) throws ControllerException;
 
     ElectionEvent getElectionEvent(final Integer eventId) throws ControllerException;
 

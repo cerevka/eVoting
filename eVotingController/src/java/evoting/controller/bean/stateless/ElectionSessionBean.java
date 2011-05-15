@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import evoting.controller.pojo.ControllerException;
 import evoting.validator.pojo.ValidatorException;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class ElectionSessionBean implements ElectionSessionRemote {
@@ -77,26 +78,16 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         return elections;
     }
 
+   
     /**
-     *
-     * @param electionId Id of the given election
-     * @return election events of the given election
-     * @throws ControllerException if election not found
+     * Return collection of unfinished events in given election.
+     * @param election A given election.
+     * @return Collection of unfinished events. 
      */
     @Override
-    public Collection<ElectionEvent> getUnfinishedElectionEvents(final Integer electionId) throws ControllerException {
-        Election election = em.find(Election.class, electionId);
-        if (election == null) {
-            throw new ControllerException("Election not found.");
-        }
-        Collection<ElectionEvent> events = election.getElectionEvents();
-        Collection<ElectionEvent> eventsOut = new ArrayList<ElectionEvent>();
-        for (ElectionEvent event : events) {
-            if (!event.getFinished()) {
-                eventsOut.add(event);
-            }
-        }
-        return eventsOut;
+    public Collection<ElectionEvent> getUnfinishedElectionEvents(Election election) {
+        TypedQuery<ElectionEvent> query = em.createNamedQuery(ElectionEvent.FIND_UNFINISHED_BY_ELECTION_ID, ElectionEvent.class).setParameter("election", election);
+        return query.getResultList();
     }
 
     /**
@@ -232,6 +223,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         electionEvent.setNominatingStarted(Boolean.FALSE);
         electionEvent.setVotingStarted(Boolean.FALSE);
         electionEvent.setFinished(Boolean.FALSE);
+        electionEvent.setElectionId(election);
         em.persist(electionEvent);
         election.getElectionEvents().add(electionEvent);
         em.persist(election);
@@ -260,7 +252,8 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         voters.size(); // hack for LAZY relationship
         return voters;
     }
- /**
+
+    /**
      *
      * @param voter - voter, that you want to delete
      * @param eventId - id of event
@@ -268,7 +261,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      * @throws ControllerException if voter not found.
      */
     @Override
-      public void deleteVoterFromEvent(Voter voter, Integer eventId) throws ControllerException {
+    public void deleteVoterFromEvent(Voter voter, Integer eventId) throws ControllerException {
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         Collection<Voter> voters = event.getVoters();
         voters.size();
@@ -322,6 +315,4 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         }
         return election;
     }
-
-
 }

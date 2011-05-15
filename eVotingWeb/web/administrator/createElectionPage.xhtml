@@ -16,13 +16,13 @@
                     <tbody>
                         <tr>
                             <th>Election name:</th>
-                            <td><h:inputText id="name" requiredMessage="Election name is required!" value="#{createElection.name}"
+                            <td><h:inputText id="name" requiredMessage="Election name is required!" value="#{election.name}"
                                      required="true" label="Name"/></td>
                     </tr>
                     <tr>
                         <th>Type:</th>
                         <td>
-                    <h:selectOneRadio id="type" value="#{createElection.currentType}">
+                    <h:selectOneRadio id="type" value="#{election.currentType}">
                         <f:selectItem itemLabel="Internet" itemValue="Internet"  />
                         <f:selectItem itemLabel="Local" itemValue="Local" />
                     </h:selectOneRadio>
@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="button">
-                    <h:commandButton value="Create" action="#{createElection.create}"/>
+                    <h:commandButton value="Create" action="#{election.create}"/>
                     </td>
                     </tr>
                     </tbody>
