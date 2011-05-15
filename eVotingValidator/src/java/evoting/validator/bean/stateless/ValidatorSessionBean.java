@@ -47,6 +47,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
      * @param eventId id of the given election event
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void createNewElectionEvent(final Integer eventId) {
         ValidatorElectionEvent electionEvent = new ValidatorElectionEvent();
         electionEvent.setId(eventId);
@@ -61,6 +62,7 @@ public class ValidatorSessionBean implements ValidatorSessionRemote {
      * @throws ValidatorException if the given election event not found
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    @Override
     public void addCandidate(final String candidateLogin, final Integer eventId) throws ValidatorException {
         ValidatorElectionEvent electionEvent = em.find(ValidatorElectionEvent.class, eventId);
         if (electionEvent == null) {

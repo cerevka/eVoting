@@ -40,4 +40,6 @@ public interface VotingSessionRemote {
     public void sendMail(java.lang.String recipient, java.lang.String text);
 
     public evoting.controller.entity.Election getElectionFromEvent(java.lang.Integer eventId);
+
+    public evoting.controller.entity.Voter getVoter(java.lang.String voterLogin);
 }

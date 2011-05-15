@@ -30,8 +30,11 @@ public class CounterBean implements CounterRemote {
 
     @PersistenceContext
     private EntityManager em;
+
     private static final String KEY_PAIR_GEN_ALGORITHM = "DSA"; //also can be "RSA"
+
     private static final String SECURE_RANDOM_ALGORITHM = "SHA1PRNG";
+
     private static final String SECURE_RANDOM_PROVIDER = "SUN";
 
     /**
@@ -48,11 +51,11 @@ public class CounterBean implements CounterRemote {
             throw new CounterException("Election event not found.");
         }
         int arraySize = electionEvent.getVotesCounts().size();
-     //  int arraySize = electionEvent.getCandidates().size();
+        //  int arraySize = electionEvent.getCandidates().size();
 
-       // System.out.println(electionEvent.getCandidates().size());
+        // System.out.println(electionEvent.getCandidates().size());
         System.out.println("Counter VotesCount arraysize: " + arraySize);
-        System.out.println("Counter VoterCandicats " +electionEvent.getCandidates().size());
+        System.out.println("Counter VoterCandicats " + electionEvent.getCandidates().size());
         String[] candidates = new String[arraySize];
         int[] votes = new int[arraySize];
         int i = 0;
@@ -64,9 +67,9 @@ public class CounterBean implements CounterRemote {
         result.setElectionEvent(electionEventId);
         result.setCandidates(candidates);
         result.setVotes(votes);
-        System.out.println("result.getCandidates length "+result.getCandidates().length);
+        System.out.println("result.getCandidates length " + result.getCandidates().length);
         for (int j = 0; j < result.getCandidates().length; j++) {
-                System.out.println("Results names for "+result.getCandidates()[j]);
+            System.out.println("Results names for " + result.getCandidates()[j]);
         }
         return result;
     }
@@ -92,6 +95,7 @@ public class CounterBean implements CounterRemote {
             em.persist(election);
             return null; // pair.getPublic().getEncoded();
         } catch (Exception e) {
+            Logger.getLogger(CounterBean.class.getName()).log(Level.SEVERE, "Error during election creation in counter.", e);
             throw new CounterException(e.getMessage());
         }
     }
@@ -104,12 +108,11 @@ public class CounterBean implements CounterRemote {
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     @Override
-    public void createNewElectionEvent(final Integer electionId, final Integer electionEventId)
-            throws CounterException {
+    public void createNewElectionEvent(final Integer electionId, final Integer electionEventId) throws CounterException {
         try {
             CounterElectionEvent electionEvent = new CounterElectionEvent();
             electionEvent.setId(electionEventId);
-            CounterElection election = em.find(CounterElection.class, electionId);
+            CounterElection election = em.find(CounterElection.class, electionId);            
             election.getElectionEvents().add(electionEvent);
             electionEvent.setElection(election);
             em.persist(electionEvent);

@@ -40,5 +40,7 @@ public interface NominatingSessionRemote {
 
     public void sendMail(java.lang.String recipient, java.lang.String text);
 
+    public evoting.controller.entity.Candidate getCandidate(java.lang.String login);
+
     
 }

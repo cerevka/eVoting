@@ -26,7 +26,7 @@
             <br/>
             <div>
                 <h:form>
-                    <h:dataTable style="float:left" styleClass="elections" cellspacing="0" value="#{voting.allVotersModel}" var="item">
+                    <h:dataTable style="float:left" styleClass="elections" cellspacing="0" value="#{voting.allVoters}" var="item">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Voters"/>
@@ -34,14 +34,15 @@
                             <h:outputText value="#{item.login}"/>
                         </h:column>
                         <h:column>
-                            <h:commandLink styleClass="link" value="Remove" action="#{voting.deleteVoter}"  >
-
+                            <h:commandLink styleClass="link" action="#{voting.deleteVoter}"  >
+                                <h:outputText value="Remove" />
+                                <f:param name="voterLogin" value="#{item.login}" />
                             </h:commandLink>
                         </h:column>
                     </h:dataTable>
                 </h:form>
                 <h:form>
-                    <h:dataTable style="float: left" styleClass="elections" cellspacing="0" value="#{electionEvent.candidatesModel}" var="item">
+                    <h:dataTable style="float: left" styleClass="elections" cellspacing="0" value="#{electionEvent.candidates}" var="item">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Candidates"/>
@@ -52,7 +53,10 @@
                             <h:outputText value="#{item.candidateRole}" />
                         </h:column>
                         <h:column>
-                            <h:commandLink styleClass="link" value="Remove" action="#{electionEvent.deleteCandidate}" />
+                            <h:commandLink styleClass="link" action="#{electionEvent.deleteCandidate}">
+                                <h:outputText value="Remove" />
+                                <f:param name="candidateLogin" value="#{item.login}" />
+                            </h:commandLink>
                         </h:column>
 
                     </h:dataTable>

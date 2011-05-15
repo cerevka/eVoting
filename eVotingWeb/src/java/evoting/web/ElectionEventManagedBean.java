@@ -14,8 +14,6 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
@@ -46,10 +44,8 @@ public class ElectionEventManagedBean {
     @ManagedProperty(value = "#{param.eventId}")
     private Integer eventId;
 
-    private DataModel candidatesModel;
-
     private String eventName;
-
+    
     private String voterLogin;
 
     private String info;
@@ -61,6 +57,11 @@ public class ElectionEventManagedBean {
     private List<SelectItem> voterSel;
 
     private Candidate candidate;
+
+    @ManagedProperty(value = "#{param.candidateLogin}")
+    private String candidateLogin;   
+    
+   
 
     private String commissionersAgreeTableHeader;
 
@@ -88,7 +89,7 @@ public class ElectionEventManagedBean {
             FacesMessage m = new FacesMessage("Event \"" + eventName + "\" was succesfully created");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
-            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ElectionEventManagedBean.class.getName()).log(Level.SEVERE, "Error during event creation.", ex);
             return "";
         }
         setElectionId(electionId);
@@ -268,6 +269,14 @@ public class ElectionEventManagedBean {
         }
     }
 
+    public String getCandidateLogin() {
+        return candidateLogin;
+    }
+
+    public void setCandidateLogin(String candidateLogin) {
+        this.candidateLogin = candidateLogin;
+    }
+
     public boolean isRenderedTableEndNom() {
         eventId = getEventId();
         if ((nominatingSessionBean.isStartedNominating(eventId) == true) && (votingSessionBean.isStartedVoting(eventId) == false) && (isAnyoneNominated() == true)) {
@@ -306,7 +315,7 @@ public class ElectionEventManagedBean {
     }
 
     public String deleteCandidate() {
-        this.candidate = (Candidate) candidatesModel.getRowData();
+        this.candidate = nominatingSessionBean.getCandidate(candidateLogin);
         this.eventId = getEventId();
         try {
             nominatingSessionBean.deleteCandidateFromEvent(candidate, eventId);
@@ -322,11 +331,6 @@ public class ElectionEventManagedBean {
 
     public Collection<Candidate> getCandidates() {
         return nominatingSessionBean.getCandidates(getEventId());
-    }
-
-    public DataModel getCandidatesModel() {
-        candidatesModel = new ListDataModel((List) getCandidates());
-        return candidatesModel;
     }
 
     public String viewResultEvent() {

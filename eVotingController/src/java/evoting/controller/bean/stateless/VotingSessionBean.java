@@ -104,6 +104,11 @@ public class VotingSessionBean implements VotingSessionRemote {
         }
         return eventsOut;
     }
+    
+    @Override
+    public Voter getVoter(String voterLogin) {
+        return em.find(Voter.class, voterLogin);        
+    }
 
     /**
      * Sets the given election event to voting state.

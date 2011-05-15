@@ -14,33 +14,48 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name="voting")
+@ManagedBean(name = "voting")
 @RequestScoped
 public class VotingManagedBean {
 
-    private ListDataModel AllVoterModel;  
     @EJB
     private TellerSessionRemote tellerSessionBean;
+
     @EJB
-    private VotingSessionRemote votingSessionBean;    
+    private VotingSessionRemote votingSessionBean;
+
     @EJB
-    private ElectionSessionRemote electionSessionBean; 
+    private ElectionSessionRemote electionSessionBean;
+
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
+
     private Voter voter = null;
+
     private Integer eventId = null;
+
+    @ManagedProperty(value = "#{param.voterLogin}")
+    private String voterLogin;
 
     public VotingManagedBean() throws ControllerException {
     }
 
+    public String getVoterLogin() {
+        return voterLogin;
+    }
+
+    public void setVoterLogin(String voterLogin) {
+        this.voterLogin = voterLogin;
+    }
+
+    /**
     @PostConstruct
     public void init() {
         try {
@@ -49,10 +64,11 @@ public class VotingManagedBean {
             Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     */
 
     public String goVote() {
         setEventId(eventId);
-        System.out.println("nastavuj EventId na "+getEventId());
+        System.out.println("nastavuj EventId na " + getEventId());
         return "goVote";
     }
 
@@ -93,7 +109,7 @@ public class VotingManagedBean {
     }
 
     public String deleteVoter() throws ControllerException {
-        voter = (Voter) AllVoterModel.getRowData();
+        voter = votingSessionBean.getVoter(voterLogin);
         this.eventId = getEventId();
         try {
             electionSessionBean.deleteVoterFromEvent(voter, eventId);
@@ -148,11 +164,6 @@ public class VotingManagedBean {
         session.setAttribute("eventId", eventId);
     }
 
-    public DataModel getAllVotersModel() throws ControllerException {
-        AllVoterModel = new ListDataModel(getEventVoters());
-        return AllVoterModel;
-    }
-
     public Voter getVoter() {
         return voter;
     }
@@ -177,7 +188,7 @@ public class VotingManagedBean {
         return (List<Voter>) votingSessionBean.getAllVoters();
     }
 
-    public boolean getRenderVolit(){
+    public boolean getRenderVolit() {
         List si = getSelectItems();
         boolean result = true;
         if (si != null) {

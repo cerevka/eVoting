@@ -28,11 +28,20 @@ public class NominatingSessionBean implements NominatingSessionRemote {
 
     @EJB
     private ValidatorSessionRemote validatorBean;
+
     @EJB
     private CounterRemote counterBean;
-    @PersistenceContext(unitName="eVotingControllerPU")
+
+    @PersistenceContext(unitName = "eVotingControllerPU")
     private EntityManager em;
+
     private Boolean nominatingDone = false;
+    
+    @Override
+    public Candidate getCandidate(String login) {
+        return em.find(Candidate.class, login);
+        
+    }
 
     /**
      * Sets the voter with given login to candidate to given event.
@@ -125,16 +134,14 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      */
     @Override
     public Collection<Candidate> getCandidates(final Integer eventId) {
-        System.out.println("Event id pro kandidaty je: " + eventId);
         ElectionEvent event = em.find(ElectionEvent.class, eventId);
         if (event != null) {
-            System.out.println("Udalost je: " + event.toString());
             Collection<Candidate> candidates = event.getCandidates();
             candidates.size();
             return candidates;
         } else {
             Logger.getLogger(NominatingSessionBean.class.getName()).log(Level.SEVERE, "Event not found.");
-            return null;            
+            return null;
         }
     }
 
@@ -345,7 +352,7 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      */
     @Override
     public Election getElectionFromEvent(Integer eventId) {
-        ElectionEvent ee = em.find(ElectionEvent.class, eventId);        
+        ElectionEvent ee = em.find(ElectionEvent.class, eventId);
         TypedQuery<Election> query = em.createNamedQuery(Election.FIND_ALL, Election.class);
         Collection<Election> elCol = query.getResultList();
         if (elCol.size() > 0) {

@@ -9,11 +9,14 @@ import evoting.controller.entity.Person;
 import evoting.controller.entity.Voter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import evoting.controller.pojo.ControllerException;
+import evoting.counter.pojo.CounterException;
 import evoting.validator.pojo.ValidatorException;
 import javax.persistence.TypedQuery;
 
@@ -41,11 +44,13 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         el.setName(electionName);
         el.setType(electionType);
         em.persist(el);
+        em.flush();
         byte[] key = null;
-        try {
+        try {            
             key = counterBean.createNewElection(el.getId());
-        } catch (Exception ex) {
+        } catch (CounterException ex) {
             // TODO delete el from db
+            Logger.getLogger(ElectionSessionBean.class.getName()).log(Level.SEVERE, "Error during election creation.", ex);
             throw new ControllerException(ex.getMessage());
         }
         //el.setPublicKey(key);
@@ -230,13 +235,15 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         em.persist(electionEvent);
         election.getElectionEvents().add(electionEvent);
         em.persist(election);
+        em.flush();
         try {
-            counterBean.createNewElectionEvent(electionId, electionEvent.getId());
             validatorBean.createNewElectionEvent(electionEvent.getId());
-        } catch (Exception ex) {
-            //TODO db synchronizovano?
-            throw new ControllerException(ex.getMessage());
+            counterBean.createNewElectionEvent(electionId, electionEvent.getId());
+        } catch (CounterException ex) {
+            Logger.getLogger(ElectionSessionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+        
     }
 
     /**
