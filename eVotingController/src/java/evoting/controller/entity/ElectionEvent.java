@@ -23,7 +23,7 @@ import javax.persistence.Table;
 })
 public class ElectionEvent implements Serializable {
 
-    public static final String FIND_UNFINISHED_BY_ELECTION_ID = "findUnfinishedByElection";
+    public static final String FIND_UNFINISHED_BY_ELECTION_ID = "ElectionEvent.findUnfinishedByElection";
 
     private static final long serialVersionUID = 1L;
 

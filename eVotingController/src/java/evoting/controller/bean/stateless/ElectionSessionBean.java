@@ -56,8 +56,8 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      * @return all persons in database
      */
     @Override
-    public Collection<Person> getAllPerson() {
-        Query query = em.createQuery("SELECT p FROM Person p");
+    public Collection<Person> getAllPerson() {        
+        TypedQuery<Person> query = em.createNamedQuery(Person.FIND_ALL, Person.class);
         return query.getResultList();
     }
 
@@ -158,8 +158,8 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      * @return all elections in database
      */
     @Override
-    public Collection<Election> getAllElection() {
-        Query query = em.createQuery("SELECT e FROM Election e");
+    public Collection<Election> getAllElection() {        
+        TypedQuery<Election> query = em.createNamedQuery(Election.FIND_ALL, Election.class);
         return query.getResultList();
     }
 

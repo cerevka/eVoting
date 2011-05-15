@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.Session;
+import javax.persistence.TypedQuery;
 
 @Stateless
 public class NominatingSessionBean implements NominatingSessionRemote {
@@ -344,8 +345,9 @@ public class NominatingSessionBean implements NominatingSessionRemote {
      */
     @Override
     public Election getElectionFromEvent(Integer eventId) {
-        ElectionEvent ee = em.find(ElectionEvent.class, eventId);
-        Collection<Election> elCol = em.createNamedQuery("Election.findAll").getResultList();
+        ElectionEvent ee = em.find(ElectionEvent.class, eventId);        
+        TypedQuery<Election> query = em.createNamedQuery(Election.FIND_ALL, Election.class);
+        Collection<Election> elCol = query.getResultList();
         if (elCol.size() > 0) {
             Iterator it = elCol.iterator();
             Election ret = null;

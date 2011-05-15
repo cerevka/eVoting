@@ -25,9 +25,9 @@ public class Election implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    public static final String FIND_ALL = "findAll";
+    public static final String FIND_ALL = "Election.findAll";
     
-    public static final String FIND_BY_ID = "findById";
+    public static final String FIND_BY_ID = "Election.findById";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

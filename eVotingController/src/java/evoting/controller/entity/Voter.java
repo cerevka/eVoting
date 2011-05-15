@@ -12,16 +12,23 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="voter")
+@Table(name = "voter")
 @NamedQueries({
-    @NamedQuery(name = "Voter.findAll", query = "SELECT v FROM Voter v"),
-    @NamedQuery(name = "Voter.findByLogin", query = "SELECT v FROM Voter v WHERE v.login = :login")})
+    @NamedQuery(name = Voter.FIND_ALL, query = "SELECT v FROM Voter v"),
+    @NamedQuery(name = Voter.FIND_BY_LOGIN, query = "SELECT v FROM Voter v WHERE v.login = :login")})
 public class Voter implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
+    public static final String FIND_ALL = "Voter.findAll";
+
+    public static final String FIND_BY_LOGIN = "Voter.findByLogin";
+
     @Id
-    @Column(name="login")
+    @Column(name = "login")
     private String login;
-    @ManyToMany(cascade= CascadeType.PERSIST)
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Collection<ElectionEvent> electionEvents;
 
     public Collection<ElectionEvent> getElectionEvents() {
@@ -63,5 +70,4 @@ public class Voter implements Serializable {
     public String toString() {
         return "entity.Voter[id=" + login + "]";
     }
-
 }

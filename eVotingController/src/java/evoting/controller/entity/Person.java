@@ -14,20 +14,29 @@ import javax.persistence.Table;
 @Table(name = "person")
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "personGroup")
 @NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
-    @NamedQuery(name = "Person.findByLogin", query = "SELECT p FROM Person p WHERE p.login = :login")})
+    @NamedQuery(name = Person.FIND_ALL, query = "SELECT p FROM Person p"),
+    @NamedQuery(name = Person.FIND_BY_LOGIN, query = "SELECT p FROM Person p WHERE p.login = :login")})
 public class Person implements Serializable {
 
+    public static final String FIND_ALL = "Person.findAll";
+
+    public static final String FIND_BY_LOGIN = "Person.findByLogin";   
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "login")
     private String login;
+
     @Column(name = "firstName")
     private String firstname;
+
     @Column(name = "lastName")
     private String lastname;
+
     @Column(name = "personGroup")
     private String personGroup;
+
     @Column(name = "password")
     private String password;
 
