@@ -191,7 +191,7 @@ Tento způsob voleb je sice funkční a léty prověřený, ovšem jeho realizac
 
 Elektronické volby jsou tématem, které již bylo mnohokrát zpracováváno. Následující odstavce rozebírají několik zdrojů, ze kterých tato práce vychází, a stručně popisují jejich obsah.
 
-\subsection{Prototyp systému eVolby}
+\subsection{Prototyp systému eVolby} \label{sec:prototyp}
 
 Implementační část této bakalářské práce vychází z prototypu systému internetových elektronických voleb pro Akademický senát ČVUT, který vznikl v rámci předmětů Y36SI2 a Y36SI3 \cite{www:prototyp}. Tento systém se sestává pouze ze serveru napsaném v Enterprise Javě, který zajišťuje jak administraci voleb, tak samotné hlasování voličů přes internet. 
 
@@ -222,7 +222,7 @@ Na implementaci je zajímavá vícevrstvá architektura dělená na prezentačn�
 
 Při volbách se voliči budou přihlašovat za pomoci otisku prstu a PINu. Pro tyto účely je pro třeba zvolit správnou čtečku otisků prstů, která zajistí spolehlivost, dlouhou životnost a cenovou dostupnost. \textit{Rešerše algoritmů pro snímání a zpracování otisku prstů} \cite{art:polackova} od Zuzany Poláčkové poskytuje podrobný náhled do oblasti daktyloskopie. Kromě jiného pojednává o základních biometrických systémech, zpracování otisků prstů a o algoritmech používaných v praxi. Nejdůležitější je pro mě kapitola o snímačích otisků prstů, kde porovnává výhody a nevýhody optoelektrických, kapacitních, teplotních, elektroluminiscenčních a ultrazvukových snímačů.
 
-Jako nejlepší volba se jeví elektroluminiscenční snímač, jelikož pořizuje kvalitní výstup v digitální podobě, nemá problémy se snímáním extrémně suché pokožky a je cenově dostupný. Mezi nevýhody sice patří menší odolnost a citlivost na prach a vodu, ale oproti ostatním snímačům je to zanedbatelné.
+Jako nejlepší volba se jeví elektroluminiscenční snímač, jelikož pořizuje kvalitní výstup v digitální podobě, nemá problémy se snímáním extrémně suché pokožky a je cenově dostupný. Mezi nevýhody sice patří menší odolnost a citlivost na prach a vodu, ale oproti ostatním snímačům, které trpí závažnějšími neduhy, je to zanedbatelné.
 
 \subsection{Electronic Voting in Europe - Technology, Law, Politics and Society}
 
@@ -391,15 +391,15 @@ Při výběru technologií byly voleny open source či freeware řešení, kter�
 
 \subsubsection{Java EE}
 
-Java Enterprise Edition je součást platformy Java určená pro vývoj podnikových aplikací a informačních systémů. Za jejím vývojem stojí společnost Sun Microsystems. Tuto technologii jsem zvolil pro její pokročilé možnosti a multiplatformní nasazení díky JVM.  Navíc prototyp eVoleb již byl napsán v Javě EE. Java EE vyžaduje ke svému běhu navíc aplikační server, jehož volba je popsána v kapitole \ref{aplikacni_server}. 
+Java Enterprise Edition (\url{http://www.oracle.com/technetwork/java/javaee/overview/index.html}) je součást platformy Java určená pro vývoj podnikových aplikací a informačních systémů. Za jejím vývojem stojí společnost Sun Microsystems. Tuto technologii jsem zvolil pro její pokročilé možnosti a multiplatformní nasazení díky JVM.  Navíc prototyp eVoleb již byl napsán v Javě EE. Java EE vyžaduje ke svému běhu navíc aplikační server, jehož volba je popsána v kapitole \ref{aplikacni_server}. 
 
 \subsubsection{Aplikační server} \label{aplikacni_server}
 
-Prototyp eVoleb běžel na aplikačním serveru Glassfish 2.1.1. Tato verze již ovšem zastarává a je na ní problematické testování \cite{www:prototyp}. Proto jsem zvolil aplikační server Glassfish 3.1 \url{http://glassfish.java.net}, který přináší mnohá zlepšení. Glassfish jsem zvolil proto, že se jedná o referenční implementaci Javy EE6 přímo společností Sun Microsystems. Glassfish je open source projekt, ale existuje i jeho komerční verze, jenž se jmenuje Oracle Glassfish 3.1. Tyto dvě verze se od sebe v podstatě neliší, rozdíl je hlavně v podpoře a aktualizacích.
+Prototyp eVoleb běžel na aplikačním serveru Glassfish 2.1.1. Tato verze již ovšem zastarává a je na ní problematické testování \cite{www:prototyp}. Proto jsem zvolil aplikační server Glassfish 3.1 (\url{http://glassfish.java.net}), který přináší mnohá zlepšení. Glassfish jsem zvolil proto, že se jedná o referenční implementaci Javy EE6 přímo společností Sun Microsystems. Glassfish je open source projekt, ale existuje i jeho komerční verze, jenž se jmenuje Oracle Glassfish 3.1. Tyto dvě verze se od sebe v podstatě neliší, rozdíl je hlavně v podpoře a aktualizacích.
 
 \subsubsection{Databáze}
 
-Java EE disponuje sadou různých databázových konektorů díky technologii JDBC, které umožňují databázový stroj kdykoliv změnit. Při vývoji bude používána databáze MySQL \url{http://www.mysql.com}. Pro snadné nasazení je ale možné použití JavaDB, což je vestavěná databáze. Jedná se vlastně jen o knihovnu napsanou v jazyce Java a umožňuje přístup k datům uloženým na pevném disku za pomoci SQL dotazů.
+Java EE disponuje sadou různých databázových konektorů díky technologii JDBC, které umožňují databázový stroj kdykoliv změnit. Při vývoji bude používána databáze MySQL (\url{http://www.mysql.com}). Pro snadné nasazení je ale možné použití JavaDB (\url{http://www.oracle.com/technetwork/java/javadb/overview/index.html}), což je vestavěná databáze. Jedná se vlastně jen o knihovnu napsanou v jazyce Java, která umožňuje přístup k datům uloženým na pevném disku za pomoci SQL dotazů.
 
 \subsection{Klient}
 
@@ -448,7 +448,7 @@ Pro vývoj jsem tedy zvolil SDK od společnosti Digital Persona a jejich sníma�
 %*****************************************************************************
 \chapter{Návrh řešení a realizace}
 
-Vzhledem k tomu, že systém vychází z prototypu eVolby, který již má své řešení navržené, budu v této práci popisovat jednotlivé iterace, ve kterých jsem ho modifikoval, přičemž v každé iteraci se zaměřím na problémy, se kterými jsme se setkal a popíši postup, kterým jsem se dopracoval k funkčnímu řešení. 
+Vzhledem k tomu, že systém vychází z prototypu systému eVolby, o kterém hovoří řešerše v kapitole \ref{sec:prototyp} a který již má své řešení navržené, budu v této práci popisovat jednotlivé iterace, ve kterých jsem ho modifikoval, přičemž v každé iteraci se zaměřím na problémy, se kterými jsme se setkal a popíši postup, kterým jsem se dopracoval k funkčnímu řešení. 
 
 \section{První iterace} \label{sec:iterace:prvni}
 
@@ -460,21 +460,23 @@ Jako první jsem si stanovil za cíl migraci z Glassfishe 2.0.1 na Glassfish ver
 
 \subsubsection{Sdílené knihovny}
 
-Zatímco Glassfish 2.0.1 byl certifikován pro Java EE 5, jeho novější verze Glassfish 3.1 je již certifikována pro Java EE 6. S tím souvisí změna některých standardů, která měla na svědomí problémy při migraci. Zjistil jsem, že při deploy aplikace dochází k vyhazování chyby, že EJB moduly neobsahují žádné EJB. Bylo to způsobováno tím, že Glassfish vynechával ty EJB, ve kterých narazil na jakoukoliv chybu. Problém tkvěl ve sdílené knihovně POJO objektů, které slouží jako přepravní kontejnery mezi EJB moduly. Jakmile remote interface dané EJB obsahoval referenci na takový sdílený POJO objekt, Glassfish 3.1 zahlásil, že takový objekt nezná.
+Zatímco Glassfish 2.0.1 byl certifikován pro Java EE 5, jeho novější verze Glassfish 3.1 je již certifikována pro Java EE 6. S tím souvisí změna některých standardů, která měla na svědomí problémy při migraci. Zjistil jsem, že při nasazení aplikace na Glassfish 3.1 dochází k chybě kvůli tomu, že EJB moduly neobsahují žádné EJB. To bylo způsobováno tím, že Glassfish vynechával ty EJB, ve kterých narazil na jakoukoliv chybu. Problém tkvěl ve sdílené knihovně POJO objektů, které slouží jako přepravní kontejnery mezi EJB moduly. Jakmile remote interface dané EJB obsahoval referenci na takový sdílený POJO objekt, Glassfish 3.1 zahlásil, že takový objekt nezná.
 
-Takováto situace se dá řešit dvěma různými způsoby. První spočívá v umístění sdílené knihovny mezi knihovny přímo do Glassfishe. Já jsem zvolil druhý způsob, který je jednodušší na nasazení. A to, že jsem všechny tři EJB moduly spolu s webovým modulem zastřešil pod jednu Enterprise aplikaci, která se následně deployuje namísto každého modulu zvlášť. 
+Tento problém se mi po dařilo odstranit zapouzdřením všech tří EJB modulů spolu s webovým modulem pod jednu enterprise aplikaci, která se pak nasazuje na aplikační server jako celek namísto nasazování každého modulu zvlášť. Díky tomu je i nasazování aplikace jednoduší, protože se provádí pouze jednou a nemusí se hlídat, v jakém pořadí se mají modulu nasadit.
 
 \subsubsection{Entity}
 
-Dále se objevily chyby v definici entit, kdy některé entity neměly pojmenované joinovací sloupce. To způsobovalo nevygenerování tabulek do databáze.
+Dále se objevily chyby v definici entit, kdy některé entity neměly pojmenované spojovací sloupce přes anotaci @JoinColumn. To způsobovalo nevygenerování tabulek do databáze.
+
+U vazeb mezi entitami bylo třeba doplnit kaskádní chování při jejich ukládání (CascadeType.PERSIST), jinak docházelo k přerušení transakcí, aby se zabránilo nekonzistenci dat.
 
 \subsubsection{Databáze}
 
-V původním návrhu je EJB modul Controller napojen na dvě databáze - první databáze obsahuje data o volebních událostech a druhá data o uživatelích systému. Jelikož uživatelská databáze měla pouze jednu tabulku, sloučil jsem tyto databáze do jedné, což vede k zjednodušení konfigurace při nasazení na server.
+V původním návrhu je EJB modul Controller napojen na dvě databáze - první databáze obsahuje data o volebních událostech a druhá data o uživatelích systému. Jelikož uživatelská databáze měla pouze jednu tabulku, sloučil jsem tyto databáze do jedné, což vede k zjednodušení konfigurace při nasazení na server. Sloučení spočívalo v odstraní příslušného persistentního unitu (PersistentUnit) a překonfigurování EJB tak, aby namísto něj používaly persistetní unit pro databázi kontroleru.
 
 \subsection{Výstup}
 
-Po skončení této iterace jsem měl funkční deploy pro Glassfish 3.1 využívající pouze tři databáze namísto čtyř s korektně vygenerovanými tabulkami.
+Po skončení této iterace jsem měl funkční nasazení aplikace na Glassfishi 3.1 využívající pouze tři databáze namísto čtyř s korektně vygenerovanými tabulkami.
 
 
 \section{Druhá iterace}
@@ -485,9 +487,23 @@ Druhým krokem bylo zprovoznění základní funkcionality a její otestování 
 
 \subsection{Postup}
 
-\subsubsection{Autentizační realm}
+\subsection{Synchronizace persistentní vrstvy}
+
+Při zakládání voleb a volebních událostí docházelo k chybě, která se na první pohled neprojevovala. Byla způsobena až v na úrovni modulů Validator a Counter, do nichž se reflektovalo založení v modulu Controller. 
+
+Chyba byla způsobována tím, že těsně po uložení entity do databáze se předpokládalo, že entita již bude v databázi i fyzicky. Tomu tak ovšem nebylo a proto se namísto přiděleného ID předával null. Před samotnou další prací s entitou je třeba na synchronizovat persistentní a datovou vrstvu zavoláním metody flush na manažeru entit (EntitManager).
+
+\subsection{SQL dotazy}
+
+Logickým krokem byla oprava a optimalizace SQL dotazů nad databází. Odstranil jsem tedy všechny NativeQuery a nahradil je NamedQuery, které jsem nadefinoval přímo u entit a pojmenoval jsem je za pomoci kontant. Díky tomu bude v budoucnu jednoduší refaktoring entit a i další vývoj, kdy je seznam všech NamedQuery dostupný přes našeptávač IDE a nemůže tak dojít k překlepům.
+
+Stejným způsobem jsem změnil i výběr neukončených volebních událostí, které se vybíraly zcela neefektivně - položil se dotaz na databázi pro výběr všech událostí a přes ty se následně iterovalo a hledaly se ty, které měly příznak \uv{finished} na hodnotě \uv{false}.
+
+\subsubsection{Zabezpečení}
 
 Původní projekt využíval pro autentizaci uživatelů file realm Glassfishe. Toto nicméně vedlo k duplikaci dat, neboť každý uživatel musel být jak v tomto file realmu, tak v databázi uživatelů. Nakonfiguroval jsem tedy v Glassfishi JDBC realm, který přes JNDI přistupuje do interní databáze uživatelů a zajišťuje jejich autentizaci na základě dat v uvedených tabulkách.
+
+V rámci zabezpečení jsem také nastavil, aby i přihlašovací formulář byl zabezpečen HTTPS spojením. Původní formulář navíc využíval metodu GET, která parametry předává přes adresní řádku, což je v případě předávání hesla nepřípustné. Nově přihlašovací formulář využívá metodu POST.
 
 \subsubsection{JSF 2.0}
 
@@ -503,11 +519,15 @@ Na doporučení ze závěrečné zprávy jsem tento applet z projektu vyřadil a
 
 \subsection{Výstup}
 
-Na konci druhé iterace je projekt ve své základní funkční podobě, umožňuje snadnější přidávání uživatelů a bezproblémové hlasování.
+Na konci druhé iterace je projekt ve své základní funkční podobě, umožňuje snadnější přidávání uživatelů a bezproblémové hlasování. Prozatím není implementována nová funkcionalita v podobě role kandidáta a aktéra času.
 
 \section{Třetí iterace}
 
 \subsection{Cíl}
+
+- přidání role kandidáta
+- aktér čas - Sheduler
+- desktopový klient
 
 \subsection{Postup}
 
@@ -517,10 +537,19 @@ Na konci druhé iterace je projekt ve své základní funkční podobě, umožň
 %*****************************************************************************
 \chapter{Testování}
 
-\begin{itemize}
- \item Způsob, průběh a výsledky testování.
- \item Srovnání s existujícími řešeními, pokud jsou známy.
-\end{itemize} 
+Celý systém musí být řádně otestován, jelikož každá chyba v průběhu ostrých voleb, může mít zásadní dopad na jejich průběh i jejich výsledek. Aplikace musí být srozumitelný nejen počítačově gramotným uživatelům, ale i uživatelům, kteří nemají zkušenosti  ovládáním počítače. 
+
+\section{Statická analýza kódu}
+
+\section{Selenium}
+
+\section{Zátěžové testy}
+
+\subsection{Apache Benchmark}
+
+\subsection{Doba SQL dotazů}
+
+
 
 
 %*****************************************************************************
@@ -559,6 +588,7 @@ Na konci druhé iterace je projekt ve své základní funkční podobě, umožň
 \item[ČTK] Česká tisková kancelář
 \item[ČVUT] České vysoké učení technické v Praze
 \item[DDoS] Distributed Denial of Service
+\item[EJB] Enterprise Java Bean
 \item[FAI] Fakulta aplikované informatiky
 \item[FEL] Fakulta elektrotechnická
 \item[FIT] Fakulta informačních technologií
