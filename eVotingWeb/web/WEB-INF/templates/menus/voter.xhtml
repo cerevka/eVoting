@@ -4,10 +4,10 @@
     <div class="menu">
         <h:form id="navigation">
             <ul class="buttons">
-                <li><h:commandLink value="Nominovat" action="nominating" disabled="#{nominating.renderNominovat}"/></li>
-                <li><h:commandLink value="Hlasovat" action="voting" disabled="#{voting.renderVolit}" /></li>
-                <li><h:commandLink value="Výsledky" action="endedEvents" /></li>
-                <li><h:commandLink value="Odhlásit" action="#{user.doLogout}" immediate="true" /></li>
+                <li><h:commandLink value="#{msg['navigation.nominate']}" action="nominating" disabled="#{nominating.renderNominovat}"/></li>
+                <li><h:commandLink value="#{msg['navigation.vote']}" action="voting" disabled="#{voting.renderVolit}" /></li>
+                <li><h:commandLink value="#{msg['navigation.results']}" action="endedEvents" /></li>
+                <li><h:commandLink value="#{msg['application.logout']}" action="#{user.doLogout}" immediate="true" /></li>
             </ul>
         </h:form>        
     </div>

@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="View event" />
+    <ui:param name="title" value="#{msg['application.title.event']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="menu">
@@ -14,11 +14,11 @@
             <div>
                 <table class="electionsInfo">
                     <tr>
-                        <th>Event name:</th>
+                        <th>#{msg['label.event.name']}:</th>
                         <td><h:outputText value="#{electionEvent.eventName}" /></td>
                     </tr>
                     <tr>
-                        <th>Event info:</th>
+                        <th>#{msg['label.information']}:</th>
                         <td><h:outputText value="#{electionEvent.info}" /></td>
                     </tr>
                 </table>
@@ -29,13 +29,13 @@
                     <h:dataTable style="float:left" styleClass="elections" cellspacing="0" value="#{voting.allVoters}" var="item">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Voters"/>
+                                <h:outputText value="#{msg['label.voters']}"/>
                             </f:facet>
                             <h:outputText value="#{item.login}"/>
                         </h:column>
                         <h:column>
                             <h:commandLink styleClass="link" action="#{voting.deleteVoter}"  >
-                                <h:outputText value="Remove" />
+                                <h:outputText value="#{msg['action.remove']}" />
                                 <f:param name="voterLogin" value="#{item.login}" />
                             </h:commandLink>
                         </h:column>
@@ -45,7 +45,7 @@
                     <h:dataTable style="float: left" styleClass="elections" cellspacing="0" value="#{electionEvent.candidates}" var="item">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Candidates"/>
+                                <h:outputText value="#{msg['label.candidates']}"/>
                             </f:facet>
                             <h:outputText value="#{item.login}"/>
                         </h:column>
@@ -54,7 +54,7 @@
                         </h:column>
                         <h:column>
                             <h:commandLink styleClass="link" action="#{electionEvent.deleteCandidate}">
-                                <h:outputText value="Remove" />
+                                <h:outputText value="#{msg['action.remove']}" />
                                 <f:param name="candidateLogin" value="#{item.login}" />
                             </h:commandLink>
                         </h:column>
@@ -78,21 +78,21 @@
                 <ul class="buttons">
                     <h:form>
                         <li>
-                        <h:commandLink value="Start nominating" action="#{nominating.startNominating}" rendered="#{electionEvent.renderStartNominating}" />
+                        <h:commandLink value="#{msg['action.start.nomination']}" action="#{nominating.startNominating}" rendered="#{electionEvent.renderStartNominating}" />
                         </li>
                         <li>
-                        <h:commandLink value="End nominating" action="#{nominating.endNominating}" rendered="#{electionEvent.renderEndNominating}" />
+                        <h:commandLink value="#{msg['action.stop.nomination']}" action="#{nominating.endNominating}" rendered="#{electionEvent.renderEndNominating}" />
                         </li>
                         <li>
-                        <h:commandLink value="Start voting" action="#{voting.startVoting}" rendered="#{electionEvent.renderStartVoting}" />
+                        <h:commandLink value="#{msg['action.start.vote']}" action="#{voting.startVoting}" rendered="#{electionEvent.renderStartVoting}" />
                         </li>
                         <li>
-                        <h:commandLink value="End voting" action="#{voting.endVoting}" rendered="#{electionEvent.renderEndVoting}" />
+                        <h:commandLink value="#{msg['action.stop.vote']}" action="#{voting.endVoting}" rendered="#{electionEvent.renderEndVoting}" />
                         </li>
                     </h:form>
                     <li>
                     <h:outputLink styleClass="button" value="addVoter.xhtml">
-                        Add voter
+                        #{msg['action.add.voter']}
                     </h:outputLink>
                     </li>
                 </ul>

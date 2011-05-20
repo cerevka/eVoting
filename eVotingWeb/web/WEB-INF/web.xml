@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login.xhtml</welcome-file>
+        <welcome-file>secured/index.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
         <display-name>General constraint</display-name>

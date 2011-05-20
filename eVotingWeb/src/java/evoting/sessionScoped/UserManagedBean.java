@@ -41,8 +41,7 @@ public class UserManagedBean implements Serializable {
         return this.password;
     }
 
-    public String doLogin() {
-        doLogout();
+    public String doLogin() {        
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         try {
             request.login(this.login, this.password);
@@ -58,6 +57,10 @@ public class UserManagedBean implements Serializable {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         session.invalidate();
         return "logout";
+    }
+    
+    public boolean isLogged() {        
+        return getRole() != null;
     }
 
     public String getRole() {

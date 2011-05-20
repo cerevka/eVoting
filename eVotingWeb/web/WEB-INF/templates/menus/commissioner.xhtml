@@ -4,8 +4,8 @@
     <div class="menu">
         <h:form id="navigation">
             <ul class="buttons">
-                <li><h:commandLink value="View election" action="commissionerElection" /></li>
-                <li><h:commandLink value="Logout" action="#{user.doLogout}" immediate="true" /></li>
+                <li><h:commandLink value="#{msg['navigation.viewElections']}" action="commissionerElection" /></li>
+                <li><h:commandLink value="#{msg['application.logout']}" action="#{user.doLogout}" immediate="true" /></li>
             </ul>
         </h:form>        
     </div>

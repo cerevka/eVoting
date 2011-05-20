@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Add commissioner" />
+    <ui:param name="title" value="#{msg['application.title.addCommissioner']}" />
     <ui:define name="content">
         <f:view xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html">
@@ -18,14 +18,14 @@
                 <table class="form">
                     <tbody>
                         <tr>
-                            <th>Commissioner:</th>
+                            <th>#{msg['role.commissioner']}:</th>
                             <td><h:selectOneMenu id="selectCom" value="#{election.stringperson}" >
                         <f:selectItems value="#{election.personSel}" />
                     </h:selectOneMenu></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="button">
-                    <h:commandButton value="Add" action="#{election.addCommissioner}"/>
+                    <h:commandButton value="#{msg['action.add']}" action="#{election.addCommissioner}"/>
                     </td>
                     </tr>
                     </tbody>
@@ -33,7 +33,7 @@
                 <br/><br />
                 <h:outputLink styleClass="button" value="viewElection.xhtml">
                     <f:param name="electionId" value="#{election.electionId}"/>
-                    Back to Election event
+                    #{msg['action.back']}
                 </h:outputLink>
             </h:form>
         </f:view>

@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Voter" />
+    <ui:param name="title" value="#{msg['application.title.voter']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="menu">
@@ -11,7 +11,7 @@
             </ui:insert>
             <h:messages styleClass="message" />
 
-            <p>Vítejte. Vyberte akci z menu nahoře.</p>
+            <p>#{msg['message.hello.voter']}</p>
         </f:view>
     </ui:define>
 </ui:composition>

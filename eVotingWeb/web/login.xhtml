@@ -2,17 +2,19 @@
                 xmlns="http://www.w3.org/1999/xhtml" 
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html">
-    <ui:param name="title" value="Login" />
+    <ui:param name="title" value="#{msg['application.title.login']}" />
     <ui:define name="content">                
         <div class="login">
             <div>
-                <h1>Login</h1>                
+                <h1>#{msg['heading.login']}</h1>                
                 <h:form id="loginForm">
-                    <h:outputLabel for="login" value="Login:" />
-                    <h:inputText id="login" value="#{user.login}" required="true" />
-                    <h:outputLabel for="password" value="Password:" />
-                    <h:inputSecret id="password" value="#{user.password}" />
-                    <h:commandButton id="submitLogin" action="#{user.doLogin}" value="login" />
+                    <h:panelGrid columns="2" columnClasses="dataLabel,,">
+                        <h:outputLabel for="login" value="#{msg['label.login']}:" />
+                        <h:inputText id="login" value="#{user.login}" required="true" />
+                        <h:outputLabel for="password" value="#{msg['label.password']}:" />
+                        <h:inputSecret id="password" value="#{user.password}" />
+                        <h:commandButton id="submitLogin" action="#{user.doLogin}" value="#{msg['action.login']}" />
+                    </h:panelGrid>
                 </h:form>
             </div> 
         </div>

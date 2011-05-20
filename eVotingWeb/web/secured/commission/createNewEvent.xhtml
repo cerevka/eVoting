@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Create new event" />
+    <ui:param name="title" value="#{msg['application.title.createEvent']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="menu">
@@ -15,16 +15,16 @@
                 <table class="form">
                     <tbody>
                         <tr>
-                            <th>Event name:</th>
-                            <td><h:inputText style="width: 250px" required="true" requiredMessage="Event name is required" value="#{electionEvent.eventName}" /></td>
+                            <th>#{msg['label.event.name']}:</th>
+                            <td><h:inputText style="width: 250px" required="true" requiredMessage="#{msg['message.required.eventName']}" value="#{electionEvent.eventName}" /></td>
                     </tr>
                     <tr>
-                        <th>Info:</th>
+                        <th>#{msg['label.information']}:</th>
                         <td> <h:inputTextarea style="width: 250px" value="#{electionEvent.info}" /></td>
                     </tr>
                     <tr>
                         <td class="button" colspan="2">
-                    <h:commandButton value="Create" action="#{electionEvent.createEvent}">
+                    <h:commandButton value="#{msg['action.create']}" action="#{electionEvent.createEvent}">
                         <f:param name="electionId" value="#{electionEvent.electionId}"/>
                     </h:commandButton>
                     </td>
@@ -36,7 +36,7 @@
             </h:form>
             <br/>
             <h:outputLink styleClass="button" value="mainCommissioner.xhtml">
-                Go back
+                #{msg['action.back']}
             </h:outputLink>
         </f:view>
 

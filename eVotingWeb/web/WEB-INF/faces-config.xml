@@ -23,7 +23,7 @@
         <from-view-id>/secured/*</from-view-id>
         <navigation-case>
             <from-outcome>logout</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id> 
+            <to-view-id>/logout.xhtml</to-view-id> 
             <redirect />
         </navigation-case>
         <navigation-case>
@@ -32,7 +32,7 @@
             <redirect />
         </navigation-case>
         <navigation-case>
-            <from-outcome>viewElection</from-outcome>
+            <from-outcome>viewElections</from-outcome>
             <to-view-id>/secured/administrator/viewElections.xhtml</to-view-id>
             <redirect />
         </navigation-case>

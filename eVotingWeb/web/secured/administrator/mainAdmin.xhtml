@@ -3,14 +3,14 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Administrator" />
+    <ui:param name="title" value="#{msg['application.title.administrator']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="left">
                 <ui:include src="/WEB-INF/templates/menus/administrator.xhtml" />
             </ui:insert>
             <h:messages />
-            <p>Hello administrator, please choose from the menu above.</p>
+            <p>#{msg['message.hello.administrator']}</p>
         </f:view>
     </ui:define>
 </ui:composition>

@@ -3,14 +3,14 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Commissioner" />
+    <ui:param name="title" value="#{msg['application.title.commissioner']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="menu">
                 <ui:include src="/WEB-INF/templates/menus/commissioner.xhtml" />
             </ui:insert>
             <h:messages />
-            <p>Hello commissioner, choose from the menu above.</p>
+            <p>#{msg['message.hello.commissioner']}</p>
 
         </f:view>
 

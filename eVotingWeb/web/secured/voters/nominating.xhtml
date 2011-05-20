@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Nominating" />
+    <ui:param name="title" value="#{msg['application.title.nomination']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="menu">
@@ -11,12 +11,12 @@
             </ui:insert>
             <h:messages styleClass="message" />
 
-            <h2>Nominovat se do volební události</h2>
+            <h2>#{msg['heading.nomination']}</h2>
             <h:form>
                 <table class="form" cellspacing="1">
                     <tbody>
                         <tr>
-                            <th>Volební událost:</th>
+                            <th>#{msg['label.electionEvent']}:</th>
                             <td>
                     <h:selectOneMenu value="#{nominating.eventId}">
                         <f:selectItems value="#{nominating.selectItems}"/>
@@ -24,12 +24,12 @@
                     </td>
                     </tr>
                     <tr>
-                        <th>Program:</th>
+                        <th>#{msg['label.program']}:</th>
                         <td><h:inputTextarea value="#{nominating.programme}" /></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="button">
-                    <h:commandButton value="Nominovat" action="#{nominating.nominate}" />
+                    <h:commandButton value="#{msg['action.nominate']}" action="#{nominating.nominate}" />
                     </td>
                     </tr>
                     </tbody>

@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Result" />
+    <ui:param name="title" value="#{msg['application.title.result']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="menu">
@@ -14,19 +14,19 @@
             <h:dataTable styleClass="elections" cellspacing="1" value="#{results.eeResultModel}" var="item">
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Kandidát"/>
+                        <h:outputText value="#{msg['role.cadidate']}"/>
                     </f:facet>
                     <h:outputText value="#{item.candidate}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Počet hlasů"/>
+                        <h:outputText value="#{msg['label.numberOfVotes']}"/>
                     </f:facet>
                     <h:outputText value="#{item.votes}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Výsledek" />
+                        <h:outputText value="#{msg['label.result']}" />
                     </f:facet>
                     <h:outputText value="#{results.votingResultLabel}"/>
                 </h:column>

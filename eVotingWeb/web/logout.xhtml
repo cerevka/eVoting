@@ -3,11 +3,13 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Goodbye" />
+    <ui:param name="title" value="#{msg['application.title.logout']}" />
     <ui:define name="content">
         <f:view>
-            <h1>Goodbye and come back soon.</h1>
-            <p>You are logged out from a system. Now, you can go to <a href="http://localhost:8080/evoting">home</a>.</p>
+            <h1>#{msg['heading.goodbye']}</h1>
+            <h:form>
+                <p>#{msg['message.goodbye']} <h:commandLink value="#{msg['message.home']}" action="login.xhtml" />.</p>
+            </h:form>
         </f:view>
     </ui:define>
 </ui:composition>

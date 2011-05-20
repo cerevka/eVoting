@@ -4,9 +4,9 @@
     <div class="menu">
         <h:form id="navigation">
             <ul class="buttons">
-                <li><h:commandLink value="Create election" action="createElection" /></li>
-                <li><h:commandLink value="View elections" action="viewElection" /></li>
-                <li><h:commandLink value="Logout" action="#{user.doLogout}" immediate="true" /></li>
+                <li><h:commandLink value="#{msg['navigation.createElection']}" action="createElection" /></li>
+                <li><h:commandLink value="#{msg['navigation.viewElections']}" action="viewElections" /></li>
+                <li><h:commandLink value="#{msg['application.logout']}" action="#{user.doLogout}" immediate="true" /></li>
             </ul>
         </h:form>       
     </div>

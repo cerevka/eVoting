@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Create election" />
+    <ui:param name="title" value="#{msg['application.title.createElection']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="left">
@@ -15,22 +15,21 @@
                 <table class="form">
                     <tbody>
                         <tr>
-                            <th>Election name:</th>
-                            <td><h:inputText id="name" requiredMessage="Election name is required!" value="#{election.name}"
-                                     required="true" label="Name"/></td>
+                            <th>#{msg['label.election.name']}:</th>
+                            <td><h:inputText id="name" requiredMessage="#{msg['message.required.electionName']}" value="#{election.name}" required="true" label="#{msg['label.name']}"/></td>
                     </tr>
                     <tr>
-                        <th>Type:</th>
+                        <th>#{msg['label.type']}:</th>
                         <td>
                     <h:selectOneRadio id="type" value="#{election.currentType}">
-                        <f:selectItem itemLabel="Internet" itemValue="Internet"  />
-                        <f:selectItem itemLabel="Local" itemValue="Local" />
+                        <f:selectItem itemLabel="#{msg['label.election.type.internet']}" itemValue="Internet"  />
+                        <f:selectItem itemLabel="#{msg['label.election.type.local']}" itemValue="Local" />
                     </h:selectOneRadio>
                     </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="button">
-                    <h:commandButton value="Create" action="#{election.create}"/>
+                    <h:commandButton value="#{msg['action.create']}" action="#{election.create}"/>
                     </td>
                     </tr>
                     </tbody>

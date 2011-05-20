@@ -3,7 +3,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    <ui:param name="title" value="Add voter" />
+    <ui:param name="title" value="#{msg['application.title.addVoter']}" />
     <ui:define name="content">
         <f:view>
             <ui:insert name="menu">
@@ -13,7 +13,7 @@
             <h:form>
                 <table>
                     <tr>
-                        <td>Select voter:</td>
+                        <td>#{msg['heading.selectVoter']}:</td>
                         <td>
                     <h:selectOneMenu id="selectCom" value="#{electionEvent.voterLogin}" >
                         <f:selectItems value="#{electionEvent.voterSel}" />
@@ -22,7 +22,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: right">
-                    <h:commandButton  value="Add voter" action="#{electionEvent.addVoter}"/>
+                    <h:commandButton  value="#{msg['action.add.voter']}" action="#{electionEvent.addVoter}"/>
                     </td>
                     </tr>
                 </table>
@@ -30,7 +30,7 @@
             <ul class="buttons">
                 <li>
                 <h:outputLink styleClass="buttons" value="viewEvent.xhtml">
-                    Go back
+                    #{msg['action.back']}
                     <f:param name="evenId" value="#{electionEvent.eventId}"/>
                 </h:outputLink>
                 </li>

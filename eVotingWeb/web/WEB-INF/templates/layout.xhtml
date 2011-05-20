@@ -21,20 +21,18 @@
                 <div class="content">
                     <ui:insert name="content">
                         Default content.
-                    </ui:insert>
-                    #{msg['application.title']}
+                    </ui:insert>                   
                 </div>
                 <div class="foot">
                     <div id="languages">
                         <h:form id="languageForm" >
-                            <h:commandLink action="#{translator.doChangeLanguage('cs')}" value="Česky" />
-                            <h:commandLink action="#{translator.doChangeLanguage('en')}" value="English" />
+                            <h:commandLink action="#{translator.doChangeLanguage('cs')}" value="#{msg['language.czech']}" />
+                            <h:commandLink action="#{translator.doChangeLanguage('en')}" value="#{msg['language.english']}" />
                         </h:form>
                     </div>
-                    <div id="author">Made by E-volby2010 team</div>                    
+                    <div id="author">#{msg['footer.author']}</div>                    
                 </div>
             </div>
-
         </h:body>
     </f:view>
 </html>
