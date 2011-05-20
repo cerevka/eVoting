@@ -6,9 +6,11 @@
     <ui:param name="title" value="#{msg['application.title.index']}" />
     <ui:define name="content">
         <f:view xmlns:ui="http://java.sun.com/jsf/facelets">            
-            <h1>#{msg['heading.welcome']}</h1>            
+            <h1>#{msg['heading.welcome']}</h1>           
             <br />
+            
             <h:outputText value="#{msg['message.welcome']} " />
+            <h:outputText rendered="#{!user.logged}">#{msg['message.login.first']} <h:form><h:commandLink value="#{msg['action.login']}" action="login.xhtml"  /></h:form>!</h:outputText>
             <h:outputText value="#{user.userName}" />
             <h:form>
                 <h:commandLink value="#{msg['message.continue.voter']}" action="voters" rendered="#{user.voter}" />
