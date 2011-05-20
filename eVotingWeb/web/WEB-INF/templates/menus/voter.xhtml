@@ -2,28 +2,13 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html">
     <div class="menu">
-        <ul class="buttons">
-            <li>
-            <h:outputLink value="nominating.xhtml" disabled="#{nominating.renderNominovat}">
-                Nominovat
-            </h:outputLink>
-            </li>
-            <li>
-            <h:outputLink  value="voting.xhtml"  disabled="#{voting.renderVolit}">
-                Hlasovat
-            </h:outputLink>
-            </li>
-            <li>
-            <h:outputLink  value="endedEvents.xhtml">
-                Výsledky
-            </h:outputLink>
-            </li>
-            <li>
-            <h:form>
-                <h:commandLink value="Odhlásit" action="#{default.logout}" immediate="true" />
-            </h:form>
-            </li>
-        </ul>
-        <h1>Výsledky</h1>
+        <h:form id="navigation">
+            <ul class="buttons">
+                <li><h:commandLink value="Nominovat" action="nominating" disabled="#{nominating.renderNominovat}"/></li>
+                <li><h:commandLink value="Hlasovat" action="voting" disabled="#{voting.renderVolit}" /></li>
+                <li><h:commandLink value="Výsledky" action="endedEvents" /></li>
+                <li><h:commandLink value="Odhlásit" action="#{user.doLogout}" immediate="true" /></li>
+            </ul>
+        </h:form>        
     </div>
 </ui:composition>

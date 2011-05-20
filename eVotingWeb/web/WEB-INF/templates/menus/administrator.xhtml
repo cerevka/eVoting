@@ -2,19 +2,12 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html">
     <div class="menu">
-        <ul class="buttons">
-            <li>
-            <h:outputLink value="createElectionPage.xhtml">Create election</h:outputLink>
-            </li>
-            <li>
-            <h:outputLink value="viewElections.xhtml">View elections</h:outputLink>
-            </li>
-            <li>
-            <h:form>
-                <h:commandLink value="logout" action="#{default.logout}" immediate="true" />
-            </h:form>
-            </li>
-        </ul>
-        <h1>Main page</h1>
+        <h:form id="navigation">
+            <ul class="buttons">
+                <li><h:commandLink value="Create election" action="createElection" /></li>
+                <li><h:commandLink value="View elections" action="viewElection" /></li>
+                <li><h:commandLink value="Logout" action="#{user.doLogout}" immediate="true" /></li>
+            </ul>
+        </h:form>       
     </div>
 </ui:composition>

@@ -39,7 +39,7 @@
             <description/>
             <role-name>administrators</role-name>
             <role-name>voters</role-name>
-            <role-name>commissioners</role-name>           
+            <role-name>commissioners</role-name>
         </auth-constraint>
         <!--
         <user-data-constraint>
@@ -66,7 +66,7 @@
             <description/>
             <role-name>administrators</role-name>
         </auth-constraint>
-    </security-constraint>    
+    </security-constraint>
     <security-constraint>
         <display-name>Commissioner's constraint</display-name>
         <web-resource-collection>
@@ -110,7 +110,7 @@
         <realm-name>eVotingRealm</realm-name>
         <form-login-config>
             <form-login-page>/login.xhtml</form-login-page>
-            <form-error-page>/error.xhtml</form-error-page>
+            <form-error-page>/login.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>

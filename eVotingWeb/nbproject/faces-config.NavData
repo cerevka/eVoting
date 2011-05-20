@@ -2,30 +2,30 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
-        <Node id="voters/resultEvent.xhtml" x="1400" y="300" zoom="true"/>
-        <Node id="voters/*" x="1150" y="450" zoom="true"/>
-        <Node id="administrator/viewElection.xhtml" x="150" y="150" zoom="true"/>
-        <Node id="commission/addVoter.xhtml" x="1400" y="150" zoom="true"/>
-        <Node id="administrator/addCommissioner.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="secured/administrator/addCommissioner.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="secured/commission/mainCommissioner.xhtml" x="1150" y="450" zoom="true"/>
         <Node id="error.xhtml" x="1650" y="150" zoom="true"/>
-        <Node id="commission/*" x="1150" y="150" zoom="true"/>
-        <Node id="commission/viewEvents.xhtml" x="650" y="600" zoom="true"/>
-        <Node id="administrator/mainAdmin.xhtml" x="650" y="150" zoom="true"/>
-        <Node id="voters/voting.xhtml" x="150" y="900" zoom="true"/>
-        <Node id="administrator/createElectionPage.xhtml" x="900" y="150" zoom="true"/>
-        <Node id="voters/nominating.xhtml" x="150" y="750" zoom="true"/>
-        <Node id="voters/mainVoter.xhtml" x="150" y="300" zoom="true"/>
-        <Node id="commission/commissionerElection.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="secured/index.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="secured/voters/nominating.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="secured/commission/commissionerElection.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="secured/commission/addVoter.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="secured/commission/viewEvent.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="secured/administrator/createElectionPage.xhtml" x="150" y="900" zoom="true"/>
+        <Node id="secured/commission/*" x="150" y="300" zoom="true"/>
         <Node id="login.xhtml" x="400" y="300" zoom="false"/>
         <Node id="*" x="900" y="450" zoom="true"/>
-        <Node id="administrator/viewElections.xhtml" x="400" y="150" zoom="true"/>
-        <Node id="voters/endedEvents.xhtml" x="150" y="600" zoom="true"/>
-        <Node id="commission/createNewEvent.xhtml" x="650" y="300" zoom="true"/>
-        <Node id="voters/votingApplet.xhtml" x="400" y="450" zoom="true"/>
-        <Node id="index.xhtml" x="400" y="750" zoom="true"/>
-        <Node id="commission/mainCommissioner.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="secured/administrator/mainAdmin.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="secured/voters/resultEvent.xhtml" x="1400" y="300" zoom="true"/>
+        <Node id="secured/commission/createNewEvent.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="secured/voters/mainVoter.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="secured/voters/voting.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="secured/administrator/viewElections.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="secured/voters/endedEvents.xhtml" x="650" y="150" zoom="true"/>
+        <Node id="secured/voters/*" x="150" y="150" zoom="true"/>
+        <Node id="secured/administrator/viewElection.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="secured/commission/viewEvents.xhtml" x="400" y="600" zoom="true"/>
         <Node id="logout.xhtml" x="150" y="450" zoom="true"/>
-        <Node id="commission/viewEvent.xhtml" x="650" y="450" zoom="true"/>
+        <Node id="secured/voters/votingApplet.xhtml" x="400" y="750" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
