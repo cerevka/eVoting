@@ -1,13 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
-
-<!-- =========== FULL CONFIGURATION FILE ================================== -->
-
 <faces-config version="2.0"
     xmlns="http://java.sun.com/xml/ns/javaee" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+        
+    <!-- LOCALIZATION -->
     
-    <!-- =========== NAVIGATION ================================== -->
+    <application>
+        <locale-config>
+            <default-locale>cs</default-locale>
+            <supported-locale>en</supported-locale>            
+        </locale-config>           
+        <resource-bundle>
+            <base-name>evoting.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
+    
+    <!--  NAVIGATION  -->
     
     <navigation-rule>
         <from-view-id>*</from-view-id>
@@ -15,84 +25,95 @@
             <from-outcome>logout</from-outcome>
             <to-view-id>/login.xhtml</to-view-id> 
             <redirect />
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{user.doLogin}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/secured/index.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
         <navigation-case>
-            <from-outcome>login</from-outcome>
+            <from-action>#{user.doLogin}</from-action>
+            <from-outcome>fail</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
-            <redirect/>
+            <redirect />
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/administrator/createElectionPage.xhtml</from-view-id>
+        <from-view-id>/secured/administrator/createElectionPage.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/administrator/viewElections.xhtml</to-view-id>
+            <to-view-id>/secured/administrator/viewElections.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/administrator/addCommissioner.xhtml</from-view-id>
+        <from-view-id>/secured/administrator/addCommissioner.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/administrator/viewElections.xhtml</to-view-id>
+            <to-view-id>/secured/administrator/viewElections.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
 
     <navigation-rule>
-        <from-view-id>/commission/*</from-view-id>
+        <from-view-id>/secured/commission/*</from-view-id>
         <navigation-case>
             <from-outcome>goMain</from-outcome>
-            <to-view-id>/commission/mainCommissioner.xhtml</to-view-id>
+            <to-view-id>/secured/commission/mainCommissioner.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewEvent</from-outcome>
-            <to-view-id>/commission/viewEvent.xhtml</to-view-id>
+            <to-view-id>/secured/commission/viewEvent.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewEvents</from-outcome>
-            <to-view-id>/commission/viewEvents.xhtml</to-view-id>
+            <to-view-id>/secured/commission/viewEvents.xhtml</to-view-id>
 
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/voters/*</from-view-id>
+        <from-view-id>/secured/voters/*</from-view-id>
         <navigation-case>
             <from-outcome>goVote</from-outcome>
-            <to-view-id>/voters/votingApplet.xhtml</to-view-id>
+            <to-view-id>/secured/voters/votingApplet.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>goNominate</from-outcome>
-            <to-view-id>/voters/nominating.xhtml</to-view-id>
+            <to-view-id>/secured/voters/nominating.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>goMain</from-outcome>
-            <to-view-id>/voters/mainVoter.xhtml</to-view-id>
+            <to-view-id>/secured/voters/mainVoter.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewResultEvent</from-outcome>
-            <to-view-id>/voters/resultEvent.xhtml</to-view-id>
+            <to-view-id>/secured/voters/resultEvent.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
+        <from-view-id>/secured/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>voters</from-outcome>
-            <to-view-id>/voters/mainVoter.xhtml</to-view-id>
+            <to-view-id>/secured/voters/mainVoter.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>commissioners</from-outcome>
-            <to-view-id>/commission/mainCommissioner.xhtml</to-view-id>
+            <to-view-id>/secured/commission/mainCommissioner.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>administrators</from-outcome>
-            <to-view-id>/administrator/mainAdmin.xhtml</to-view-id>
+            <to-view-id>/secured/administrator/mainAdmin.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

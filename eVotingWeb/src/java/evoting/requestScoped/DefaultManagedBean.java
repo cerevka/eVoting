@@ -1,6 +1,9 @@
-package evoting.web;
+package evoting.requestScoped;
 
 import java.io.IOException;
+import java.security.Principal;
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -11,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class DefaultManagedBean {
 
-    private String role;
+    private String role;  
 
     /** Creates a new instance of DefaultManagedBean */
     public DefaultManagedBean() {
@@ -25,7 +28,7 @@ public class DefaultManagedBean {
     }
 
     public String getRole() {
-
+        /*
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         if (ec.isUserInRole("voters")) {
             role = "voters";
@@ -40,6 +43,14 @@ public class DefaultManagedBean {
         }
 
         return role;
+         * 
+         */
+        Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+        if (principal == null) {
+            return null;
+        }
+        return principal.toString();
+        
     }
 
     public boolean isVoter() {

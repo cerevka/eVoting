@@ -1,27 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html
+<html lang="#{translator.language}"
     xmlns="http://www.w3.org/1999/xhtml" 
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <link href="/evoting/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="robots" content="index,follow" />
-        <meta http-equiv="pragma" content="no-cache" />
-        <title>#{title} | eVoting</title>
-    </h:head>
-    <h:body>
-        <div class="main">
-            <div class="head"></div>
-            <div class="content">
-                <ui:insert name="content">
-                    Default content.
-                </ui:insert>
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+    
+    <f:view locale="#{translator.locale}">
+        <h:head>
+            <link href="/evoting/resources/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="robots" content="index,follow" />
+            <meta http-equiv="pragma" content="no-cache" />
+            <title>#{title} | #{msg['application.title']}</title>
+        </h:head>
+        <h:body>
+            <div class="main">
+                <div class="head"></div>
+                <div class="content">
+                    <ui:insert name="content">
+                        Default content.
+                    </ui:insert>
+                    #{msg['application.title']}
+                </div>
+                <div class="foot">
+                    <div id="languages">
+                        #{default.role}
+                        
+                        
+                        <h:form id="languageForm" >
+                            <h:commandLink action="#{translator.doChangeLanguage('cs')}" value="Česky" />
+                            <h:commandLink action="#{translator.doChangeLanguage('en')}" value="English" />
+                        </h:form>
+                        
+                    </div>
+                    <div id="author">Made by E-volby2010 team</div>                    
+                </div>
             </div>
-            <div class="foot">Made by E-volby2010 team.</div>
-        </div>
 
-    </h:body>
+        </h:body>
+    </f:view>
 </html>

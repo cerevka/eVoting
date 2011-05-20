@@ -1,4 +1,4 @@
-package evoting.web;
+package evoting.requestScoped;
 
 import evoting.controller.bean.stateless.NominatingSessionRemote;
 import evoting.controller.bean.stateless.TellerSessionRemote;
