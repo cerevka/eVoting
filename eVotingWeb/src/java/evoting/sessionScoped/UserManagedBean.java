@@ -2,10 +2,15 @@ package evoting.sessionScoped;
 
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +23,9 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class UserManagedBean implements Serializable {
 
+    private static final Logger logger = Logger.getLogger(UserManagedBean.class.getName());
+    
+       
     private String login;
 
     private String password;
@@ -41,15 +49,18 @@ public class UserManagedBean implements Serializable {
         return this.password;
     }
 
-    public String doLogin() {        
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+    public String doLogin() {
+        FacesContext ctx = FacesContext.getCurrentInstance();               
+        HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
         try {
             request.login(this.login, this.password);
             this.login = this.password = null;
             return "success";
         } catch (ServletException ex) {
             this.login = this.password = null;
-            return "fail";
+            ResourceBundle bundle = ctx.getApplication().getResourceBundle(ctx, "msg");
+            ctx.addMessage("loginForm:submitLogin", new FacesMessage(bundle.getString("message.error.login")));             
+            return null;
         }
     }
 

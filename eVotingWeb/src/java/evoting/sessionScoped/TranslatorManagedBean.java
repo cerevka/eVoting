@@ -2,8 +2,12 @@ package evoting.sessionScoped;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
+import javax.enterprise.inject.Produces;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -15,7 +19,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "translator")
 @SessionScoped
 public class TranslatorManagedBean implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
 
     private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
@@ -33,7 +37,7 @@ public class TranslatorManagedBean implements Serializable {
      * @return Current locale.
      */
     public Locale getLocale() {
-        return this.locale;
+        return locale;
     }
 
     /**
@@ -41,16 +45,16 @@ public class TranslatorManagedBean implements Serializable {
      * @return Current language.
      */
     public String getLanguage() {
-        return this.locale.getLanguage();
+        return locale.getLanguage();
     }
 
     /**
      * Change language.
      * @param language New language.
-     */
-    @PermitAll
+     */   
     public void doChangeLanguage(String language) {
         locale = new Locale(language);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
-    }
+    } 
+    
 }

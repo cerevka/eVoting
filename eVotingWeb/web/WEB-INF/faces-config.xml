@@ -51,12 +51,6 @@
             <to-view-id>/secured/index.xhtml</to-view-id>    
             <redirect />
         </navigation-case>
-        <navigation-case>
-            <from-action>#{user.doLogin}</from-action>
-            <from-outcome>fail</from-outcome>
-            <to-view-id>/login.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
     </navigation-rule>
     
     <navigation-rule>

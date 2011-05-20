@@ -8,13 +8,22 @@
             <div>
                 <h1>#{msg['heading.login']}</h1>                
                 <h:form id="loginForm">
-                    <h:panelGrid columns="2" columnClasses="dataLabel,,">
-                        <h:outputLabel for="login" value="#{msg['label.login']}:" />
-                        <h:inputText id="login" value="#{user.login}" required="true" />
-                        <h:outputLabel for="password" value="#{msg['label.password']}:" />
-                        <h:inputSecret id="password" value="#{user.password}" />
-                        <h:commandButton id="submitLogin" action="#{user.doLogin}" value="#{msg['action.login']}" />
-                    </h:panelGrid>
+                    <table>
+                        <tr>
+                            <td class="dataLabel"><h:outputLabel for="login" value="#{msg['label.login']}:" /></td>
+                            <td><h:inputText id="login" value="#{user.login}" required="true" requiredMessage="#{msg['message.required.login']}" /></td>
+                        </tr>
+                        <tr><td colspan="2" class="textRight"><h:message styleClass="error" for="login" /></td></tr>
+                        <tr>
+                            <td class="dataLabel"><h:outputLabel for="password" value="#{msg['label.password']}:" /></td>
+                            <td><h:inputSecret id="password" value="#{user.password}" required="true" requiredMessage="#{msg['message.required.password']}" /></td>
+                        </tr>
+                        <tr><td colspan="2" class="textRight"><h:message styleClass="error" for="password" /></td></tr>
+                        <tr>
+                            <td colspan="2"><h:commandButton id="submitLogin" action="#{user.doLogin}" value="#{msg['action.login']}" /></td>
+                        </tr>
+                        <tr><td colspan="2" class="textCenter"><h:message styleClass="error" for="submitLogin" /></td></tr>
+                    </table>                    
                 </h:form>
             </div> 
         </div>

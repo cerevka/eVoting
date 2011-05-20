@@ -8,7 +8,7 @@
     xmlns:f="http://java.sun.com/jsf/core">
     
     <f:view locale="#{translator.locale}">
-        <h:head>
+        <h:head>           
             <link href="/evoting/resources/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="robots" content="index,follow" />
@@ -26,8 +26,8 @@
                 <div class="foot">
                     <div id="languages">
                         <h:form id="languageForm" >
-                            <h:commandLink action="#{translator.doChangeLanguage('cs')}" value="#{msg['language.czech']}" />
-                            <h:commandLink action="#{translator.doChangeLanguage('en')}" value="#{msg['language.english']}" />
+                            <h:commandButton image="/resources/css/img/flag_cz.png" action="#{translator.doChangeLanguage('cs')}" value="#{msg['language.czech']}" />
+                            <h:commandButton image="/resources/css/img/flag_gb.png" action="#{translator.doChangeLanguage('en')}" value="#{msg['language.english']}" />
                         </h:form>
                     </div>
                     <div id="author">#{msg['footer.author']}</div>                    
