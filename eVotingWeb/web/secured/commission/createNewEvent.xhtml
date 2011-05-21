@@ -11,8 +11,7 @@
                 <ui:include src="/WEB-INF/templates/menus/commissioner.xhtml" />
             </ui:insert>
             <h:messages styleClass="message"/>
-            <h:form>
-                <h:inputHidden value="#{electionEvent.electionId}" />
+            <h:form>               
                 <table class="form">
                     <tbody>
                         <tr>
@@ -26,7 +25,7 @@
                     <tr>
                         <td class="button" colspan="2">
                     <h:commandButton value="#{msg['action.create']}" action="#{electionEvent.createEvent}">
-                        <f:param name="electionId" value="#{electionEvent.electionId}"/>
+                        <f:param name="electionId" value="#{election.electionId}"/>
                     </h:commandButton>
                     </td>
                     </tr>

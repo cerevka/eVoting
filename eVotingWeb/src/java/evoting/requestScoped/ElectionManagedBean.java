@@ -15,6 +15,8 @@ import evoting.controller.pojo.ControllerException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "election")
 @RequestScoped
@@ -59,7 +61,7 @@ public class ElectionManagedBean {
             return "";
         }
         try {
-            electionSessionBean.addCommissioner(personOut, electionId);
+            electionSessionBean.addCommissioner(personOut, getElectionId());
             FacesMessage m = new FacesMessage("The commissioner " + personOut.getLogin() + " was successfully added");
             FacesContext.getCurrentInstance().addMessage("", m);
         } catch (ControllerException ex) {
@@ -71,7 +73,7 @@ public class ElectionManagedBean {
 
     public Collection<Commissioner> getElectionCommissioners() {
         try {
-            return electionSessionBean.getElectionCommissioners(electionId);
+            return electionSessionBean.getElectionCommissioners(getElectionId());
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -87,7 +89,8 @@ public class ElectionManagedBean {
         return personSel;
     }
     
-    public String viewElection() {        
+    public String viewElection() {
+        setElectionId(electionId);
         return "goViewEvents";       
     }
 
@@ -129,7 +132,7 @@ public class ElectionManagedBean {
 
     public Election getElection() {
         try {
-            return electionSessionBean.getElection(electionId);
+            return electionSessionBean.getElection(getElectionId());
         } catch (ControllerException ex) {
             Logger.getLogger(ElectionManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -137,11 +140,22 @@ public class ElectionManagedBean {
     }
 
     public Integer getElectionId() {
-        return electionId;
+        if (electionId != null) {
+            return electionId;
+        }
+        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
+        HttpSession session = (HttpSession) ctx.getSession(true);
+        return (Integer) session.getAttribute("electionId");
     }
 
     public void setElectionId(Integer electionId) {
+        if (electionId == null) {
+            return;
+        }
         this.electionId = electionId;
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpSession session = (HttpSession) context.getSession(true);
+        session.setAttribute("electionId", electionId);
     }
 
     public String getCommissionerName() {
@@ -158,5 +172,10 @@ public class ElectionManagedBean {
 
     public void setStringperson(String stringperson) {
         this.stringperson = stringperson;
+    }
+    
+    public String goViewElection() {
+        setElectionId(electionId);
+        return "goViewElection";
     }
 }

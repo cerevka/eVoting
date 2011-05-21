@@ -233,6 +233,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         electionEvent.setFinished(Boolean.FALSE);
         electionEvent.setElectionId(election);
         em.persist(electionEvent);
+        em.flush();
         election.getElectionEvents().add(electionEvent);
         em.persist(election);
         em.flush();

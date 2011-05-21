@@ -69,6 +69,15 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/secured/administrator/*</from-view-id>
+        <navigation-case>
+            <from-outcome>goViewElection</from-outcome>
+            <to-view-id>/secured/administrator/viewElection.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
 
 
     <navigation-rule>
@@ -80,14 +89,16 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewEvent</from-outcome>
-            <to-view-id>/secured/commission/viewEvent.xhtml</to-view-id>   
-            <redirect />
+            <to-view-id>/secured/commission/viewEvent.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>goViewEvents</from-outcome>
             <to-view-id>/secured/commission/viewEvents.xhtml</to-view-id>
-            <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>goCreateEvent</from-outcome>
+            <to-view-id>/secured/commission/createNewEvent.xhtml</to-view-id>
+            </navigation-case>        
     </navigation-rule>
 
     <navigation-rule>

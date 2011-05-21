@@ -15,24 +15,25 @@
 
             <h2>#{msg['heading.availableElections']}</h2>
 
-            <h:dataTable cellspacing="1" styleClass="elections" value="#{election.elections}" var="item">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['label.id']}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.id}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{msg['label.name']}"/>
-                    </f:facet>
-                    <h:outputLink styleClass="link"  value="viewElection.xhtml">
-                        <h:outputText value="#{item.name}"/>
-                        <f:param name="electionId" value="#{item.id}"/>
-                    </h:outputLink>
-                    <f:attribute name="align" value="left" />
-                </h:column>
-            </h:dataTable>
+            <h:form>
+                <h:dataTable cellspacing="1" styleClass="elections" value="#{election.elections}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['label.id']}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['label.name']}"/>
+                        </f:facet>
+                        <h:commandLink styleClass="link"  value="#{item.name}" action="#{election.goViewElection}" >                        
+                            <f:param name="electionId" value="#{item.id}"/>
+                        </h:commandLink>
+                        <f:attribute name="align" value="left" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
         </f:view>
     </ui:define>
 </ui:composition>

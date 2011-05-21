@@ -45,10 +45,12 @@
 
                 </h:dataTable>
                 <ul class="buttons">
-                    <li><h:outputLink value="addCommissioner.xhtml">
+                    <li>
+                    <h:outputLink value="addCommissioner.xhtml">
                         #{msg['action.add.commissioner']}
                         <f:param name="electionId" value="#{election.electionId}"/>
-                    </h:outputLink></li>
+                    </h:outputLink>
+                    </li>
                 </ul>
             </div>
         </f:view>

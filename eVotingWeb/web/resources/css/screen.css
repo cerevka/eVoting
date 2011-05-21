@@ -3,13 +3,11 @@ Screen css file for evolby project
 @author Ondra Mandik <ondramandik@gmail.com>
 */
 
-.message {
-    position: absolute;
+.message {    
     font-size: 15px;
     font-weight: bold;
     list-style-type: none;
-    color: red;
-    margin: 0;
+    color: #900000;    
     padding: 0;
     top: 100px;
 }

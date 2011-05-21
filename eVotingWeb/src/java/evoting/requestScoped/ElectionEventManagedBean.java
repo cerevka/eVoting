@@ -25,6 +25,8 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "electionEvent")
 @RequestScoped
 public class ElectionEventManagedBean {
+    
+    private static final Logger logger = Logger.getLogger(ElectionEventManagedBean.class.getName());
 
     @EJB
     private ElectionSessionRemote electionSessionBean;
@@ -84,7 +86,7 @@ public class ElectionEventManagedBean {
     }
 
     public String createEvent() {
-        try {
+        try {            
             electionSessionBean.createElectionEvent(electionId, eventName, info);
             FacesMessage m = new FacesMessage("Event \"" + eventName + "\" was succesfully created");
             FacesContext.getCurrentInstance().addMessage("", m);
@@ -138,6 +140,11 @@ public class ElectionEventManagedBean {
             return "";
         }
         return "";
+    }
+    
+    public String goCreateElectionEvent() {
+        setElectionId(electionId);
+        return "goCreateEvent";
     }
 
     public Collection<Voter> getEventVoters() {

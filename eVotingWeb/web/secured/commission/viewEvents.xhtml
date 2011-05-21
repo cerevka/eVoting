@@ -44,10 +44,11 @@
             </h:dataTable>
             <ul class="buttons">
                 <li>
-                <h:outputLink  value="createNewEvent.xhtml">
-                    #{msg['action.create.event']}
-                    <f:param name="electionId" value="#{electionEvent.electionId}"/>
-                </h:outputLink>
+                <h:form>
+                    <h:commandLink value="#{msg['action.create.event']}" action="#{electionEvent.goCreateElectionEvent}">
+                        <f:param name="electionId" value="#{election.electionId}" />
+                    </h:commandLink>
+                </h:form>
                 </li>
             </ul>
         </f:view>
