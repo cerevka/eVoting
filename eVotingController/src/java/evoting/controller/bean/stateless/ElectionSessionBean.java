@@ -280,11 +280,10 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         Collection<ElectionEvent> events = vot.getElectionEvents();
         events.size();
         events.remove(event);
-        voters.remove(vot);
+        voters.remove(vot);       
 
         try {
             validatorBean.deleteVoterFromEvent(voter.getLogin(), eventId);
-
         } catch (Exception ex) {
             //TODO db synchronizovano?
             throw new ControllerException(ex.getMessage());

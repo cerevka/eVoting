@@ -23,6 +23,8 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "voting")
 @RequestScoped
 public class VotingManagedBean {
+    
+    private static final Logger logger = Logger.getLogger(VotingManagedBean.class.getName());
 
     @EJB
     private TellerSessionRemote tellerSessionBean;
@@ -110,7 +112,7 @@ public class VotingManagedBean {
     public String deleteVoter() throws ControllerException {
         voter = votingSessionBean.getVoter(voterLogin);
         this.eventId = getEventId();
-        try {
+        try {            
             electionSessionBean.deleteVoterFromEvent(voter, eventId);
             FacesMessage m = new FacesMessage("Voter " + voter.getLogin() + " was successfully removed");
             FacesContext.getCurrentInstance().addMessage("", m);
