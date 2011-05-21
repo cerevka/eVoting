@@ -1,5 +1,6 @@
 package evoting.requestScoped;
 
+import DTO.CandidateDTO;
 import evoting.controller.bean.stateless.ElectionSessionRemote;
 import evoting.controller.bean.stateless.NominatingSessionRemote;
 import evoting.controller.bean.stateless.TellerSessionRemote;
@@ -16,6 +17,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -23,9 +29,18 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "voting")
 @RequestScoped
 public class VotingManagedBean {
-    
+
     private static final Logger logger = Logger.getLogger(VotingManagedBean.class.getName());
 
+    private Map<String, Boolean> votes = new HashMap<String, Boolean>();
+
+    public Map<String, Boolean> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Map<String, Boolean> votes) {
+        this.votes = votes;
+    }
     @EJB
     private TellerSessionRemote tellerSessionBean;
 
@@ -56,17 +71,27 @@ public class VotingManagedBean {
         this.voterLogin = voterLogin;
     }
 
+    public String doVote() {
+        Iterator it = votes.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, Boolean> pairs = (Map.Entry<String, Boolean>) it.next();
+            if (pairs.getValue() == true) {
+                logger.log(Level.SEVERE, "Hlas pro {0}", pairs.getKey());
+            }
+        }
+        return null;
+    }
+
     /**
     @PostConstruct
     public void init() {
-        try {
-            getAllVotersModel();
-        } catch (ControllerException ex) {
-            Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    try {
+    getAllVotersModel();
+    } catch (ControllerException ex) {
+    Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
      */
-
     public String goVote() {
         setEventId(eventId);
         System.out.println("nastavuj EventId na " + getEventId());
@@ -109,10 +134,20 @@ public class VotingManagedBean {
         }
     }
 
+    public Collection<CandidateDTO> getCandidates(int eventId) {
+        try {
+            CandidateDTO[] candidates = votingSessionBean.getCandidates(eventId);
+            return Arrays.asList(candidates);
+        } catch (ControllerException ex) {
+            logger.log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
     public String deleteVoter() throws ControllerException {
         voter = votingSessionBean.getVoter(voterLogin);
         this.eventId = getEventId();
-        try {            
+        try {
             electionSessionBean.deleteVoterFromEvent(voter, eventId);
             FacesMessage m = new FacesMessage("Voter " + voter.getLogin() + " was successfully removed");
             FacesContext.getCurrentInstance().addMessage("", m);

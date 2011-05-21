@@ -105,7 +105,7 @@
         <from-view-id>/secured/voters/*</from-view-id>
         <navigation-case>
             <from-outcome>goVote</from-outcome>
-            <to-view-id>/secured/voters/votingApplet.xhtml</to-view-id>
+            <to-view-id>/secured/voters/votingCard.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         <navigation-case>
