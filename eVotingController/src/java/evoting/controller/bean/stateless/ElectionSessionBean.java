@@ -46,7 +46,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         em.persist(el);
         em.flush();
         byte[] key = null;
-        try {            
+        try {
             key = counterBean.createNewElection(el.getId());
         } catch (CounterException ex) {
             // TODO delete el from db
@@ -74,7 +74,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
      * @throws ControllerException if commissioner not found
      */
     @Override
-    public Collection<Election> getCommissionerElection(final String commissionerLogin) throws ControllerException {        
+    public Collection<Election> getCommissionerElection(final String commissionerLogin) throws ControllerException {
         Commissioner com = em.find(Commissioner.class, commissionerLogin);
         if (com == null) {
             throw new ControllerException("Commissioner not found.");
@@ -156,6 +156,24 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         election.getCommissioners().add(commissioner);
         em.persist(commissioner);
         em.persist(election);
+    }
+
+    @Override
+    public void deleteCommissionerFromEvent(Commissioner commissioner, int electionId) throws ControllerException {
+        Election election = em.find(Election.class, electionId);
+        Collection<Commissioner> commissioners = election.getCommissioners();
+        commissioners.size();
+        Commissioner com = em.find(Commissioner.class, commissioner.getLogin());
+        Collection<Election> elections = com.getElections();
+        elections.size();
+        elections.remove(election);
+        commissioners.remove(com); 
+    }
+    
+    @Override
+    public Commissioner getCommissioner(String commissionerLogin) {
+        return em.find(Commissioner.class, commissionerLogin);
+        
     }
 
     /**
@@ -243,8 +261,8 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         } catch (CounterException ex) {
             Logger.getLogger(ElectionSessionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        
+
+
     }
 
     /**
@@ -280,7 +298,7 @@ public class ElectionSessionBean implements ElectionSessionRemote {
         Collection<ElectionEvent> events = vot.getElectionEvents();
         events.size();
         events.remove(event);
-        voters.remove(vot);       
+        voters.remove(vot);
 
         try {
             validatorBean.deleteVoterFromEvent(voter.getLogin(), eventId);

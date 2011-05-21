@@ -41,4 +41,8 @@ public interface ElectionSessionRemote {
     public Collection<ElectionEvent> getEndedEvents(final String login) throws ControllerException;
 
     public void deleteVoterFromEvent(evoting.controller.entity.Voter voter, java.lang.Integer eventId) throws evoting.controller.pojo.ControllerException;
+
+    public void deleteCommissionerFromEvent(evoting.controller.entity.Commissioner commissioner, int eventId) throws evoting.controller.pojo.ControllerException;
+
+    public evoting.controller.entity.Commissioner getCommissioner(java.lang.String commissionerLogin);
 }

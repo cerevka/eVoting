@@ -23,27 +23,31 @@
 
             <div class="electionCommisioners">
                 <h2>#{msg['heading.associetedCommissioners']}</h2>
-                <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{election.electionCommissioners}" var="item">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{msg['label.login']}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.login}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{msg['label.name.first']}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.firstName}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{msg['label.name.last']}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.lastName}"/>
-                    </h:column>
-
-                </h:dataTable>
+                <h:form>
+                    <h:dataTable styleClass="electionsInfo" cellspacing="0" value="#{election.electionCommissioners}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['label.login']}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.login}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['label.name.first']}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.firstName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['label.name.last']}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lastName}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandLink styleClass="link" action="#{election.removeCommissioner(item.login)}" value="#{msg['action.remove']}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
                 <ul class="buttons">
                     <li>
                     <h:outputLink value="addCommissioner.xhtml">

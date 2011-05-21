@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
 @ManagedBean(name = "election")
 @RequestScoped
 public class ElectionManagedBean {
+    
+    private static final Logger logger = Logger.getLogger(ElectionManagedBean.class.getName());
 
     @EJB
     private ElectionSessionRemote electionSessionBean;
@@ -125,6 +127,20 @@ public class ElectionManagedBean {
     public Collection<Person> getPersonList() {
         return electionSessionBean.getAllPerson();
     }
+    
+   public String removeCommissioner(String commissionerLogin) {
+       Commissioner commissioner = electionSessionBean.getCommissioner(commissionerLogin);
+       this.electionId = getElectionId();
+       try {
+           electionSessionBean.deleteCommissionerFromEvent(commissioner, electionId);
+           FacesMessage msg = new FacesMessage("Commissioner " + commissionerLogin + " was successfully removed.");
+           FacesContext.getCurrentInstance().addMessage(null, msg);           
+       } catch (ControllerException ex) {
+           logger.log(Level.SEVERE, null, ex);
+           return "";
+       }
+       return "";
+   }
 
     public Collection<Election> getElections() {
         return electionSessionBean.getAllElection();
