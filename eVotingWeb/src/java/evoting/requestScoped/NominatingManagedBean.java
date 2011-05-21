@@ -49,7 +49,7 @@ public class NominatingManagedBean {
             Logger.getLogger(NominatingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
             return "";
         }
-        return "goMain";
+        return "";
     }
 
     public String startNominating() {
