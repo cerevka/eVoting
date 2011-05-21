@@ -3,20 +3,17 @@ package evoting.sessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
- *
+ * User manager.
  * @author Tomáš Čerevka
  */
 @ManagedBean(name = "user")
@@ -49,6 +46,10 @@ public class UserManagedBean implements Serializable {
         return this.password;
     }
 
+    /**
+     * Login user.
+     * @return Target page.
+     */
     public String doLogin() {
         FacesContext ctx = FacesContext.getCurrentInstance();               
         HttpServletRequest request = (HttpServletRequest) ctx.getExternalContext().getRequest();
@@ -64,16 +65,27 @@ public class UserManagedBean implements Serializable {
         }
     }
 
+    /**
+     * Logout user.
+     * @return Target page.
+     */
     public String doLogout() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        session.invalidate();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();        
         return "logout";
     }
     
+    /**
+     * Decide if user is logged.
+     * @return True for logged user, otherwise false.
+     */
     public boolean isLogged() {        
         return getRole() != null;
     }
 
+    /**
+     * Return role of user.
+     * @return Role of user. For unlogged user return null.
+     */
     public String getRole() {
         Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
         if (principal == null) {
@@ -82,6 +94,10 @@ public class UserManagedBean implements Serializable {
         return principal.getName();
     }
 
+    /**
+     * Decide if user is voter.
+     * @return True for voter, otherwise false.
+     */
     public boolean isVoter() {
         ExternalContext ectx = FacesContext.getCurrentInstance().getExternalContext();
         if (ectx.isUserInRole("voters")) {
@@ -91,6 +107,10 @@ public class UserManagedBean implements Serializable {
         }
     }
 
+    /**
+     * Decide if user is administrator.
+     * @return True for administrator, otherwise false.
+     */
     public boolean isAdministrator() {
         ExternalContext ectx = FacesContext.getCurrentInstance().getExternalContext();
         if (ectx.isUserInRole("administrators")) {
@@ -100,6 +120,10 @@ public class UserManagedBean implements Serializable {
         }
     }
 
+    /**
+     * Decide if user is commissioner.
+     * @return True for commissioner, otherwise false.
+     */
     public boolean isCommissioner() {
         ExternalContext ecxt = FacesContext.getCurrentInstance().getExternalContext();
         if (ecxt.isUserInRole("commissioners")) {
@@ -109,6 +133,10 @@ public class UserManagedBean implements Serializable {
         }
     }
 
+    /**
+     * Return login of user.
+     * @return 
+     */
     public String getUserName() {
         ExternalContext ectx = FacesContext.getCurrentInstance().getExternalContext();
         return ectx.getRemoteUser();

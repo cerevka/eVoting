@@ -6,9 +6,11 @@
     <ui:param name="title" value="#{msg['application.title.createElection']}" />
     <ui:define name="content">
         <f:view>
+            <h1>#{msg['heading.createElection']}</h1>
             <ui:insert name="left">
                 <ui:include src="/WEB-INF/templates/menus/administrator.xhtml" />
             </ui:insert>
+            
             <h:messages styleClass="message" />
 
             <h:form>
@@ -29,7 +31,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="button">
-                    <h:commandButton value="#{msg['action.create']}" action="#{election.create}"/>
+                    <h:commandButton styleClass="button" value="#{msg['action.create']}" action="#{election.create}"/>
                     </td>
                     </tr>
                     </tbody>

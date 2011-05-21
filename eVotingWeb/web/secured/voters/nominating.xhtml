@@ -6,12 +6,11 @@
     <ui:param name="title" value="#{msg['application.title.nomination']}" />
     <ui:define name="content">
         <f:view>
+            <h1>#{msg['heading.nomination']}</h1>
             <ui:insert name="menu">
                 <ui:include src="/WEB-INF/templates/menus/voter.xhtml" />
             </ui:insert>
-            <h:messages styleClass="message" />
-
-            <h2>#{msg['heading.nomination']}</h2>
+            <h:messages styleClass="message" />            
             <h:form>
                 <table class="form" cellspacing="1">
                     <tbody>

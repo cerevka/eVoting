@@ -2,12 +2,7 @@ package evoting.sessionScoped;
 
 import java.io.Serializable;
 import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.annotation.security.PermitAll;
-import javax.enterprise.inject.Produces;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;

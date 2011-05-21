@@ -19,8 +19,8 @@ body {
 }
 div.menu {
     display: block;
-    margin: 0 0 0 0;
-    padding: 5px 0 10px 0;
+    margin: -43px 0px 15px 0px;
+    padding: 5px 0px 10px 0px;
 }
 
 div.menu h1 {
@@ -62,7 +62,8 @@ h2 {
     padding: 0 0 10px 5px;
 }
 
-ul.buttons li a:visited, ul.buttons li a {
+ul.buttons li a:visited, ul.buttons li a,
+.button, .button:visited {
     color:white;
 }
 
@@ -71,16 +72,19 @@ ul.buttons li a, a.button, input.button {
     background-image: url("img/button.png");
     background-position: left top;
     background-repeat: no-repeat;
-    width: 160px;
-    padding: 8px 0 8px 10px;
-    text-align:left;
+    width: 158px;
+    height: 31px;
+    padding: 8px 0 8px 0px;
+    text-align:center;
     font-size:11px;
     text-decoration: none;
     text-transform: uppercase;
     font-weight:bold;
-    margin: 0;
+    margin: 0px 10px 0px 0px;
     border:none;
     cursor: url;
+    font-family: Verdana;
+    cursor: pointer;
 }
 
 ul.buttons li span{
@@ -105,7 +109,7 @@ ul.buttons li span{
 
 
 
-ul.buttons li a:hover, a.button:hover, input.button_hover {
+ul.buttons li a:hover, a.button:hover, input.button:hover {
     background-image: url("img/button_hover.png");
     color: white;
 }
@@ -136,7 +140,7 @@ p {
 
 table.form {
     background-color: #fff;
-    padding: 0 0 0 10px;
+    padding: 0px 0px 0px 0px;
 }
 
 table.form td,
