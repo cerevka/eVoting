@@ -197,7 +197,7 @@ Implementační část této bakalářské práce vychází z prototypu systému
 
 Prototyp je koncipován pouze pro personální volby, kdy se nejprve z řad voličů nominují kandidáti. Po ukončení nominací následuje hlasování, kdy voliči dávají své hlasy jednotlivým kandidátům. V této práci bude systém rozšířen o možnost i nepersonálních voleb, kdy předmět voleb a možnosti budou definovány explicitně při jejich zakládání.
 
-V systému figurují tři role uživatelů: administrátor, komisař a volič. Pro lepší správu kandidátů přidává nový koncept další uživatelskou roli: kandidáta. Administrátor je v systému pouze jeden a má pravomoc založit volby a jmenovat jim komisaře. Jedny volby mohou mít více komisařů a v případě důležitého rozhodnutí je třeba potvrzení alespoň nadpoloviční většiny. Komisaři pod volbami zakládají volební události představující jednotlivá kola voleb. K těm přiřazují oprávněné voliče a schvalují či vyřazují nominované kandidáty.
+V systému figurují tři role uživatelů: administrátor, komisař a volič. Administrátor je v systému pouze jeden a má pravomoc založit volby a jmenovat jim komisaře. Jedny volby mohou mít více komisařů a v případě důležitého rozhodnutí je třeba potvrzení alespoň nadpoloviční většiny. Komisaři pod volbami zakládají volební události představující jednotlivá kola voleb. K těm přiřazují oprávněné voliče a schvalují či vyřazují nominované kandidáty.
 
 \subsection{Experimentální ověření distribuovaného volebního schématu}
 Konceptuální návrh podobného systému zpracoval ve své disertační práci \textit{Experimentální ověření distribuovaného
@@ -291,7 +291,11 @@ Tato sekce se zabývá požadavky na funkčnost systému. Systém umožní:
 	\item nominování kandidátů.
 	\item hlasování.
 	\item prezentaci výsledků.
+	\item hromadné vložení voličů.
 \end{enumerate}
+
+%*****************************************************************************
+\chapter{Analýza}
 
 \section{Fáze elektronických voleb}
 
@@ -315,15 +319,19 @@ Když jsou v systému připraveni uživatelé, ať již zaregistrovaní či neza
 
 \subsection{Nominace} \label{sec:nominace}
 
-Nominace se týkají pouze voleb personálních a jsou zahajovány alespoň nadpoloviční většinou komisařů. V této fázi se může volič nominovat a stát se tak zároveň kandidátem. Součástí kandidatury je kandidátní listina s volebním programem a fotografií kandidáta. Kandidát má možnost kandidátní listinu upravovat nebo svou kandidaturu zrušit, dokud nejsou nominace ukončeny. Komisaři mají právo kandidáta do systému zadat ručně nebo kandidaturu zrušit. Pro ukončení nominací je třeba souhlas alespoň nadpoloviční většiny komisařů. 
+Nominace se týkají pouze voleb personálních a jsou zahajovány alespoň nadpoloviční většinou komisařů. V této fázi se může volič nominovat a stát se tak zároveň kandidátem. Součástí kandidatury je kandidátní listina s volebním programem. Kandidát má možnost kandidátní listinu upravovat nebo svou kandidaturu zrušit, dokud nejsou nominace ukončeny. Komisaři mají právo kandidáta do systému zadat ručně nebo kandidaturu zrušit. Pro ukončení nominací je třeba souhlas alespoň nadpoloviční většiny komisařů. 
 
 \subsection{Hlasování}
 
-K hlasování voliči používají terminálového klienta, za jeho pomoci se identifikují otiskem prstu a následně se autentizují svým PINem. Systém si nechá potvrdit voličovu totožnost a zobrazí mu předmět voleb s možnostmi, pro které může hlasovat. Volič odhlasuje a jeho volební lístek se odešle ke zpracování na server. Server hlas uloží bez informace, komu patří, a u voliče si nastaví příznak, že již odhlasoval.
+K hlasování voliči používají terminálového klienta, za jeho pomoci se identifikují otiskem prstu a následně se autentizují svým PINem. Systém si nechá potvrdit voličovu totožnost a zobrazí mu předmět voleb s možnostmi, pro které může hlasovat. Volič odhlasuje a jeho volební lístek se odešle ke zpracování na server. 
 
 \subsection{Výsledky}
 
 Hlasování ukončuje komisař, v případě více komisařů nadpoloviční většina z nich. Celé volby uzavírá administrátor, pokud jsou všechna hlasování v nich ukončena. Systém zpracuje hlasy a vyhodnotí výsledky.
+
+\subsection{Společné schvalování}
+
+Některé úkoly jsou v životním cyklu volební události přelomové a nevratné. Konkrétně se jedná o zahájení a ukončení nominací a zahájení a ukončení hlasování. Proto je třeba k jejich uskutečnění souhlas nadpoloviční většiny komisařů, kteří danou volební událost mají na starosti.
 
 \section{Bezpečnostní rizika} \label{sec:bezpecnostni_rizika}
 
@@ -331,7 +339,7 @@ Jak již bylo zmíněno v kapitole \ref{sec:motivace}, volby jsou provázeny mno
 
 \subsection{Hrozby}
 
-Hrozby se dají obecně rozdělit do dvou kategorií: 
+Hrozby\cite{book:prosser} se dají obecně rozdělit do dvou kategorií: 
 
 \begin{itemize}
 	\item manipulační
@@ -340,14 +348,33 @@ Hrozby se dají obecně rozdělit do dvou kategorií:
 
 Ke zmanipulování voleb může dojít ze strany komisaře, který využije svých práv v systému a upraví výsledky, nebo ze strany voliče, který se pokusí hlasovat vícekrát, případně hlasovat cizím jménem. Výsledky mohou také být ovlivněny hackerským útokem modifikujícím hlasy. Všechny tyto snahy o manipulaci s daty se snaží nevzbudit žádné podezření a zůstat tak neodhaleny. 
 
-Na druhé straně jsou hrozby, které mohou zabránit průběhu hlasování. Ty se dají dále dělit na úmyslné a neúmyslné. Mezi neúmyslné může například patřit přerušení dodávky elektřiny, či selhání hlasovacího systému vinou neodhalené chyby. Naopak mezi úmyslné hrozby patří DDoS útok \cite{www:ddos} na server, úmyslné přerušení dodávky elektřiny či neoprávněná manipulace s hardwarem a softwarem.
+Na druhé straně jsou hrozby, které mohou zabránit průběhu hlasování. Ty se dají dále dělit na úmyslné a neúmyslné. Mezi neúmyslné může například patřit přerušení dodávky elektřiny, či selhání hlasovacího systému vinou neodhalené chyby. Naopak mezi úmyslné hrozby patří DDoS útok \cite{www:ddos} na server, úmyslné přerušení dodávky elektřiny či neoprávněná manipulace s hardwarem a softwarem. Výčet rizik a jejich opatření je uveden v tabulce \ref{tab:rizika}.
 
 \subsection{Zabezpečení}
 
-U voleb musí byt zajištěno nezfalšování hlasů, proto je třeba, aby všechny volební terminály komunikovaly se serverem pomocí protokolu HTTPS a veškerá komunikace mezi nimi byla zašifrovaná. Dále je třeba zajistit, aby volba každého voliče byla tajná. Toho se docílí neevidování vazby mezi hlasem a voličem. Jakmile tedy volič odhlasuje, přičte se ke zvolené možnosti hlas, systém si uloží, že tento volič již hlasoval, a znemožní mu další hlasování v daném kole voleb.
+U voleb musí být zajištěno nezfalšování hlasů, proto je třeba, aby všechny volební terminály komunikovaly se serverem pomocí protokolu HTTPS a veškerá komunikace mezi nimi byla zašifrovaná. Dále je třeba zajistit, aby volba každého voliče byla tajná. Toho se docílí neevidování vazby mezi hlasem a voličem. Jakmile tedy volič odhlasuje, přičte se ke zvolené možnosti hlas, systém si uloží, že tento volič již hlasoval, a znemožní mu další hlasování v daném kole voleb.
 
-%*****************************************************************************
-\chapter{Analýza}
+\begin{table}[h!]
+	\begin{center}	
+		\begin{tabular}{|l|l|}
+		\hline		
+		\textbf{Riziko} & \textbf{Opatření} \\
+		\hline
+		Útok hackera & Server poběží na firewallem chráněném počítači. \\
+		\hline		
+		Pád systému & Systém bude důkladně otestovaný. \\
+		\hline
+		Hardwarová závada & Připravený záložní hardware. \\
+		\hline
+		Vynucené hlasování & Voliči hlasují samostatně za plentou. \\
+		\hline
+		Odposlech datové komunikace & Veškerá data jsou přenášena po HTTPS protokolu. \\
+		\hline
+		\end{tabular}		
+	\end{center}
+	\caption{Tabulka rizik a opatření}
+	\label{tab:rizika}
+\end{table}
 
 \section{Uživatelské role}
 
@@ -363,17 +390,11 @@ Komisař je jmenován administrátorem a je přiřazen k volbám. Komisařů pro
 
 \subsection{Volič}
 
-Volič modifikuje a odevzdává volební lístek ve volbách, ve kterých je oprávněn hlasovat. Také se může nominovat na kandidáta.
-
-
-\subsection{Kandidát}
-
-Kandidát je nominovaný volič a může být zvolen. Má možnost upravovat svou kandidátní listinu a stáhnout kandidátku, dokud jsou volby ve fázi nominací.
+Volič modifikuje a odevzdává volební lístek ve volbách, ve kterých je oprávněn hlasovat. Také se může nominovat na kandidáta, upravovat svou kandidátní listinu či kandidaturu zrušit.
 
 \section{Případy užití}
 
 Případy užití jsou částečně popsané v předchozích kapitolách. Pro úplnost je na obrázku \ref{fig:pripady_uziti} znázorněn diagram případů užití. Oproti předchozím kapitolám je na něm zachycena i systémová role \uv{Čas}. Aktér Čas je abstraktní podobou toku času a znázorňuje možnost automatického spouštění daných činností v nadefinovanou dobu. 
-
 
 \begin{figure}[h!]
 	\centering
@@ -381,6 +402,229 @@ Případy užití jsou částečně popsané v předchozích kapitolách. Pro ú
 	\caption{Diagram případů užití.}
 	\label{fig:pripady_uziti}
 \end{figure}
+
+\section{Scénáře}
+
+\subsection{Založení voleb}
+
+\begin{itemize}
+\item Aktéři: Administrátor
+\item Vstup: -
+\item Výstup: Založené volby.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o vytvoření nových voleb.
+		\item Systém zobrazí formulář pro vytvoření nových voleb.
+		\item Uživatel vyplní formulář (název a typ voleb).
+		\item Uživatel odešle formulář.
+		\item Systém provede validaci vyplněných údajů.
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém založí volby.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Přiřazení komisaře k volbám}
+
+\begin{itemize}
+\item Aktéři: Administrátor
+\item Vstup: Volby. 
+\item Výstup: Volby s přiřazenými komisaři.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu voleb.
+		\item Systém zobrazí detail voleb.
+		\item Uživatel zvolí z menu přidání komisaře.
+		\item Systém zobrazí formulář se seznamem komisařů.
+		\item Uživatel vybere komisaře a odešle formulář.
+		\item Systém provede validaci vstupních údajů.
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 4.
+		\item Systém přiřadí komisaře k volbám.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Odstranění komisaře z voleb}
+
+\begin{itemize}
+\item Aktéři: Administrátor
+\item Vstup: Volby s přiřazeným komisařem.
+\item Výstup: Volby s odebraným komisařem.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu voleb.
+		\item Systém zobrazí detail voleb.
+		\item Uživatel zvolí odstranění komisaře ze seznamu přiřazených komisařů.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém odstraní komisaře z voleb.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Založení volební události}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Volby s přiřazeným komisařem.
+\item Výstup: Založená volební událost.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu voleb.
+		\item Systém zobrazí detail voleb.
+		\item Uživatel zvolí založení volební události.
+		\item Systém zobrazí formulář pro založení volební události.
+		\item Uživatel vyplní formulář (název volební události, popis volební události) a odešle ho.
+		\item Systém provede validaci vstupních údajů.
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 4.
+		\item Systém založí volební událost.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Přiřazení voliče k volební události}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Volební událost.
+\item Výstup: Volební událost s přiřazeným voličem.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu volební události.
+		\item Systém zobrazí detail volební události.
+		\item Uživatel zvolí přidání voliče.
+		\item Systém zobrazí formulář se seznamem voličů.
+		\item Uživatel vybere voliče a odešle formulář.
+		\item Systém provede validaci vstupních údajů.
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 4.
+		\item Systém přiřadí voliče k volební události.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Odstranění voliče z volební události}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Volební událost s přiřazeným voličem.
+\item Výstup: Volební událost s odebraným voličem.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu volební události.
+		\item Systém zobrazí detail volební události.
+		\item Uživatel zvolí odstranění voliče ze seznamu přiřazených voličů.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém odstraní voliče z volební události.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Zahájení nominování}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Volební událost s voliči.
+\item Výstup: Volební událost se zahájenými nominacemi.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu volební události.
+		\item Systém zobrazí detail volební události.
+		\item Uživatel zvolí zahájení nominací.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém zahájí nominace.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Ukončení nominování}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Volební událost s voliči a kandidáty se zahájenými nominacemi.
+\item Výstup: Volební událost s ukončenými nominacemi.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu volební události.
+		\item Systém zobrazí detail volební události.
+		\item Uživatel zvolí ukončení nominací.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém ukončí nominace.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Zahájení hlasování}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Založená volební s voliči s kandidáty s ukončeným nominováním.
+\item Výstup: Volební událost se zahájeným hlasováním.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu volební události.
+		\item Systém zobrazí detail volební události.
+		\item Uživatel zvolí zahájení hlasování.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém zahájí hlasování.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Ukončení hlasování}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Volební událost s voliči s kandidáty se zahájeným hlasováním.
+\item Výstup: Ukončená volební událost.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu volební události.
+		\item Systém zobrazí detail volební události.
+		\item Uživatel zvolí ukončení hlasování.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém ukončí hlasování.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Nominování kandidáta}
+
+\begin{itemize}
+\item Aktéři: Volič
+\item Vstup: Volič přiřazený do volební události se zahájenými nominacemi.
+\item Výstup: Nominovaný volič (kandidát) ve volební události.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení nominačního formuláře.
+		\item Systém zobrazí formulář na nominování se seznamem dostupných volebních událostí.
+		\item Uživatel zvolí volební událost, ve které chce být nominován, a odešle formulář.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém nominuje voliče jako kandidáta.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Zamítnutí nominace}
+
+\begin{itemize}
+\item Aktéři: Komisař
+\item Vstup: Volič nominovaný do volební události.
+\item Výstup: Zamítnutá kandidatura.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení detailu volební události.
+		\item Systém zobrazí detail volební události.
+		\item Uživatel zvolí odstranění kandidáta se seznamu kandidátů.		
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
+		\item Systém odstraní kandidáta z volební události.
+	\end{enumerate}
+\end{itemize}
+
+\subsection{Hlasování}
+
+\begin{itemize}
+\item Aktéři: Volič
+\item Vstup: Volič přiřazený do volební události, která má zahájené hlasování.
+\item Výstup: Odeslaný hlasovací lístek.
+\item Kroky:
+	\begin{enumerate}
+		\item Uživatel požádá o zobrazení volebních událostí, ve kterých může hlasovat.
+		\item Systém zobrazí seznam volebních událostí, ve kterých může voliče hlasovat.
+		\item Uživatel vybere volební událost a formulář odešle.
+		\item Systém zobrazí hlasovací lístek s kandidáty.
+		\item Uživatel zvolí kandidáty, jimž chce udělit hlas, a lístek odešle.	
+		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 4.
+		\item Systém odešle hlasovací lístek.
+	\end{enumerate}
+\end{itemize}
 
 
 \section{Technologie}
@@ -412,6 +656,8 @@ Java SE slouží k tvorbě desktopových aplikací, které běží pod JVM. Je t
 Vývoj probíhal na operačním systém Ubuntu 11.04 a bylo použito vývojové prostředí NetBeans IDE ve verzi 7.0. Jedná se o komplexní prostředí, které umožňuje ovládání aplikačního serveru Glassfish a napojení JDBC ovladačů na databázový stroj. Pro verzování projektu jsem používal GIT s klientem SmartGIT (\url{http://www.syntevo.com/smartgit/}) a repozitář projektu je veřejně dostupný na adrese \url{https://github.com/cerevka/eVoting}.
 
 Pro testování webového prostředí posloužil webový prohlížeč Firefox 4.0.1.
+
+
 
 \section{Snímač otisků prstů}
 
@@ -448,6 +694,8 @@ Pro vývoj jsem tedy zvolil SDK od společnosti Digital Persona a jejich sníma�
 %*****************************************************************************
 \chapter{Návrh řešení a realizace}
 
+
+ 
 Vzhledem k tomu, že systém vychází z prototypu systému eVolby\cite{www:prototyp}, o kterém hovoří řešerše v kapitole \ref{sec:prototyp} a který již má své řešení navržené, budu v této práci popisovat jednotlivé iterace, ve kterých jsem ho modifikoval, přičemž v každé iteraci se zaměřím na problémy, se kterými jsme se setkal a popíši postup, kterým jsem se dopracoval k funkčnímu řešení. 
 
 \section{První iterace} \label{sec:iterace:prvni}
@@ -519,7 +767,7 @@ Na doporučení ze závěrečné zprávy jsem tento applet z projektu vyřadil a
 
 \subsection{Výstup}
 
-Na konci druhé iterace je projekt ve své základní funkční podobě, umožňuje snadnější přidávání uživatelů a bezproblémové hlasování. Prozatím není implementována nová funkcionalita v podobě role kandidáta a aktéra času.
+Na konci druhé iterace je projekt ve své základní funkční podobě, umožňuje snadnější přidávání uživatelů a bezproblémové hlasování. Prozatím není implementována nová funkcionalita aktéra času.
 
 \section{Třetí iterace}
 
@@ -539,18 +787,48 @@ Na konci druhé iterace je projekt ve své základní funkční podobě, umožň
 
 Celý systém musí být řádně otestován, jelikož každá chyba v průběhu ostrých voleb, může mít zásadní dopad na jejich průběh i jejich výsledek. Aplikace musí být srozumitelný nejen počítačově gramotným uživatelům, ale i uživatelům, kteří nemají zkušenosti  ovládáním počítače. 
 
-\section{Statická analýza kódu}
 
 \section{Selenium}
 
-\section{Zátěžové testy}
+Při testování webových aplikací je třeba otestovat i průchod uživatele skrz webové stránky. K tomu jsem použil testovací nástroj Selenium. Nabízí se dvě metody testování - buďto za pomoci pluginu pro Firefoxu, nebo za pomoci speciálního serveru Selenia. Já jsem si zvolil druhý způsob, jelikož umožňuje integraci do vývojového prostředí (pro Netbeans doplněk \uv{Selenium Plugin for Ant Projects}). Samotné testy jsou pak velice podobné unit testování za pomoci JUnitu. 
 
-\subsection{Apache Benchmark}
+Po spuštění testu se začnou předávat příkazy serveru Selenia, který simuluje pohyb uživatele po webu a dokáže zacílit kterýkoliv element a provést na něm řadu akcí. Lze takto vytvořit sadu testů, která vždy otestuje, že novými zásahy nedošlo k poškození stávající funkcionality.
 
-\subsection{Doba SQL dotazů}
+Tvorba testů pro Selenium se dá zjednodušit zmiňovaným doplňkem pro Firefox. Ten totiž umožňuje nahrávat akce a výsledné záznamy znovu spouštět či vyexportovat to mnoha programovacích jazyků právě pro vzdálené volání za pomoci serveru Selenia.
 
+\section{Apache Benchmark}
 
+Pro zátěžové testování jsem zvolil nástroj Apache Benchmark, který dokáže produkovat požadavky na server. Stačí mu nastavit, kolik požadavků má být celkem posláno a kolik z nich má být posláno zároveň.
 
+\begin{table}[!t]
+	\begin{center}
+		\begin{tabular}[b]{|c|c|c|c|}
+		\hline
+		Požadavků & Současných požadavků & Čas na odpověď [ms] & Čas celkem [s] \\
+		\hline		
+		100 & 1 &  5.149 &  0.515 \\
+		\hline
+		1 000 & 1 & 5.015 & 5.015 \\
+		\hline
+		1 000 & 10 & 3.127 & 3.127 \\
+		\hline
+		10 000 & 1 & 4.904 & 49.039 \\
+		\hline
+		10 000 & 10 & 3.026 & 30.257 \\
+		\hline
+		10 000 & 100 & 2.922 & 29.223 \\
+		\hline
+		\end{tabular}
+	\end{center}
+	\caption{Výsledky zátěžového testování pomocí Apache Benchmark}
+	\label{tab:zatezove_testovani}
+\end{table}
+
+Testování jsem prováděl jen pro zobrazení přihlašovací stránky, jelikož zbytek aplikace je přístupný až po zadání přihlašovacích údajů, což nelze při tomto druhu testování simulovat. Výsledků testů jsou zaznamenány v tabulce \ref{tab:zatezove_testovani}. 
+
+\newpage
+
+Testy ukazují, že Glassfish 3.1 nemá nejmenší problémy se zpracováním obrovského náporu požadavků a že časy jeho odpovědí jsou v řádech milisekund.
 
 %*****************************************************************************
 \chapter{Závěr}
@@ -612,9 +890,6 @@ Celý systém musí být řádně otestován, jelikož každá chyba v průběhu
 \item[Y36SI3] Realizace programových systémů
 \end{description}
 
-%*****************************************************************************
-\chapter{UML diagramy}
-\textbf{\large Tato příloha není povinná a zřejmě se neobjeví v každé práci. Máte-li ale větší množství podobných diagramů popisujících systém, není nutné všechny umísťovat do hlavního textu, zvláště pokud by to snižovalo jeho čitelnost.}
 
 %*****************************************************************************
 \chapter{Instalační a uživatelská příručka}
