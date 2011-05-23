@@ -91,7 +91,8 @@ public class VotingManagedBean {
         }       
         VotingCardDTO votingCard = new VotingCardDTO((String[]) electedCandidates.toArray(new String[electedCandidates.size()]), voterLogin, eventId);
         try {
-           validatorSessionBean.sendVote(votingCard);            
+           validatorSessionBean.sendVote(votingCard);      
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Váš hlas byl úspěšně odeslán!"));
         } catch (ValidatorException ex) {
             logger.log(Level.SEVERE, "Error during sending votes.", ex);
         }

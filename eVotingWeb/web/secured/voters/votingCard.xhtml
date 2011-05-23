@@ -6,11 +6,11 @@
     <ui:param name="title" value="Voting applet" />
     <ui:define name="content">
         <f:view>
-            <h1>#{msg['heading.votingCard']}</h1>
-            <h:messages styleClass="message" />
+            <h1>#{msg['heading.votingCard']}</h1>            
             <ui:insert name="menu">
                 <ui:include src="/WEB-INF/templates/menus/voter.xhtml" />
             </ui:insert>
+            <h:messages styleClass="message" />
             <h:form>               
                 <h:dataTable styleClass="electionsInfo" cellspacing="1" value="#{voting.getCandidates(voting.eventId)}" var="item">
                     <h:column>
