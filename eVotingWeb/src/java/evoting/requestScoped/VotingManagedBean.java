@@ -1,6 +1,9 @@
 package evoting.requestScoped;
 
 import DTO.CandidateDTO;
+import DTO.VotesDTO;
+import DTO.VotingCardDTO;
+import com.google.common.collect.Lists;
 import evoting.controller.bean.stateless.ElectionSessionRemote;
 import evoting.controller.bean.stateless.NominatingSessionRemote;
 import evoting.controller.bean.stateless.TellerSessionRemote;
@@ -17,6 +20,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import evoting.controller.pojo.ControllerException;
+import evoting.validator.bean.stateless.ValidatorSessionRemote;
+import evoting.validator.pojo.ValidatorException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -52,10 +57,14 @@ public class VotingManagedBean {
 
     @EJB
     private NominatingSessionRemote nominatingSessionBean;
+    
+    @EJB
+    private ValidatorSessionRemote validatorSessionBean;
 
     private Voter voter = null;
 
-    private Integer eventId = null;
+    @ManagedProperty(value = "#{param.eventId}")
+    private Integer eventId;
 
     @ManagedProperty(value = "#{param.voterLogin}")
     private String voterLogin;
@@ -72,29 +81,26 @@ public class VotingManagedBean {
     }
 
     public String doVote() {
+        List<String> electedCandidates = new ArrayList<String>();
         Iterator it = votes.entrySet().iterator();
         while (it.hasNext()) {
-            Map.Entry<String, Boolean> pairs = (Map.Entry<String, Boolean>) it.next();
-            if (pairs.getValue() == true) {
-                logger.log(Level.SEVERE, "Hlas pro {0}", pairs.getKey());
+            Map.Entry<String, Boolean> candidate = (Map.Entry<String, Boolean>) it.next();
+            if (candidate.getValue() == true) {
+                electedCandidates.add(candidate.getKey());                
             }
+        }       
+        VotingCardDTO votingCard = new VotingCardDTO((String[]) electedCandidates.toArray(new String[electedCandidates.size()]), voterLogin, eventId);
+        try {
+           validatorSessionBean.sendVote(votingCard);            
+        } catch (ValidatorException ex) {
+            logger.log(Level.SEVERE, "Error during sending votes.", ex);
         }
         return null;
     }
 
-    /**
-    @PostConstruct
-    public void init() {
-    try {
-    getAllVotersModel();
-    } catch (ControllerException ex) {
-    Logger.getLogger(VotingManagedBean.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }
-     */
+    
     public String goVote() {
-        setEventId(eventId);
-        System.out.println("nastavuj EventId na " + getEventId());
+        setEventId(eventId);        
         return "goVote";
     }
 

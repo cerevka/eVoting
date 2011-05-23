@@ -1,0 +1,50 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:param name="title" value="Voting applet" />
+    <ui:define name="content">
+        <f:view>
+            <h1>#{msg['heading.votingCard']}</h1>
+            <h:messages styleClass="message" />
+            <ui:insert name="menu">
+                <ui:include src="/WEB-INF/templates/menus/voter.xhtml" />
+            </ui:insert>
+            <h:form>               
+                <h:dataTable styleClass="electionsInfo" cellspacing="1" value="#{voting.getCandidates(voting.eventId)}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['label.vote']}" />
+                        </f:facet>
+                        <h:selectBooleanCheckbox value="#{voting.votes[item.login]}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['label.name']}"/>
+                        </f:facet>
+                        <h:commandLink styleClass="link"  action="#">
+                            <h:outputText value="#{item.login}"/>                            
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['label.name.first']}" />
+                        </f:facet>
+                        <h:outputText value="#{item.firstName}" />                    
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msg['label.name.last']}" />
+                        </f:facet>
+                        <h:outputText value="#{item.lastName}" />                    
+                    </h:column>                    
+                </h:dataTable>
+                <h:commandButton action="#{voting.doVote}" value="#{msg['action.vote']}">
+                    <f:param name="voterLogin" value="#{user.userName}" />
+                    <f:param name="eventId" value="#{electionEvent.eventId}" />
+                </h:commandButton>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>
