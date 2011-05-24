@@ -337,7 +337,7 @@ Některé úkoly jsou v životním cyklu volební události přelomové a nevrat
 
 Jak již bylo zmíněno v kapitole \ref{sec:motivace}, volby jsou provázeny mnoha faktory, které mohou nepříznivě ovlivnit jejich výsledky. Elektronická verze hlasování potlačuje do pozadí lidský faktor a minimalizuje tak jeho negativní dopad, ovšem objevují se nové hrozby, jejichž dopad by mohl být mnohem horší. Těm se ale můžeme efektivně bránit.
 
-\subsection{Hrozby}
+\subsection{Hrozby} \label{sec:hrozby}
 
 Hrozby\cite{book:prosser} se dají obecně rozdělit do dvou kategorií: 
 
@@ -352,7 +352,7 @@ Na druhé straně jsou hrozby, které mohou zabránit průběhu hlasování. Ty 
 
 \subsection{Zabezpečení}
 
-U voleb musí být zajištěno nezfalšování hlasů, proto je třeba, aby všechny volební terminály komunikovaly se serverem pomocí protokolu HTTPS a veškerá komunikace mezi nimi byla zašifrovaná. Dále je třeba zajistit, aby volba každého voliče byla tajná. Toho se docílí neevidování vazby mezi hlasem a voličem. Jakmile tedy volič odhlasuje, přičte se ke zvolené možnosti hlas, systém si uloží, že tento volič již hlasoval, a znemožní mu další hlasování v daném kole voleb.
+U voleb musí být zajištěno nezfalšování hlasů, proto je třeba, aby všechny volební terminály komunikovaly se serverem pomocí protokolu HTTPS a veškerá komunikace mezi nimi byla zašifrovaná. Dále je třeba zajistit, aby volba každého voliče byla tajná. Toho se docílí neevidování vazby mezi hlasem a voličem. Jakmile tedy volič odhlasuje, přičte se ke zvolené možnosti hlas, systém si uloží, že tento volič již hlasoval, a znemožní mu další hlasování v daném kole voleb. Těmito postupy je možné zabránit rizikům odcizení citlivých údajů praktikami vyjmenovanými v kapitole \ref{sec:hrozby}.
 
 \begin{table}[h!]
 	\begin{center}	
@@ -773,13 +773,23 @@ Na konci druhé iterace je projekt ve své základní funkční podobě, umožň
 
 \subsection{Cíl}
 
-- přidání role kandidáta
-- aktér čas - Sheduler
-- desktopový klient
+V poslední části jsem si vzal za úkol vylepšení stávající funkcionality a zpříjemnění používání aplikace běžnému uživateli.
 
 \subsection{Postup}
 
+\subsection{Grafické úpravy}
+
+Jedním z takových kroků byly i úpravy CSS stylů a odladění grafického vzevření některých sekcí, které by mohly být zavádějící. S tím se pojí i zlepšení navigace po aplikaci.
+
+\subsubsection{Multijazyčnost}
+
+Aby práce s aplikací byla co nejpříjemnější pro co největší množství uživatelů, integroval jsem do ní podporu multijazyčnosti. Všechny řetězce, které bylo napevno vepsány do zdrojového kódu jsem nahradil značkami, které se nahrazují překlady dle zvoleného jazyka. Aktuálně aplikace podporuje angličtinu a češtinu. 
+
+Všechny překlady jsou umístěny ve speciálním properties souboru a pro vytvoření nové jazykové mutace stačí přeložit pouze tento jeden soubor. Ten je přímo zakompilován do aplikace a Java EE jej obsluhuje za pomoci vestavěných nástrojů, tedy práce s ním nijak nezpomaluje chod aplikace.
+
 \subsection{Výstup}
+
+Po dokončení těchto úprav je aplikace dovybavena výše zmíněnými funkcemi.
 
 
 %*****************************************************************************
@@ -833,10 +843,11 @@ Testy ukazují, že Glassfish 3.1 nemá nejmenší problémy se zpracováním ob
 %*****************************************************************************
 \chapter{Závěr}
 
-\begin{itemize}
-\item Zhodnocení splnění cílů DP/BP a  vlastního přínosu práce (při formulaci je třeba vzít v potaz zadání práce).
-\item Diskuse dalšího možného pokračování práce.
-\end{itemize} 
+Cílem práce bylo upravit stávající prototyp systému eVolby\cite{www:prototyp} pro lokální volby za použití terminálů se snímači otisků prstů. Během vývoje jsem uskutečnil celou řadu úprav, které mezi sebe zahrnují hlavně migraci ze zastaralého aplikačního serveru Glassfish 2 na Glassfish 3.1, který již podporuje nejnovější platformu Java Enterprise Edition 6. To s sebou neslo nemalé překážky, které tkvěly hlavně ve změnách specifikací. 
+
+Další úpravy se zaměřily na vyladění aplikace a opravu chyb, což velmi často obnášelo i aktualizaci zastaralých postupů, které byly v aplikaci používány. V posledních fázích došlo k přidávání nové funkcionality.
+
+Pro další vývoj serverové části bych doporučil přehodnocení celého modelu, který je na tolik nedokonalý, že není reálně možná implementace všech požadavků. Do doby dokončení této práce se bohužel nepodařilo obstarat snímač otisků prstů, se kterým by bylo možné uvedení klientského terminálu do provozu tak, jak bylo zamýšleno.
 
 %*****************************************************************************
 % Seznam literatury je v samostatnem souboru reference.bib. Ten
