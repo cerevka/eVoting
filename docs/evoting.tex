@@ -115,7 +115,7 @@ Především bych rád poděkoval své rodině a přátelům, kteří mě podpor
 
 %   Prohlaseni 
 
-\declaration{V~Chebu dne 15.\,5.\,2011}
+\declaration{V~Praze dne 26.\,5.\,2011}
 %\declaration{In Kořenovice nad Bečvárkou on May 15, 2008}
 
 
@@ -166,7 +166,7 @@ Tato práce se zabývá návrhem a implementací systému pro správu elektronic
 
 Na schůzích a zasedáních dochází často k rozhodování mezi několika možnostmi. Může se jednat o zvolení kandidáta do funkce, nebo se může například hlasovat o nepersonálních otázkách\footnote{Například využití peněz z bytového fondu, kudy povede nová dálnice, jak vyřešit stávku etc.}. Jelikož ne všichni jsou vždy stejného názoru a je třeba rozhodnout kolektivně, přistupuje se k hlasování. Hlasování může být veřejné, tj. ví se, jak kdo hlasoval, nebo tajné, kdy je každý hlas anonymní. V obou případech je ovšem třeba zajistit, aby mohly hlasovat jen k tomu oprávněné osoby.
 
-Tématika elektronických voleb je poslední dobou stále častěji zmiňována v souvislosti s rozvojem moderních technologií a internetu. Modernizace stávajícího volebního systému je základním pilířem tzv. systému elektronického vlády, e-governmentu. Přínosy elektronického hlasování jsou podrobně popsány v kapitole \ref{sec:motivace}, ale ruku v ruce s nimi jde i řada technických a organizačních otázek, které je třeba řešit a jejichž základní nástin nabízí kapitola \ref{sec:bezpecnostni_rizika}.
+Tématika elektronických voleb je poslední dobou stále častěji zmiňována v souvislosti s rozvojem moderních technologií a internetu. Modernizace stávajícího volebního systému je základním pilířem tzv. systému elektronické vlády, e-governmentu. Přínosy elektronického hlasování jsou podrobně popsány v kapitole \ref{sec:motivace}, ale ruku v ruce s nimi jde i řada technických a organizačních otázek, které je třeba řešit a jejichž základní nástin nabízí kapitola \ref{sec:bezpecnostni_rizika}.
 
 Cílem této práce je jejich zodpovězení a vytvoření funkčního systému, který umožní realizovat elektronické volby za pomoci dotykových terminálů ve volební místnosti. Centrální server bude od terminálů přijímat jednotlivé hlasy a na konci hlasování prezentuje výsledky.
 
@@ -195,7 +195,7 @@ Elektronické volby jsou tématem, které již bylo mnohokrát zpracováváno. N
 
 Implementační část této bakalářské práce vychází z prototypu systému internetových elektronických voleb pro Akademický senát ČVUT, který vznikl v rámci předmětů Y36SI2 a Y36SI3 \cite{www:prototyp}. Tento systém se sestává pouze ze serveru napsaném v Enterprise Javě, který zajišťuje jak administraci voleb, tak samotné hlasování voličů přes internet. 
 
-Prototyp je koncipován pouze pro personální volby, kdy se nejprve z řad voličů nominují kandidáti. Po ukončení nominací následuje hlasování, kdy voliči dávají své hlasy jednotlivým kandidátům. V této práci bude systém rozšířen o možnost i nepersonálních voleb, kdy předmět voleb a možnosti budou definovány explicitně při jejich zakládání.
+Prototyp je koncipován pouze pro personální volby, kdy se nejprve z řad voličů nominují kandidáti. Po ukončení nominací následuje hlasování, kdy voliči dávají své hlasy jednotlivým kandidátům. 
 
 V systému figurují tři role uživatelů: administrátor, komisař a volič. Administrátor je v systému pouze jeden a má pravomoc založit volby a jmenovat jim komisaře. Jedny volby mohou mít více komisařů a v případě důležitého rozhodnutí je třeba potvrzení alespoň nadpoloviční většiny. Komisaři pod volbami zakládají volební události představující jednotlivá kola voleb. K těm přiřazují oprávněné voliče a schvalují či vyřazují nominované kandidáty.
 
@@ -203,9 +203,9 @@ V systému figurují tři role uživatelů: administrátor, komisař a volič. A
 Konceptuální návrh podobného systému zpracoval ve své disertační práci \textit{Experimentální ověření distribuovaného
 volebního schématu} Radek Šilhavý \cite{art:silhavy}. Tato práce se zabývá hlavně teoretickou rovinou a popisu procesů a požadavků na realizaci elektronických volebních systémů a dává k dispozici ucelený pohled na problematiku. Důraz je kladen hlavně na internetové volební systémy umožňující vzdálené hlasování bez nutnosti fyzické účasti ve volební místnosti.
 
-V úvodu se autor zabývá teoretických rámcem od legislativní problematiky v prostředí České republiky až po praktické využití ve světě. Popisuje, v jaké podobě byly elektronické volby testovány nasazovány ve Spojených státech amerických, Německu, Velké Británii, Španělsku, Švýcarsku a Estonsku.
+V úvodu se autor zabývá teoretických rámcem od legislativní problematiky v prostředí České republiky až po praktické využití ve světě. Popisuje, v jaké podobě byly elektronické volby testovány a nasazovány ve Spojených státech amerických, Německu, Velké Británii, Španělsku, Švýcarsku a Estonsku.
 
-Zbytek práce se již orientuje více prakticky na návrh konceptuálního řešení distribuovaného volebního schématu a stanovuje hypotézy pro experimentální ověření hypotéz. První hypotéza předpokládá, že elektronizace volebního procesu za využití internetového volebního systému je možná a že je přínosem pro voliče. Druhá hypotéza prohlašuje využití webové aplikace jako základního řešení za výhodné, protože každému uživateli je přístupná a dostupná v čase a místě jemu vyhovujícím.
+Zbytek práce se již orientuje více prakticky na návrh konceptuálního řešení distribuovaného volebního schématu a stanovuje hypotézy pro experimentální ověření. První hypotéza předpokládá, že elektronizace volebního procesu za využití internetového volebního systému je možná a že je přínosem pro voliče. Druhá hypotéza prohlašuje využití webové aplikace jako základního řešení za výhodné, protože každému uživateli je přístupná a dostupná v čase a místě jemu vyhovujícím.
 
 \subsection{Hlasovací systém pro samosprávné orgány vysokých škol}
 Problematikou elektronických voleb se zabývá i diplomová práce Michala Petříka \textit{Hlasovací systém pro samosprávné orgány vysokých škol} \cite{art:petrik}. Zde se autor zaměřuje hlavně na potřeby samosprávných orgánů vysokých škol, speciálně Akademického senátu FIT ČVUT. 
@@ -214,9 +214,9 @@ Tento systém je navržen tak, aby dokázal zautomatizovat online hlasování, s
 
 \subsection{Mobilního hlasovacího zařízení}
 
-Hlavním účelem elektronických voleb je snaha o zpříjemnění a zrychlení práce se samotnými hlasy. Proto je také důležité zpracování terminálového klienta, který si za vzor beru \textit{Mobilní hlasovací zařízení} \cite{art:valenta} Jakuba Valenty. Autor se sice zabývá problematikou hlasovacího zařízení v podobě mobilního telefonu s technologií Wi-Fi, čímž se tato práce nezabývá, ale podobnost s terminálovým klientem z hlediska analýzy je značná. Kromě toho rozebírá síťovou komunikaci posíláním zpráv v jazyce XML přes protokol HTTP.
+Hlavním účelem elektronických voleb je snaha o zpříjemnění a zrychlení práce se samotnými hlasy. Proto je také důležité zpracování terminálového klienta, které si za vzor beru \textit{Mobilní hlasovací zařízení} \cite{art:valenta} Jakuba Valenty. Autor se sice zabývá problematikou hlasovacího zařízení v podobě mobilního telefonu s technologií Wi-Fi, čímž se tato práce nezabývá, ale podobnost s terminálovým klientem z hlediska analýzy je značná. Kromě toho rozebírá síťovou komunikaci posíláním zpráv v jazyce XML přes protokol HTTP.
 
-Na implementaci je zajímavá vícevrstvá architektura dělená na prezentační, aplikační, datová, persistentní a síťovou vrstvu. Serverová část v sobě také zahrnuje modul pro generování výsledků, jehož studium v sobě skrývá potenciál využitelný při zpracovávání hlasů a prezentaci výsledků. 
+Na implementaci je zajímavá vícevrstvá architektura dělená na prezentační, aplikační, datovou, persistentní a síťovou vrstvu. Serverová část v sobě také zahrnuje modul pro generování výsledků, jehož studium v sobě skrývá potenciál využitelný při zpracovávání hlasů a prezentaci výsledků. 
 
 \subsection{Rešerše algoritmů pro snímání a zpracování otisku prstů} \label{sec:reserse_otisky}
 
@@ -250,11 +250,11 @@ Na celkový návrh řešení a dokumentaci jsou kladeny následující požadavk
 
 \begin{enumerate}
 	\item Systém bude rozdělen na serverovou a klientskou část.
-	\item Instalace systému a jeho uvedení do provozu bude co nejjednodušší, aby jsi zvládl i zaškolený běžný uživatel počítače.
-	\item Systém bude multiplatformní díky běhovému prostředí JVM.
+	\item Instalace systému a jeho uvedení do provozu bude co nejjednodušší, aby ji zvládl i zaškolený běžný uživatel počítače.
+	\item Systém bude multiplatformní díky prostředí JVM.
 	\item Systém bude používat open license nebo freeware technologie.
 	\item Systém zajistí bezpečnost hlasování, tj. nezfalšovatelnost hlasů a tajnost voleb vůči druhé i třetí osobě.
-	\item Součástí systému bude podrobná dokumentace.
+	\item Součástí práce bude podrobná dokumentace.
 \end{enumerate}
 
 \subsubsection{Server}
@@ -286,7 +286,7 @@ Tato sekce se zabývá požadavky na funkčnost systému. Systém umožní:
 	\item založení voleb.
 	\item založení volební události.
 	\item přiřazení komisaře k volbám.
-	\item registrace voliče.
+	\item registraci voliče.
 	\item přiřazení voličů k volební události.
 	\item nominování kandidátů.
 	\item hlasování.
@@ -295,7 +295,7 @@ Tato sekce se zabývá požadavky na funkčnost systému. Systém umožní:
 \end{enumerate}
 
 %*****************************************************************************
-\chapter{Analýza}
+\chapter{Analýza} \label{sec:analyza}
 
 \section{Fáze elektronických voleb}
 
@@ -311,7 +311,7 @@ Registrace bude obnášet sejmutí otisku prstu a vygenerování přístupového
 
 \subsubsection{Seznamy voličů} \label{sec:seznamy}
 
-Dá se předpokládat, že systém bude používán na více než jedny volby, přičemž seznam voličů se mezi jednotlivými volbami bude lišit jen minimálně, ne-li vůbec. Správce voleb si tedy může jednotlivé voliče zařadit do seznamu, přičemž jeden volič může být obsažen ve více seznamech, ovšem nemusí být v žádném. Při zakládání hlasování pak může voliče přidávat jednotlivě nebo hromadně vložit celé seznamy voličů bez ohledu na to, zda již jsou v systému zaregistrování, nebo jejich předpřipravené účty zatím na registraci čekají.
+Dá se předpokládat, že systém bude používán na více než jedny volby, přičemž seznam voličů se mezi jednotlivými volbami bude lišit jen minimálně, ne-li vůbec. Správce voleb si tedy může jednotlivé voliče zařadit do seznamu, přičemž jeden volič může být obsažen ve více seznamech, ovšem nemusí být v žádném. Při zakládání hlasování pak může voliče přidávat jednotlivě nebo hromadně vložit celé seznamy voličů bez ohledu na to, zda již jsou v systému zaregistrováni, nebo jejich předpřipravené účty zatím na registraci čekají.
 
 \subsection{Založení voleb}
 
@@ -319,7 +319,7 @@ Když jsou v systému připraveni uživatelé, ať již zaregistrovaní či neza
 
 \subsection{Nominace} \label{sec:nominace}
 
-Nominace se týkají pouze voleb personálních a jsou zahajovány alespoň nadpoloviční většinou komisařů. V této fázi se může volič nominovat a stát se tak zároveň kandidátem. Součástí kandidatury je kandidátní listina s volebním programem. Kandidát má možnost kandidátní listinu upravovat nebo svou kandidaturu zrušit, dokud nejsou nominace ukončeny. Komisaři mají právo kandidáta do systému zadat ručně nebo kandidaturu zrušit. Pro ukončení nominací je třeba souhlas alespoň nadpoloviční většiny komisařů. 
+Nominace se týkají pouze voleb personálních a jsou zahajovány alespoň nadpoloviční většinou komisařů. V této fázi se může volič nominovat a stát se tak zároveň kandidátem. Součástí kandidatury je kandidátní listina s volebním programem a fotografií kandidáta. Kandidát má možnost kandidátní listinu upravovat nebo svou kandidaturu zrušit, dokud nejsou nominace ukončeny. Komisaři mají právo kandidáta do systému zadat ručně nebo kandidaturu zrušit. Pro ukončení nominací je třeba souhlas alespoň nadpoloviční většiny komisařů. 
 
 \subsection{Hlasování}
 
@@ -329,13 +329,13 @@ K hlasování voliči používají terminálového klienta, za jeho pomoci se id
 
 Hlasování ukončuje komisař, v případě více komisařů nadpoloviční většina z nich. Celé volby uzavírá administrátor, pokud jsou všechna hlasování v nich ukončena. Systém zpracuje hlasy a vyhodnotí výsledky.
 
-\subsection{Společné schvalování}
+\subsection{Společné schvalování} \label{sec:spolecne_schvalovani}
 
 Některé úkoly jsou v životním cyklu volební události přelomové a nevratné. Konkrétně se jedná o zahájení a ukončení nominací a zahájení a ukončení hlasování. Proto je třeba k jejich uskutečnění souhlas nadpoloviční většiny komisařů, kteří danou volební událost mají na starosti.
 
 \section{Bezpečnostní rizika} \label{sec:bezpecnostni_rizika}
 
-Jak již bylo zmíněno v kapitole \ref{sec:motivace}, volby jsou provázeny mnoha faktory, které mohou nepříznivě ovlivnit jejich výsledky. Elektronická verze hlasování potlačuje do pozadí lidský faktor a minimalizuje tak jeho negativní dopad, ovšem objevují se nové hrozby, jejichž dopad by mohl být mnohem horší. Těm se ale můžeme efektivně bránit.
+Jak již bylo zmíněno v kapitole \ref{sec:motivace}, volby jsou provázeny mnoha faktory, které mohou nepříznivě ovlivnit jejich výsledky. Elektronická verze hlasování potlačuje lidský faktor a minimalizuje tak jeho negativní dopad, ovšem objevují se nové hrozby, jejichž dopad by mohl být mnohem horší. Těm se ale můžeme efektivně bránit.
 
 \subsection{Hrozby} \label{sec:hrozby}
 
@@ -352,7 +352,7 @@ Na druhé straně jsou hrozby, které mohou zabránit průběhu hlasování. Ty 
 
 \subsection{Zabezpečení}
 
-U voleb musí být zajištěno nezfalšování hlasů, proto je třeba, aby všechny volební terminály komunikovaly se serverem pomocí protokolu HTTPS a veškerá komunikace mezi nimi byla zašifrovaná. Dále je třeba zajistit, aby volba každého voliče byla tajná. Toho se docílí neevidování vazby mezi hlasem a voličem. Jakmile tedy volič odhlasuje, přičte se ke zvolené možnosti hlas, systém si uloží, že tento volič již hlasoval, a znemožní mu další hlasování v daném kole voleb. Těmito postupy je možné zabránit rizikům odcizení citlivých údajů praktikami vyjmenovanými v kapitole \ref{sec:hrozby}.
+U voleb musí být zajištěna nezfalšovatelnost hlasů, proto je třeba, aby všechny volební terminály komunikovaly se serverem pomocí protokolu HTTPS a veškerá komunikace mezi nimi byla zašifrovaná. Dále je třeba zajistit, aby volba každého voliče byla tajná. Toho se docílí neevidování vazby mezi hlasem a voličem. Jakmile tedy volič odhlasuje, přičte se ke zvolené možnosti hlas, systém si uloží, že tento volič již hlasoval, a znemožní mu další hlasování v daném kole voleb. Těmito postupy je možné zabránit rizikům odcizení citlivých údajů praktikami vyjmenovanými v kapitole \ref{sec:hrozby}.
 
 \begin{table}[h!]
 	\begin{center}	
@@ -360,15 +360,19 @@ U voleb musí být zajištěno nezfalšování hlasů, proto je třeba, aby vše
 		\hline		
 		\textbf{Riziko} & \textbf{Opatření} \\
 		\hline
-		Útok hackera & Server poběží na firewallem chráněném počítači. \\
+		Hackerský útok & Uzavřená datová síť. \\
 		\hline		
-		Pád systému & Systém bude důkladně otestovaný. \\
+		Výpadek systému & Zálohovaná data a použití transakčního zpracování. \\
 		\hline
 		Hardwarová závada & Připravený záložní hardware. \\
 		\hline
 		Vynucené hlasování & Voliči hlasují samostatně za plentou. \\
 		\hline
-		Odposlech datové komunikace & Veškerá data jsou přenášena po HTTPS protokolu. \\
+		Únik informací o hlasování & Veškerá data jsou přenášena po HTTPS protokolu. \\
+		\hline		
+		Podvržení hlasu & Veškerá data jsou přenášena po HTTPS protokolu. \\
+		\hline
+		Ztráta hlasu & Server potvrzuje přijetí. \\
 		\hline
 		\end{tabular}		
 	\end{center}
@@ -378,7 +382,7 @@ U voleb musí být zajištěno nezfalšování hlasů, proto je třeba, aby vše
 
 \section{Uživatelské role}
 
-Volební procesu se účastní mnoho osob, které se dělí do rolí, které při volbách představují. Pro snazší orientaci uvádím jejich výčet.
+Volebního procesu se účastní mnoho osob, které se dělí do rolí, které při volbách představují. Pro snazší orientaci uvádím jejich výčet.
 
 \subsection{Administrátor}
 
@@ -386,11 +390,15 @@ Volební procesu se účastní mnoho osob, které se dělí do rolí, které př
 
 \subsection{Komisař}
 
-Komisař je jmenován administrátorem a je přiřazen k volbám. Komisařů pro jedny volby můžu být více, pak v důležitých momentech voleb rozhoduje nadpoloviční většina z nich. Komisař zakládá v rámci voleb jednotlivé volební události, definuje jejich nastavení a přiřazuje k nim oprávněné voliče. Jeho úkolem je zahajování a ukončování nominací a hlasování.
+Komisař je jmenován administrátorem a je přiřazen k volbám. Komisařů pro jedny volby může být více, pak v důležitých momentech voleb rozhoduje nadpoloviční většina z nich (viz. kapitola \ref{sec:spolecne_schvalovani}). Komisař zakládá v rámci voleb jednotlivé volební události, definuje jejich nastavení a přiřazuje k nim oprávněné voliče. Jeho úkolem je zahajování a ukončování nominací a hlasování.
 
 \subsection{Volič}
 
-Volič modifikuje a odevzdává volební lístek ve volbách, ve kterých je oprávněn hlasovat. Také se může nominovat na kandidáta, upravovat svou kandidátní listinu či kandidaturu zrušit.
+Volič modifikuje a odevzdává volební lístek ve volbách, ve kterých je oprávněn hlasovat. Také se může nominovat na kandidáta.
+
+\subsection{Kandidát}
+
+Kandidát je nominovaný volič a může být zvolen. Má možnost upravovat svou kandidátní listinu a stáhnout kandidátku, dokud jsou volby ve fázi nominací.
 
 \section{Případy užití}
 
@@ -417,7 +425,7 @@ Případy užití jsou částečně popsané v předchozích kapitolách. Pro ú
 		\item Systém zobrazí formulář pro vytvoření nových voleb.
 		\item Uživatel vyplní formulář (název a typ voleb).
 		\item Uživatel odešle formulář.
-		\item Systém provede validaci vyplněných údajů.
+		\item Systém provede validaci, že je vyplněn název voleb.
 		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 2.
 		\item Systém založí volby.
 	\end{enumerate}
@@ -435,8 +443,7 @@ Případy užití jsou částečně popsané v předchozích kapitolách. Pro ú
 		\item Systém zobrazí detail voleb.
 		\item Uživatel zvolí z menu přidání komisaře.
 		\item Systém zobrazí formulář se seznamem komisařů.
-		\item Uživatel vybere komisaře a odešle formulář.
-		\item Systém provede validaci vstupních údajů.
+		\item Uživatel vybere komisaře a odešle formulář.		
 		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 4.
 		\item Systém přiřadí komisaře k volbám.
 	\end{enumerate}
@@ -471,7 +478,7 @@ Případy užití jsou částečně popsané v předchozích kapitolách. Pro ú
 		\item Uživatel zvolí založení volební události.
 		\item Systém zobrazí formulář pro založení volební události.
 		\item Uživatel vyplní formulář (název volební události, popis volební události) a odešle ho.
-		\item Systém provede validaci vstupních údajů.
+		\item Systém provede validaci, že je vyplněn název volební události.
 		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 4.
 		\item Systém založí volební událost.
 	\end{enumerate}
@@ -489,8 +496,7 @@ Případy užití jsou částečně popsané v předchozích kapitolách. Pro ú
 		\item Systém zobrazí detail volební události.
 		\item Uživatel zvolí přidání voliče.
 		\item Systém zobrazí formulář se seznamem voličů.
-		\item Uživatel vybere voliče a odešle formulář.
-		\item Systém provede validaci vstupních údajů.
+		\item Uživatel vybere voliče a odešle formulář.		
 		\item ALTERNATIVA Systém hlásí chybu. NÁVRAT NA KROK 4.
 		\item Systém přiřadí voliče k volební události.
 	\end{enumerate}
@@ -626,7 +632,6 @@ Případy užití jsou částečně popsané v předchozích kapitolách. Pro ú
 	\end{enumerate}
 \end{itemize}
 
-
 \section{Technologie}
 
 Při výběru technologií byly voleny open license či freeware řešení, které zajistí multiplatformnost systému.
@@ -639,7 +644,7 @@ Java Enterprise Edition (\url{http://www.oracle.com/technetwork/java/javaee/over
 
 \subsubsection{Aplikační server} \label{aplikacni_server}
 
-Prototyp eVoleb běžel na aplikačním serveru Glassfish 2.1.1. Tato verze již ovšem zastarává a je na ní problematické testování \cite{www:prototyp}. Proto jsem zvolil aplikační server Glassfish 3.1 (\url{http://glassfish.java.net}), který přináší mnohá zlepšení. Glassfish jsem zvolil proto, že se jedná o referenční implementaci Javy EE6 přímo společností Sun Microsystems. Glassfish je open source projekt, ale existuje i jeho komerční verze, jenž se jmenuje Oracle Glassfish 3.1. Tyto dvě verze se od sebe v podstatě neliší, rozdíl je hlavně v podpoře a aktualizacích.
+Prototyp systému eVolby\cite{www:prototyp} běžel na aplikačním serveru Glassfish 2.1.1. Tato verze již ovšem zastarává a je na ní problematické testování. Proto jsem zvolil aplikační server Glassfish 3.1 (\url{http://glassfish.java.net}), který přináší mnohá zlepšení. Glassfish jsem zvolil proto, že se jedná o referenční implementaci Javy EE6 přímo společností Sun Microsystems. Glassfish je open source projekt, ale existuje i jeho komerční verze, jenž se jmenuje Oracle Glassfish 3.1. Tyto dvě verze se od sebe v podstatě neliší, rozdíl je hlavně v podpoře a aktualizacích.
 
 \subsubsection{Databáze}
 
@@ -657,11 +662,9 @@ Vývoj probíhal na operačním systém Ubuntu 11.04 a bylo použito vývojové 
 
 Pro testování webového prostředí posloužil webový prohlížeč Firefox 4.0.1.
 
-
-
 \section{Snímač otisků prstů}
 
-V kapitole \ref{sec:reserse_otisky} jsem rozebíral výhody a nevýhody jednotlivých technologií pro snímání otisků prstů. Pro vývoj klientské části, která má umožňovat autentizaci na základně otisku prstu, je třeba vybrat konkrétní snímač s kompatibilním SDK, které umožňuje práci s Javou. Využitím s biometrických údajů se zabývá mnoho společností a většina z nich nabízí i vlastní SDK určené právě pro jejich čtečky, což omezuje výběr. 
+V kapitole \ref{sec:reserse_otisky} jsem rozebíral výhody a nevýhody jednotlivých technologií pro snímání otisků prstů. Pro vývoj klientské části, která má umožňovat autentizaci na základně otisku prstu, je třeba vybrat konkrétní snímač s kompatibilním SDK, které umožňuje práci s Javou. Využitím biometrických údajů se zabývá mnoho společností a většina z nich nabízí i vlastní SDK určené právě pro jejich čtečky, což omezuje výběr. 
 
 V úvahu je také třeba vzít ceny licencí SDK. V požadavcích v kapitole \ref{sec:obecne_pozadavky} je stanoveno, že budou využity open license či freeware technologie. Proto se klíčovým atributem pro výběr snímače otisků prstů stala cena licence SDK společně s podporou platformy Java. Při výběru jsem dbal i na to, aby SDK a snímače bylo možné používat pod operačními systémy MS Windows a Linux.
 
@@ -687,7 +690,7 @@ Jako nejvhodnější se ukázalo SDK od společnosti Digital Persona\footnote{\u
 
 Digital Persona k tomuto SDK nabízí i svůj vlastní snímač otisků prstů pod označením U.are.U 4500 Fingerprint Reader v ceně \$99.
 
-\subsection{Vybrané SKD a snímač otisků prstů}
+\subsection{Vybrané SKD a snímač otisků prstů} \label{sec:vybrany_snimac}
 
 Pro vývoj jsem tedy zvolil SDK od společnosti Digital Persona a jejich snímač otisků prstů U.are.U 4500 Fingerprint Reader. Volba na něj padla především díky volně dostupnému SDK, které mají ostatní společnosti zpoplatněné, podpoře MS Windows a Linux a platformy Java.
 
@@ -708,9 +711,9 @@ Jako první jsem si stanovil za cíl migraci z Glassfishe 2.0.1 na Glassfish ver
 
 \subsubsection{Sdílené knihovny}
 
-Zatímco Glassfish 2.0.1 byl certifikován pro Java EE 5, jeho novější verze Glassfish 3.1 je již certifikována pro Java EE 6. S tím souvisí změna některých standardů, která měla na svědomí problémy při migraci. Zjistil jsem, že při nasazení aplikace na Glassfish 3.1 dochází k chybě kvůli tomu, že EJB moduly neobsahují žádné EJB. To bylo způsobováno tím, že Glassfish vynechával ty EJB, ve kterých narazil na jakoukoliv chybu. Problém tkvěl ve sdílené knihovně POJO objektů, které slouží jako přepravní kontejnery mezi EJB moduly. Jakmile remote interface dané EJB obsahoval referenci na takový sdílený POJO objekt, Glassfish 3.1 zahlásil, že takový objekt nezná.
+Zatímco Glassfish 2.0.1 byl certifikován pro Java EE 5, jeho novější verze 3.1 je již certifikována pro Java EE 6. S tím souvisí změna některých standardů, která měla na svědomí problémy při migraci. Zjistil jsem, že při nasazení aplikace na Glassfish 3.1 dochází k chybě kvůli tomu, že EJB moduly neobsahují žádné EJB. To bylo způsobováno tím, že Glassfish vynechával ty EJB, ve kterých narazil na jakoukoliv chybu. Problém tkvěl ve sdílené knihovně POJO objektů, které slouží jako přepravní kontejnery mezi EJB moduly. Jakmile remote interface dané EJB obsahoval referenci na takový sdílený POJO objekt, Glassfish 3.1 zahlásil, že takový objekt nezná.
 
-Tento problém se mi po dařilo odstranit zapouzdřením všech tří EJB modulů spolu s webovým modulem pod jednu enterprise aplikaci, která se pak nasazuje na aplikační server jako celek namísto nasazování každého modulu zvlášť. Díky tomu je i nasazování aplikace jednoduší, protože se provádí pouze jednou a nemusí se hlídat, v jakém pořadí se mají modulu nasadit.
+Tento problém se mi po dařilo odstranit zapouzdřením všech tří EJB modulů spolu s webovým modulem pod jednu enterprise aplikaci, která se pak nasazuje na aplikační server jako celek namísto nasazování každého modulu zvlášť. Díky tomu je i nasazování aplikace jednoduší, protože se provádí pouze jednou a nemusí se hlídat, v jakém pořadí se mají moduly nasadit.
 
 \subsubsection{Entity}
 
@@ -720,7 +723,7 @@ U vazeb mezi entitami bylo třeba doplnit kaskádní chování při jejich uklá
 
 \subsubsection{Databáze}
 
-V původním návrhu je EJB modul Controller napojen na dvě databáze - první databáze obsahuje data o volebních událostech a druhá data o uživatelích systému. Jelikož uživatelská databáze měla pouze jednu tabulku, sloučil jsem tyto databáze do jedné, což vede k zjednodušení konfigurace při nasazení na server. Sloučení spočívalo v odstraní příslušného persistentního unitu (PersistentUnit) a překonfigurování EJB tak, aby namísto něj používaly persistetní unit pro databázi kontroleru.
+V původním návrhu je EJB modul Controller napojen na dvě databáze - první databáze obsahuje data o volebních událostech a druhá data o uživatelích systému. Jelikož uživatelská databáze měla pouze jednu tabulku, sloučil jsem tyto databáze do jedné, což vede k zjednodušení konfigurace při nasazení na server. Sloučení spočívalo v odstranění příslušného persistentního unitu (PersistentUnit) a překonfigurování EJB tak, aby namísto něj používaly persistetní unit pro databázi kontroleru.
 
 
 \subsection{Výstup}
@@ -736,17 +739,17 @@ Druhým krokem bylo zprovoznění základní funkcionality a její otestování 
 
 \subsection{Postup}
 
-\subsection{Synchronizace persistentní vrstvy}
+\subsubsection{Synchronizace persistentní vrstvy}
 
 Při zakládání voleb a volebních událostí docházelo k chybě, která se na první pohled neprojevovala. Byla způsobena až v na úrovni modulů Validator a Counter, do nichž se reflektovalo založení v modulu Controller. 
 
-Chyba byla způsobována tím, že těsně po uložení entity do databáze se předpokládalo, že entita již bude v databázi i fyzicky. Tomu tak ovšem nebylo a proto se namísto přiděleného ID předával null. Před samotnou další prací s entitou je třeba na synchronizovat persistentní a datovou vrstvu zavoláním metody flush na manažeru entit (EntitManager).
+Chyba byla způsobována tím, že těsně po uložení entity do databáze se předpokládalo, že entita již bude v databázi i fyzicky. Tomu tak ovšem nebylo a proto se namísto přiděleného ID předával null. Před samotnou další prací s entitou je třeba synchronizovat persistentní a datovou vrstvu zavoláním metody flush na manažeru entit (EntitManager).
 
-\subsection{SQL dotazy}
+\subsubsection{SQL dotazy}
 
 Logickým krokem byla oprava a optimalizace SQL dotazů nad databází. Odstranil jsem tedy všechny NativeQuery a nahradil je NamedQuery, které jsem nadefinoval přímo u entit a pojmenoval jsem je za pomoci konstant. Díky tomu bude v budoucnu jednoduší refaktoring entit a i další vývoj, kdy je seznam všech NamedQuery dostupný přes našeptávač IDE a nemůže tak dojít k překlepům.
 
-Stejným způsobem jsem změnil i výběr neukončených volebních událostí, které se vybíraly zcela neefektivně - položil se dotaz na databázi pro výběr všech událostí a přes ty se následně iterovalo a hledaly se ty, které měly příznak \uv{finished} na hodnotě \uv{false}.
+Stejným způsobem jsem změnil i výběr neukončených volebních událostí, které se vybíraly zcela neefektivně - položil se dotaz na databázi pro výběr všech událostí, přes ty se následně iterovalo a hledaly se ty, které měly příznak \uv{finished} na hodnotě \uv{false}.
 
 \subsubsection{Zabezpečení}
 
@@ -758,17 +761,19 @@ V rámci zabezpečení jsem také nastavil, aby i přihlašovací formulář byl
 
 Jak již bylo zmíněno v první iteraci \ref{sec:iterace:prvni}, nová verze Glassfishe 3.1 s sebou přináší nejnovější technologie. To v sobě zahrnuje i přechod z JSF 1.2 na verzi JSF 2.0. Původní prototyp systému eVolby\cite{www:prototyp} využíval střídavě technologií JSP i tohoto zastaralého JSF.
 
-Předělal jsem všechny webové stránky tak, aby jednotně používaly JSF 2.0 za využití systému šablon. Stránky tedy není neincludují hlavičku a patičku, jak tomu bylo původně, nýbrž využívají šablonovacího systému.
+Předělal jsem všechny webové stránky tak, aby jednotně používaly JSF 2.0 za využití systému šablon. Stránky tedy nyní do sebe nevkládají společnou hlavičku a patičku, jak tomu bylo původně, nýbrž využívají šablonovacího systému. 
+
+Dalším přínosem šablon je i skutečnost, že nyní jsou menu pro jednotlivé role na jednom místě a nejsou na každé stránce definovány znovu. V původním konceptu by přidání jedné položky do menu obnášelo aktualizaci všech stránek. 
 
 \subsubsection{Volební applet}
 
-Applet napsaný v Javě FX se při testování prototypu systému eVolby\cite{www:prototyp} ukázal jako nepoužitelný. Hlavním problémem byla verze nainstalované Javy na klientském počítači, ke se applet spouštěl, společně s problematickou komunikací s hostitelským serverem.
+Applet napsaný v Javě FX se při testování prototypu systému eVolby\cite{www:prototyp} ukázal jako nepoužitelný. Hlavním problémem byla verze nainstalované Javy na klientském počítači, kde se applet spouštěl, společně s problematickou komunikací s hostitelským serverem.
 
 Na doporučení ze závěrečné zprávy jsem tento applet z projektu vyřadil a nahradil ho klasickým formulářem. Ten zajišťuje mnohem pohodlnější, rychlejší a hlavně funkční hlasování.
 
 \subsection{Výstup}
 
-Na konci druhé iterace je projekt ve své základní funkční podobě, umožňuje snadnější přidávání uživatelů a bezproblémové hlasování. Prozatím není implementována nová funkcionalita aktéra času.
+Na konci druhé iterace je projekt ve své základní funkční podobě, umožňuje snadnější přidávání uživatelů a bezproblémové hlasování. Prozatím není implementována nová funkcionalita pro roli kandidáta a aktéra času.
 
 \section{Třetí iterace}
 
@@ -778,13 +783,17 @@ V poslední části jsem si vzal za úkol vylepšení stávající funkcionality
 
 \subsection{Postup}
 
-\subsection{Grafické úpravy}
+\subsubsection{Grafické úpravy}
 
 Jedním z takových kroků byly i úpravy CSS stylů a odladění grafického vzevření některých sekcí, které by mohly být zavádějící. S tím se pojí i zlepšení navigace po aplikaci.
 
+\subsubsection{Odebrání komisaře}
+
+Administrátorovi byla přidána možnost odebrat komisaře z voleb.
+
 \subsubsection{Multijazyčnost}
 
-Aby práce s aplikací byla co nejpříjemnější pro co největší množství uživatelů, integroval jsem do ní podporu multijazyčnosti. Všechny řetězce, které bylo napevno vepsány do zdrojového kódu jsem nahradil značkami, které se nahrazují překlady dle zvoleného jazyka. Aktuálně aplikace podporuje angličtinu a češtinu. 
+Aby práce s aplikací byla co nejpříjemnější pro co největší množství uživatelů, integroval jsem do ní podporu multijazyčnosti. Všechny řetězce, které byly napevno vepsány do zdrojového kódu jsem nahradil značkami, které se nahrazují překlady dle zvoleného jazyka. Aktuálně aplikace podporuje angličtinu a češtinu. 
 
 Všechny překlady jsou umístěny ve speciálním properties souboru a pro vytvoření nové jazykové mutace stačí přeložit pouze tento jeden soubor. Ten je přímo zakompilován do aplikace a Java EE jej obsluhuje za pomoci vestavěných nástrojů, tedy práce s ním nijak nezpomaluje chod aplikace.
 
@@ -795,34 +804,42 @@ Všechny překlady jsou umístěny ve speciálním properties souboru a pro vytv
 	\label{fig:tridy}
 \end{figure}
 
-\section{Datový model}
+\subsubsection{Datový model} \label{sec:datovy_model}
 
-Diagram \ref{fig:tridy} zachycuje aktuální podobu datového modelu. Od původního návrhu modelu z prototypu systému eVolby\cite{www:prototyp} se poměrně liší a je značně nelogicky uspořádán. Hlavním problém vidím v tom, že entity jsou spolu špatně navázány na úrovni objektového návrhu a následně se s nimi v projektu špatně pracuje, případně některé změny jsou neuskutečnitelné.
+Diagram \ref{fig:tridy} zachycuje aktuální podobu datového modelu. Od původního návrhu datového modelu z prototypu systému eVolby\cite{www:prototyp} se poměrně liší a je značně nelogicky uspořádán. Hlavním problém vidím v tom, že entity jsou spolu špatně navázány na úrovni objektového návrhu a následně se s nimi v projektu špatně pracuje, případně některé změny jsou neuskutečnitelné.
 
-Předpokládám, že tento problém vznikl až při skutečné implementaci objektů z důvodů nedostatečné znalosti toho, jak funguje persistentní vrstva v Java EE. To vedlo na návrh, kdy se jednotlivé objekty na sebe váží přes své ID a nepoužívají persistentních vztahů. Takový model se dá sice dobře používat při klasickém použití relační databáze, nikoliv však při objektově relačním mapování.
+Předpokládám, že tento problém vznikl až při skutečné implementaci objektů z důvodu nedostatečné znalosti toho, jak funguje persistentní vrstva v Java EE. To vedlo na návrh, kdy se jednotlivé objekty na sebe váží přes své ID a nepoužívají persistentních vztahů. Takový datový model se dá sice dobře používat při klasickém použití relační databáze, nikoliv však při objektově relačním mapování.
+
+\subsubsection{Role kandidáta}
+
+Pokusy o přidání role kandidáta selhaly kvůli špatně navrženému datovému modelu aplikace (viz. kapitola \ref{sec:datovy_model}), který nepodporuje možnost, aby jeden uživatel měl více rolí. Vyplývá to z diagramu \ref{fig:tridy}, kde je vidět, že ke každému účtu patří právě jedna role. Navíc tento návrh porušuje normálovou formu, jelikož zde dochází k redundanci dat, na které by se mělo odkazovat pomocí klíčů.
+
+\subsubsection{Terminálový klient}
+
+Kvůli problémům s objednáním a následným doručením snímače otisků prstů, který byl vybrán v kapitole \ref{sec:vybrany_snimac} a který nebyl k dispozici ani v době dokončení práce, nebyl terminálový klient na platformně Java SE realizován. Z časových důvodů již nebyl možný ani vznik jeho zjednodušené verze bez snímače.
 
 \subsection{Výstup}
 
-Po dokončení těchto úprav je aplikace dovybavena výše zmíněnými funkcemi.
+Po dokončení těchto úprav se již nedochází ke grafickým defektům a aplikace plně podporuje multijazyčné rozhraní, do kterého se dá kdykoliv přidat další jazyková mutace. Výstupem jsou i závěry, kvůli kterým nemohly být realizovány všechny požadavky navržené v kapitole \ref{sec:analyza}.
 
 
 %*****************************************************************************
 \chapter{Testování}
 
-Celý systém musí být řádně otestován, jelikož každá chyba v průběhu ostrých voleb, může mít zásadní dopad na jejich průběh i jejich výsledek. Aplikace musí být srozumitelný nejen počítačově gramotným uživatelům, ale i uživatelům, kteří nemají zkušenosti  ovládáním počítače. 
+Celý systém musí být řádně otestován, jelikož každá chyba v průběhu ostrých voleb, může mít zásadní dopad na jejich průběh i jejich výsledek. Hrozby elektronických voleb popisuje kapitola \ref{sec:hrozby}. Aplikace musí být srozumitelná nejen počítačově gramotným uživatelům, ale i uživatelům, kteří nemají zkušenosti s ovládáním počítače. 
 
 
 \section{Selenium}
 
-Při testování webových aplikací je třeba otestovat i průchod uživatele skrz webové stránky. K tomu jsem použil testovací nástroj Selenium. Nabízí se dvě metody testování - buďto za pomoci pluginu pro Firefoxu, nebo za pomoci speciálního serveru Selenia. Já jsem si zvolil druhý způsob, jelikož umožňuje integraci do vývojového prostředí (pro Netbeans doplněk \uv{Selenium Plugin for Ant Projects}). Samotné testy jsou pak velice podobné unit testování za pomoci JUnitu. 
+Při testování webových aplikací je třeba otestovat i průchod uživatele skrz webové stránky. K tomu jsem použil testovací nástroj Selenium. Nabízí se dvě metody testování - buďto za pomoci pluginu pro prohlížeč Firefox, nebo za pomoci speciálního serveru Selenia. Já jsem si zvolil druhý způsob, jelikož umožňuje integraci do vývojového prostředí (pro Netbeans doplněk \uv{Selenium Plugin for Ant Projects}). Samotné testy jsou pak velice podobné unit testování za pomoci JUnitu. 
 
-Po spuštění testu se začnou předávat příkazy serveru Selenia, který simuluje pohyb uživatele po webu a dokáže zacílit kterýkoliv element a provést na něm řadu akcí. Lze takto vytvořit sadu testů, která vždy otestuje, že novými zásahy nedošlo k poškození stávající funkcionality.
+Po spuštění testu se začnou předávat příkazy serveru Selenia, který simuluje pohyb uživatele po webu a dokáže zacílit kterýkoliv element a provést na něm řadu akcí. Lze takto vytvořit sadu testů, která vždy otestuje, že novými zásahy nedošlo k poškození stávající funkcionality. Testy je nutné spouštět na nezabezpečeném spojení, jelikož Selenium si neumí poradit s varovným hlášením o nedůvěryhodném certifikátu, který Glassfish používá, pokud se do něj nenainstaluje důvěryhodný certifikát podepsaný certifikační autoritou.
 
 Tvorba testů pro Selenium se dá zjednodušit zmiňovaným doplňkem pro Firefox. Ten totiž umožňuje nahrávat akce a výsledné záznamy znovu spouštět či vyexportovat to mnoha programovacích jazyků právě pro vzdálené volání za pomoci serveru Selenia.
 
 \section{Apache Benchmark}
 
-Pro zátěžové testování jsem zvolil nástroj Apache Benchmark, který dokáže produkovat požadavky na server. Stačí mu nastavit, kolik požadavků má být celkem posláno a kolik z nich má být posláno zároveň.
+Pro zátěžové testování jsem zvolil nástroj Apache Benchmark, který dokáže produkovat požadavky na server. Stačí mu nastavit, kolik požadavků má být celkem posláno a kolik z nich má odejít zároveň.
 
 \begin{table}[!t]
 	\begin{center}
@@ -848,7 +865,7 @@ Pro zátěžové testování jsem zvolil nástroj Apache Benchmark, který doká
 	\label{tab:zatezove_testovani}
 \end{table}
 
-Testování jsem prováděl jen pro zobrazení přihlašovací stránky, jelikož zbytek aplikace je přístupný až po zadání přihlašovacích údajů, což nelze při tomto druhu testování simulovat. Výsledků testů jsou zaznamenány v tabulce \ref{tab:zatezove_testovani}. 
+Testování jsem prováděl jen pro zobrazení přihlašovací stránky, jelikož zbytek aplikace je přístupný až po zadání přihlašovacích údajů, což nelze při tomto druhu testování simulovat. Výsledky testů jsou zaznamenány v tabulce \ref{tab:zatezove_testovani}. 
 
 \newpage
 
@@ -857,11 +874,16 @@ Testy ukazují, že Glassfish 3.1 nemá nejmenší problémy se zpracováním ob
 %*****************************************************************************
 \chapter{Závěr}
 
-Cílem práce bylo upravit stávající prototyp systému eVolby\cite{www:prototyp} pro lokální volby za použití terminálů se snímači otisků prstů. Během vývoje jsem uskutečnil celou řadu úprav, které mezi sebe zahrnují hlavně migraci ze zastaralého aplikačního serveru Glassfish 2 na Glassfish 3.1, který již podporuje nejnovější platformu Java Enterprise Edition 6. To s sebou neslo nemalé překážky, které tkvěly hlavně ve změnách specifikací. 
+Cílem práce bylo upravit stávající prototyp systému eVolby\cite{www:prototyp} pro lokální hlasování za použití terminálů se snímači otisků prstů. Během vývoje jsem uskutečnil celou řadu úprav, které mezi sebe zahrnují hlavně migraci ze zastaralého aplikačního serveru Glassfish 2 na Glassfish 3.1, který již podporuje nejnovější platformu Java Enterprise Edition 6. To s sebou neslo nemalé překážky, které tkvěly hlavně ve změnách specifikace. Nicméně migrace se i přesto plně zdařila.
 
-Další úpravy se zaměřily na vyladění aplikace a opravu chyb, což velmi často obnášelo i aktualizaci zastaralých postupů, které byly v aplikaci používány. V posledních fázích došlo k přidávání nové funkcionality.
+Další úpravy se zaměřily na vyladění aplikace a opravu chyb, které způsobovaly její pád, což velmi často obnášelo i aktualizaci zastaralých postupů, které byly v aplikaci používány. Konkrétně se například jednalo o používání technologie JSP a JSF 1.2, která je nyní nahrazena verzí 2.0. V posledních fázích došlo k přidávání nové funkcionality. Jako nejvýznamnější přínos v oblasti uživatelsky přívětivého prostředí pouvažuji integraci multijazyčnosti, díky které je možné kdykoliv si přepnout jazyk, ve kterém aplikace komunikuje. Samozřejmostí je snadné přidání další jazykové mutace.
 
-Pro další vývoj serverové části bych doporučil přehodnocení celého modelu, který je na tolik nedokonalý, že není reálně možná implementace všech požadavků. Do doby dokončení této práce se bohužel nepodařilo obstarat snímač otisků prstů, se kterým by bylo možné uvedení klientského terminálu do provozu tak, jak bylo zamýšleno.
+Do doby dokončení této práce se bohužel nepodařilo obstarat snímač otisků prstů, se kterým by bylo možné uvedení klientského terminálu do provozu tak, jak bylo zamýšleno. Jelikož se stav prototypu ukázal jako nevyhovující, zaměřil jsem se hlavně na úpravy serverové části, jejichž rozsah předčil očekávání. 
+
+Práce v sobě také shrnuje nedostatky, které se v aplikaci vyskytují a které komplikují jejímu další vývoj. Jedná se hlavně o nedokonalý datový model, který plně nevyužívá možností persistence, což vede ke špatné manipulaci s daty. Pro další vývoj serverové části bych doporučil přehodnocení celého datového modelu a čistou implementaci odpovídající business logiky.
+
+
+
 
 %*****************************************************************************
 % Seznam literatury je v samostatnem souboru reference.bib. Ten
@@ -918,9 +940,193 @@ Pro další vývoj serverové části bych doporučil přehodnocení celého mod
 
 %*****************************************************************************
 \chapter{Instalační a uživatelská příručka}
-\textbf{\large Tato příloha velmi žádoucí zejména u softwarových implementačních prací.}
+
+Zde je popsán postup, jak je správně aplikaci nainstalovat a jak nastavit aplikační server Glassfish 3.1, aby aplikace fungovala.
+
+\section{Potřebné programy}
+
+\begin{itemize}
+	\item Java JRE a JDK (\url{http://www.oracle.com/technetwork/java/javase/downloads/index.html})
+	\item Glassfish Server Open Source Edition 3.1 (\url{http://glassfish.java.net/downloads/3.1-final.html})
+	\item MySQL Server (\url{http://www.mysql.com/downloads/mysql/})	
+	\item Netbeans 7.0 (\url{http://netbeans.org/}) s pluginy:
+	\begin{itemize}
+		\item Java SE
+		\item Java Web and EE
+		\item JUnit
+		\item JSF
+		\item Selenium Plugin for Ant Projects
+	\end{itemize}
+	\item Internetový prohlížeč
+\end{itemize}
+
+\section{Instalace}
+
+\subsection{Glassfish Server Open Source Edition 3.1}
+
+\begin{enumerate}
+	\item Stáhnout a instalovat podle pokynů instalátoru.
+	\item Zvolené heslo bude třeba při pozdějším použití.
+\end{enumerate}
+
+\subsection{MySQL Server}
+
+\begin{enumerate}
+	\item Stáhnout a instalovat podle pokynů instalátoru.
+	\item Zvolené heslo bude třeba při pozdějším použití.
+\end{enumerate}
+
+\subsection{Netbeans 7.0}
+
+\begin{enumerate}
+	\item Stáhnout a instalovat podle pokynů instalátoru.
+	\item Instalovat potřebné pluginy přes \textit{Tools} -> \textit{Plugins} -> \textit{Available Plugins} -> Označit vybrané -> \textit{Install}.
+	\item Restartovat Netbeans. 
+\end{enumerate}
+
+\section{Nastavení}
+
+\subsection{MySQL Server}
+
+\begin{enumerate}
+    \item Vytvořit databázového uživatele \texttt{eVoting} s heslem \texttt{eVoting}.
+    \item Vytvořit tři databáze se jmény:
+    	 \begin{itemize}    	
+       		 \item \texttt{eVotingController}
+       		 \item \texttt{eVotingCounter}
+      	 	 \item \texttt{eVotingValidator}
+    	 \end{itemize}
+    \item Databázovému uživateli \texttt{eVoting} přidělit plná práva k těmto databázím.
+    \item V Netbeans v záložce \texttt{Services} připojit MySQL server pod databázovým rootem.
+    \item U všech vytvořených databází změnit uživatele na \texttt{eVoting} a zadat jeho heslo \texttt{eVoting}.
+    \item U jednotlivých EJB modulů upravit \textit{Configuration Files} -> \textit{persistence.xml} (\textit{New Data Source}):
+    	\begin{itemize}
+    		\item eVotingController -> \texttt{mysql/eVotingController}
+			\item eVotingCounter -> \texttt{mysql/eVotingCounter}
+        	\item eVotingValidator -> \texttt{mysql/eVotingValidator}
+    	\end{itemize}    
+\end{enumerate}
+
+\subsection{Glassfish Server Open Source Edition 3.1}
+
+Následující nastavení se provádí v administrační konzoli aplikačního serveru Glassfish 3.1, která je po jeho zapnutí dostupná defaulně na adrese \url{http://localhost:4848/}. Všechny požadované položky lze nalézt přes levé rozbalovací menu.
+
+\subsubsection{Fronty}
+
+\begin{enumerate}
+	\item \textit{Resources} -> \textit{JMS Resources} -> \textit{Connection Factories} -> \textit{New...}
+		\begin{itemize} 
+			\item \textit{Pool name:} \texttt{jms/validatedVotesFactory}
+			\item  \textit{Resource Type:} \texttt{javax.jms.QueueConnectionFactory}
+		\end{itemize}
+	\item \textit{Resources} -> \textit{JMS Resources} -> \textit{Destination Resources} -> \textit{New...}
+		\begin{itemize}
+			\item \textit{JNDI Name:} \texttt{jms/validatedVotes}
+			\item \textit{Physical Destination Name:} \texttt{ValidatedVotesQueue}
+			\item \textit{Resource Type:} \texttt{javax.jms.Queue}
+		\end{itemize}
+\end{enumerate}
+
+\subsubsection{E-mail}
+
+\begin{enumerate}
+	\item  \textit{Resources} -> \textit{JavaMail Sessions} -> \textit{New...}
+		\begin{itemize}
+			\item \textit{JNDI Name:} \texttt{mail/evolbyMailSession}
+        	\item \textit{Mail Host:} dle mailového serveru
+        	\item \textit{Default User:} dle mailového serveru
+        	\item \textit{Default Sender Address:} dle mailového serveru
+        	\item \textit{Transport Protocol:} \texttt{smtps}
+        	\item \textit{Transport Protocol Class:} \texttt{com.sun.mail.smtp.SMTPSSLTransport}
+   		\end{itemize}
+   \item Do Addtional Properties přidat:
+		\begin{itemize}		        
+			\item \texttt{mail-smtps-auth} -> \texttt{true}
+        	\item \texttt{mail-smtps-password} -> \texttt{heslo k e-mailu}
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Security Realm}
+
+\begin{enumerate}
+    \item Configurations -> server-config -> Security Realms -> New...
+    	\begin{itemize}  
+        	\item \textit{Name:} \texttt{eVotingRealm}
+        	\item \textit{Class Name:} \texttt{com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm}
+        	\item \textit{JAAS Context:} \texttt{jdbcRealm}
+        	\item \textit{JNDI:} \texttt{mysql/eVotingController}
+        	\item \textit{User Table:} \texttt{person}
+        	\item \textit{User Name Column:} \texttt{login}
+        	\item \textit{Password Column:} \texttt{password}
+        	\item \textit{Group Table:} \texttt{person}
+        	\item \textit{Group Name Column:} \texttt{personGroup}
+        	\item \textit{Digest Algorithm:} \texttt{none}
+        \end{itemize}
+\end{enumerate}
+
+\section{Spuštění}
+
+\begin{enumerate}	
+	\item Spustit Glassfish 3.1.
+	\item Na projektu \texttt{eVoting} zvolit v kontextovém menu \textit{Deploy} v Netbeans.
+	\item V databázi \textit{eVotingController} přidat do tabulky \textit{person} uživatele. Možné role jsou:
+		\begin{itemize}
+			\item \texttt{administrators}
+			\item \texttt{commissioners}
+			\item \texttt{voters}
+		\end{itemize}  
+	\item Aplikace je připravena na adrese \url{https://localhost:8181/evoting/}.
+\end{enumerate}
+
 
 %*****************************************************************************
 \chapter{Obsah přiloženého CD}
+
+\begin{verbatim}
+cd/
+|-- abstraktCZ.txt
+|-- abstraktEN.txt
+|-- bin
+|   `-- eVoting.ear
+|-- doc
+|   |-- eVotingController
+|   |-- eVotingCounter
+|   |-- eVotingLibrary
+|   |-- eVotingValidator
+|   `-- eVotingWeb
+|-- readme.txt
+|-- src
+|   |-- build
+|   |-- build.xml
+|   |-- dist
+|   |-- eVotingController
+|   |-- eVotingCounter
+|   |-- eVotingLibrary
+|   |-- eVotingValidator
+|   |-- eVotingWeb
+|   |-- nbproject
+|   `-- src
+`-- txt
+    |-- csplainnat.bst
+    |-- diagrams
+    |-- ea
+    |-- evoting.aux
+    |-- evoting.bbl
+    |-- evoting.blg
+    |-- evoting.dvi
+    |-- evoting.lof
+    |-- evoting.log
+    |-- evoting.lot
+    |-- evoting.pdf
+    |-- evoting.ps
+    |-- evoting.tex
+    |-- evoting.toc
+    |-- figures
+    |-- hyphen.tex
+    |-- k336_thesis_macros.sty
+    |-- Makefile
+    |-- reference.bib
+    `-- texput.log
+\end{verbatim}
 
 \end{document}

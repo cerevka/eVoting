@@ -41,13 +41,11 @@
             <role-name>administrators</role-name>
             <role-name>voters</role-name>
             <role-name>commissioners</role-name>
-        </auth-constraint>
-        <!--
+        </auth-constraint>       
         <user-data-constraint>
             <description/>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
-        </user-data-constraint>        
-        -->
+        </user-data-constraint>
     </security-constraint>
     <security-constraint>
         <display-name>Administrator's constraint</display-name>
