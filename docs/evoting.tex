@@ -722,6 +722,7 @@ U vazeb mezi entitami bylo třeba doplnit kaskádní chování při jejich uklá
 
 V původním návrhu je EJB modul Controller napojen na dvě databáze - první databáze obsahuje data o volebních událostech a druhá data o uživatelích systému. Jelikož uživatelská databáze měla pouze jednu tabulku, sloučil jsem tyto databáze do jedné, což vede k zjednodušení konfigurace při nasazení na server. Sloučení spočívalo v odstraní příslušného persistentního unitu (PersistentUnit) a překonfigurování EJB tak, aby namísto něj používaly persistetní unit pro databázi kontroleru.
 
+
 \subsection{Výstup}
 
 Po skončení této iterace jsem měl funkční nasazení aplikace na Glassfishi 3.1 využívající pouze tři databáze namísto čtyř s korektně vygenerovanými tabulkami.
@@ -786,6 +787,19 @@ Jedním z takových kroků byly i úpravy CSS stylů a odladění grafického vz
 Aby práce s aplikací byla co nejpříjemnější pro co největší množství uživatelů, integroval jsem do ní podporu multijazyčnosti. Všechny řetězce, které bylo napevno vepsány do zdrojového kódu jsem nahradil značkami, které se nahrazují překlady dle zvoleného jazyka. Aktuálně aplikace podporuje angličtinu a češtinu. 
 
 Všechny překlady jsou umístěny ve speciálním properties souboru a pro vytvoření nové jazykové mutace stačí přeložit pouze tento jeden soubor. Ten je přímo zakompilován do aplikace a Java EE jej obsluhuje za pomoci vestavěných nástrojů, tedy práce s ním nijak nezpomaluje chod aplikace.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.9]{diagrams/tridy.eps}
+	\caption{Aktualní datový model v projektu.}
+	\label{fig:tridy}
+\end{figure}
+
+\section{Datový model}
+
+Diagram \ref{fig:tridy} zachycuje aktuální podobu datového modelu. Od původního návrhu modelu z prototypu systému eVolby\cite{www:prototyp} se poměrně liší a je značně nelogicky uspořádán. Hlavním problém vidím v tom, že entity jsou spolu špatně navázány na úrovni objektového návrhu a následně se s nimi v projektu špatně pracuje, případně některé změny jsou neuskutečnitelné.
+
+Předpokládám, že tento problém vznikl až při skutečné implementaci objektů z důvodů nedostatečné znalosti toho, jak funguje persistentní vrstva v Java EE. To vedlo na návrh, kdy se jednotlivé objekty na sebe váží přes své ID a nepoužívají persistentních vztahů. Takový model se dá sice dobře používat při klasickém použití relační databáze, nikoliv však při objektově relačním mapování.
 
 \subsection{Výstup}
 
